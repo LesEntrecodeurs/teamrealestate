@@ -28,9 +28,8 @@ COPY --from=builder /app/out/yarn.lock ./yarn.lock
 ENV DATABASE_URL="postgresql://user:password@localhost:5432/db"
 RUN yarn install --frozen-lockfile
 
-# Build the project
+# Build the project (turbo.json is already part of the pruned output)
 COPY --from=builder /app/out/full/ .
-COPY turbo.json turbo.json
 
 RUN yarn turbo run db:generate --filter=@repo/db
 RUN yarn turbo run build --filter=api...

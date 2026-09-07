@@ -24,9 +24,8 @@ COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/yarn.lock ./yarn.lock
 RUN yarn install --frozen-lockfile
 
-# Build the project
+# Build the project (turbo.json is already part of the pruned output)
 COPY --from=builder /app/out/full/ .
-COPY turbo.json turbo.json
 
 RUN yarn turbo run build --filter=web...
 
@@ -48,4 +47,4 @@ COPY --from=installer --chown=nextjs:nodejs /app/apps/web/public ./apps/web/publ
 
 EXPOSE $PORT
 
-CMD node apps/web/server.js
+CMD ["node", "apps/web/server.js"]
