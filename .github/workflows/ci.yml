@@ -34,9 +34,13 @@ jobs:
 
       - name: Build
         run: yarn build
+        env:
+          DATABASE_URL: 'postgresql://user:password@localhost:5432/db'
 
       - name: Type check
         run: yarn check-types
+        env:
+          DATABASE_URL: 'postgresql://user:password@localhost:5432/db'
 
       - name: Lint & format check
         run: yarn biome:check
