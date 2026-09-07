@@ -10,7 +10,7 @@ ENV NODE_ENV=production
 
 FROM base AS builder
 WORKDIR /app
-RUN yarn global add turbo
+RUN yarn global add turbo@2.10.12
 
 COPY . .
 RUN turbo prune api --docker
