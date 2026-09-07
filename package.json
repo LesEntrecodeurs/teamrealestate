@@ -1,0 +1,32 @@
+{
+  "name": "teamrealestate",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "biome format --write .",
+    "biome:check": "biome check .",
+    "biome:fix": "biome check --write .",
+    "check-types": "turbo run check-types",
+    "db:generate": "turbo run db:generate --filter=@repo/db",
+    "db:migrate": "turbo run db:migrate --filter=@repo/db",
+    "db:migrate:dev": "turbo run db:migrate:dev --filter=@repo/db",
+    "db:push": "turbo run db:push --filter=@repo/db",
+    "db:studio": "turbo run db:studio --filter=@repo/db"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.12",
+    "prettier": "3.9.6",
+    "turbo": "^2.10.12",
+    "typescript": "7.0.2"
+  },
+  "packageManager": "yarn@1.22.19",
+  "engines": {
+    "node": ">=24"
+  }
+}

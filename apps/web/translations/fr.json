@@ -1,0 +1,149 @@
+{
+  "Nav": {
+    "buy": "Acheter",
+    "rent": "Louer",
+    "sell": "Vendre",
+    "agency": "L'agence",
+    "contact": "Contact",
+    "estimate": "Estimer mon bien"
+  },
+  "HomePage": {
+    "hero": {
+      "eyebrow": "Agence immobilière à Luxembourg-Ville",
+      "title1": "L'immobilier",
+      "title2": "joue collectif.",
+      "subtitle": "Team Real Estate réunit recherche, négociation, juridique et estimation dans une seule équipe — pour un projet qui avance, sans jamais dépendre d'une seule personne.",
+      "tabAi": "Assistant IA",
+      "tabFilters": "Recherche par filtres",
+      "aiHelper": "Décrivez votre projet en une phrase, l'assistant explore l'ensemble de nos biens.",
+      "aiPlaceholder": "Un 2 chambres lumineux près de la gare, avec balcon, max 750 000 €",
+      "aiSubmit": "Lancer la recherche",
+      "tryLabel": "Essayez :",
+      "try1": "Maison avec jardin à Strassen",
+      "try2": "Penthouse vue dégagée à Belair",
+      "try3": "Investissement locatif quartier Gare",
+      "filterType": "Type de bien",
+      "filterTypeAny": "Tous types",
+      "filterTypeApartment": "Appartement",
+      "filterTypeHouse": "Maison",
+      "filterLocation": "Commune",
+      "filterLocationPlaceholder": "Où cherchez-vous ?",
+      "filterBudget": "Budget max",
+      "filterSubmit": "Voir les biens"
+    },
+    "featured": {
+      "eyebrow": "01 — Sélection",
+      "title": "Une sélection signée par toute l'équipe",
+      "viewAll": "Voir tous les biens"
+    },
+    "agency": {
+      "eyebrow": "02 — L'agence",
+      "title1": "Pas un agent.",
+      "title2": "Une équipe entière derrière votre projet.",
+      "body1": "Chez Team Real Estate, votre dossier n'appartient pas à une seule personne. Recherche, négociation, juridique, suivi : chaque expertise de l'équipe travaille votre projet en commun.",
+      "body2": "Le résultat : une disponibilité constante, des décisions plus rapides, et un interlocuteur toujours informé. Nous, plutôt que je.",
+      "stat1Value": "16 ans",
+      "stat1Label": "d'expérience sur le marché luxembourgeois",
+      "stat2Value": "+200",
+      "stat2Label": "biens vendus et loués",
+      "stat3Value": "Une équipe",
+      "stat3Label": "à votre service, du premier contact à la signature"
+    },
+    "team": {
+      "eyebrow": "L'équipe",
+      "title": "Les visages derrière votre projet"
+    },
+    "why": {
+      "eyebrow": "03 — Pourquoi Team",
+      "title": "L'avantage du collectif, concrètement",
+      "item1Title": "Disponibilité permanente",
+      "item1Body": "Un membre de l'équipe est toujours joignable. Vos visites et vos questions n'attendent jamais une seule personne.",
+      "item2Title": "Expertise mutualisée",
+      "item2Body": "Négociation, droit, financement, estimation : chaque spécialité de l'équipe se met au service de votre dossier.",
+      "item3Title": "Suivi continu",
+      "item3Body": "Votre projet avance sans interruption : congés, absences ou pics d'activité ne ralentissent jamais votre dossier.",
+      "item4Title": "Technologie au service du client",
+      "item4Body": "Recherche assistée par IA, estimation instantanée, alertes ciblées : nos outils accélèrent ce qui compte pour vous."
+    },
+    "estimator": {
+      "eyebrow": "Votre projet de vente",
+      "title": "Une estimation fiable, en quelques minutes",
+      "body": "Prix au m² officiels, ventes comparables et expertise de l'équipe : obtenez une fourchette de prix réaliste avant de vendre.",
+      "cta": "Estimer mon bien",
+      "disclaimer": "Une estimation indicative, jamais un engagement de prix."
+    },
+    "cta": {
+      "title": "Un projet immobilier ? Parlons-en.",
+      "subtitle": "Estimation, vente, recherche : posez votre projet, toute l'équipe s'en saisit.",
+      "primary": "Estimer mon bien",
+      "secondary": "Nous contacter"
+    }
+  },
+  "ListingsPage": {
+    "buyTitle": "Acheter à Luxembourg",
+    "buySubtitle": "Toutes nos annonces à la vente, sélectionnées et suivies par l'équipe.",
+    "rentTitle": "Louer à Luxembourg",
+    "rentSubtitle": "Nos biens disponibles à la location, du studio à la maison familiale.",
+    "resultsCount": "{count} biens",
+    "empty": "Aucun bien ne correspond pour le moment."
+  },
+  "ListingDetail": {
+    "back": "Retour aux biens",
+    "surface": "Surface",
+    "rooms": "Chambres",
+    "energyClass": "Classe énergétique",
+    "description": "Description",
+    "descriptionBody": "Ce bien fait partie de notre sélection {location}. Photos, plans et descriptif détaillé arrivent automatiquement dès la connexion avec Apimo — cette fiche est un aperçu de la structure finale.",
+    "contactAgent": "Contacter l'équipe",
+    "requestVisit": "Demander une visite"
+  },
+  "SellPage": {
+    "eyebrow": "Vendre avec Team Real Estate",
+    "title": "Combien vaut votre bien ?",
+    "subtitle": "Notre estimateur arrive très prochainement : prix au m² officiels, ventes comparables et expertise de l'équipe pour une fourchette réaliste — jamais un engagement de prix.",
+    "notifyTitle": "Soyez prévenu dès son ouverture",
+    "emailPlaceholder": "vous@email.com",
+    "notifySubmit": "Me prévenir",
+    "notifySuccess": "Merci, on vous tient au courant dès le lancement !",
+    "orContact": "En attendant, parlons-en directement :",
+    "contactCta": "Contacter l'équipe"
+  },
+  "AgencyPage": {
+    "eyebrow": "L'agence",
+    "title": "Une équipe, pas un agent",
+    "subtitle": "Recherche, négociation, juridique, estimation : cinq expertises réunies pour que votre dossier n'attende jamais une seule personne.",
+    "teamTitle": "Toute l'équipe"
+  },
+  "ContactPage": {
+    "eyebrow": "Contact",
+    "title": "Un projet immobilier ? Parlons-en.",
+    "subtitle": "Décrivez votre projet, l'équipe complète s'en saisit — vous n'attendez jamais une seule personne.",
+    "nameLabel": "Nom",
+    "emailLabel": "Email",
+    "phoneLabel": "Téléphone",
+    "messageLabel": "Votre message",
+    "submit": "Envoyer",
+    "submitSuccess": "Merci, votre message a bien été envoyé.",
+    "addressTitle": "Nos bureaux",
+    "address": "12 place de la Gare\nL-1616 Luxembourg",
+    "phoneTitle": "Téléphone",
+    "emailTitle": "Email"
+  },
+  "LegalPage": {
+    "legalNoticeTitle": "Mentions légales",
+    "privacyTitle": "Politique de confidentialité",
+    "termsTitle": "Conditions générales",
+    "placeholder": "Ce contenu sera complété avec les informations juridiques de Team Real Estate S.à r.l."
+  },
+  "Footer": {
+    "tagline": "L'immobilier joue collectif. Agence immobilière à Luxembourg-Ville.",
+    "writeUs": "Écrivons votre projet ensemble",
+    "servicesTitle": "Services",
+    "agencyTitle": "Agence",
+    "legalNotice": "Mentions légales",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions générales",
+    "backToTop": "Haut de page",
+    "rightsReserved": "Tous droits réservés."
+  }
+}

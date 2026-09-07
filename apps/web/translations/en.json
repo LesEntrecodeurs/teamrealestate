@@ -1,0 +1,149 @@
+{
+  "Nav": {
+    "buy": "Buy",
+    "rent": "Rent",
+    "sell": "Sell",
+    "agency": "The agency",
+    "contact": "Contact",
+    "estimate": "Value my property"
+  },
+  "HomePage": {
+    "hero": {
+      "eyebrow": "Real estate agency in Luxembourg City",
+      "title1": "Real estate,",
+      "title2": "played as a team.",
+      "subtitle": "Team Real Estate brings search, negotiation, legal and valuation together in one team — so your project moves forward without ever depending on a single person.",
+      "tabAi": "AI Assistant",
+      "tabFilters": "Filter search",
+      "aiHelper": "Describe your project in one sentence — the assistant searches our whole portfolio.",
+      "aiPlaceholder": "A bright 2-bedroom near the station, with a balcony, max €750,000",
+      "aiSubmit": "Search",
+      "tryLabel": "Try:",
+      "try1": "House with garden in Strassen",
+      "try2": "Penthouse with open views in Belair",
+      "try3": "Rental investment near Gare",
+      "filterType": "Property type",
+      "filterTypeAny": "Any type",
+      "filterTypeApartment": "Apartment",
+      "filterTypeHouse": "House",
+      "filterLocation": "Area",
+      "filterLocationPlaceholder": "Where are you looking?",
+      "filterBudget": "Max budget",
+      "filterSubmit": "See listings"
+    },
+    "featured": {
+      "eyebrow": "01 — Selection",
+      "title": "A selection curated by the whole team",
+      "viewAll": "View all listings"
+    },
+    "agency": {
+      "eyebrow": "02 — The agency",
+      "title1": "Not one agent.",
+      "title2": "A whole team behind your project.",
+      "body1": "At Team Real Estate, your file doesn't belong to a single person. Search, negotiation, legal, follow-up: every expertise on the team works your project together.",
+      "body2": "The result: constant availability, faster decisions, and a contact who is always up to date. We, rather than I.",
+      "stat1Value": "16 years",
+      "stat1Label": "of experience in the Luxembourg market",
+      "stat2Value": "200+",
+      "stat2Label": "properties sold and let",
+      "stat3Value": "One team",
+      "stat3Label": "at your service, from first contact to signature"
+    },
+    "team": {
+      "eyebrow": "The team",
+      "title": "The faces behind your project"
+    },
+    "why": {
+      "eyebrow": "03 — Why Team",
+      "title": "The advantage of a team, in practice",
+      "item1Title": "Always available",
+      "item1Body": "A team member is always reachable. Your viewings and questions never wait on a single person.",
+      "item2Title": "Shared expertise",
+      "item2Body": "Negotiation, law, financing, valuation: every specialty on the team serves your file.",
+      "item3Title": "Continuous follow-up",
+      "item3Body": "Your project moves forward without interruption: holidays, absences or busy periods never slow your file down.",
+      "item4Title": "Technology that serves you",
+      "item4Body": "AI-assisted search, instant valuation, targeted alerts: our tools speed up what matters to you."
+    },
+    "estimator": {
+      "eyebrow": "Selling your property",
+      "title": "A reliable estimate, in a few minutes",
+      "body": "Official price-per-m² data, comparable sales and the team's expertise: get a realistic price range before you sell.",
+      "cta": "Value my property",
+      "disclaimer": "An indicative estimate, never a price commitment."
+    },
+    "cta": {
+      "title": "A real estate project? Let's talk.",
+      "subtitle": "Valuation, selling, searching: tell us about your project, the whole team takes it on.",
+      "primary": "Value my property",
+      "secondary": "Contact us"
+    }
+  },
+  "ListingsPage": {
+    "buyTitle": "Buy in Luxembourg",
+    "buySubtitle": "Every listing for sale, curated and followed up by the team.",
+    "rentTitle": "Rent in Luxembourg",
+    "rentSubtitle": "Our available rentals, from studios to family houses.",
+    "resultsCount": "{count} listings",
+    "empty": "No listings match right now."
+  },
+  "ListingDetail": {
+    "back": "Back to listings",
+    "surface": "Surface",
+    "rooms": "Bedrooms",
+    "energyClass": "Energy class",
+    "description": "Description",
+    "descriptionBody": "This property is part of our {location} selection. Photos, floor plans and a full description will populate automatically once the Apimo connection is live — this page previews the final structure.",
+    "contactAgent": "Contact the team",
+    "requestVisit": "Request a viewing"
+  },
+  "SellPage": {
+    "eyebrow": "Selling with Team Real Estate",
+    "title": "What is your property worth?",
+    "subtitle": "Our valuation tool is launching very soon: official price-per-m² data, comparable sales and the team's expertise for a realistic range — never a price commitment.",
+    "notifyTitle": "Get notified when it launches",
+    "emailPlaceholder": "you@email.com",
+    "notifySubmit": "Notify me",
+    "notifySuccess": "Thanks — we'll let you know as soon as it launches!",
+    "orContact": "In the meantime, let's talk directly:",
+    "contactCta": "Contact the team"
+  },
+  "AgencyPage": {
+    "eyebrow": "The agency",
+    "title": "A team, not one agent",
+    "subtitle": "Search, negotiation, legal, valuation: five areas of expertise brought together so your file never waits on a single person.",
+    "teamTitle": "The whole team"
+  },
+  "ContactPage": {
+    "eyebrow": "Contact",
+    "title": "A real estate project? Let's talk.",
+    "subtitle": "Describe your project, the whole team takes it on — you never wait on a single person.",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
+    "messageLabel": "Your message",
+    "submit": "Send",
+    "submitSuccess": "Thanks — your message has been sent.",
+    "addressTitle": "Our offices",
+    "address": "12 place de la Gare\nL-1616 Luxembourg",
+    "phoneTitle": "Phone",
+    "emailTitle": "Email"
+  },
+  "LegalPage": {
+    "legalNoticeTitle": "Legal notice",
+    "privacyTitle": "Privacy policy",
+    "termsTitle": "Terms & conditions",
+    "placeholder": "This content will be completed with Team Real Estate S.à r.l.'s legal information."
+  },
+  "Footer": {
+    "tagline": "Real estate, played as a team. Real estate agency in Luxembourg City.",
+    "writeUs": "Let's write your project together",
+    "servicesTitle": "Services",
+    "agencyTitle": "Agency",
+    "legalNotice": "Legal notice",
+    "privacy": "Privacy policy",
+    "terms": "Terms & conditions",
+    "backToTop": "Back to top",
+    "rightsReserved": "All rights reserved."
+  }
+}
