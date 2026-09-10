@@ -34,9 +34,15 @@ export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const heroEl = document.getElementById('top');
     const headerOffset = 96;
-    const getThreshold = () => (heroEl ? heroEl.offsetHeight - headerOffset : headerOffset);
+    // Re-queried on every check rather than cached: the header lives in the
+    // persistent layout and never remounts on navigation, so a cached
+    // reference to a previous page's #top would go stale (detached nodes
+    // report offsetHeight 0, permanently forcing the scrolled state).
+    const getThreshold = () => {
+      const heroEl = document.getElementById('top');
+      return heroEl ? heroEl.offsetHeight - headerOffset : headerOffset;
+    };
     const onScroll = () => setScrolled(window.scrollY > getThreshold());
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -45,7 +51,10 @@ export function SiteHeader() {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
     };
-  }, []);
+    // pathname isn't read here — it's a re-run trigger so getThreshold picks
+    // up the new page's #top (or lack thereof) right after navigation.
+    // biome-ignore lint/correctness/useExhaustiveDependencies: see above
+  }, [pathname]);
 
   useEffect(() => {
     if (!open) return;
