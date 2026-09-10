@@ -13,51 +13,44 @@ export function AgencySection() {
   ];
 
   return (
-    <section className="bg-navy-50">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-6 py-20 sm:px-8 lg:grid-cols-2 lg:gap-16 lg:py-28">
-        <Reveal>
-          <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-            <span className="h-1.5 w-6 rounded-full bg-accent" />
+    <section className="relative overflow-hidden bg-navy-950 py-24 sm:py-32">
+      <div className="absolute inset-0">
+        <Image
+          src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1600&auto=format&fit=crop"
+          alt=""
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-navy-950/78" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/30 to-navy-950/40" />
+      </div>
+
+      <Reveal className="relative mx-auto max-w-7xl px-6 sm:px-8">
+        <div className="max-w-2xl text-white">
+          <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">
+            <span className="h-1.5 w-6 rounded-full bg-cyan-300" />
             {t('eyebrow')}
           </p>
-          <h2 className="font-display text-3xl font-bold leading-tight text-foreground sm:text-4xl">
+          <h2 className="font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
             {t('title1')}
             <br />
             {t('title2')}
           </h2>
-          <p className="mt-6 text-base text-muted-foreground">{t('body1')}</p>
-          <p className="mt-4 text-base text-muted-foreground">{t('body2')}</p>
+          <p className="mt-6 text-base text-white/80 sm:text-lg">{t('body1')}</p>
+          <p className="mt-4 text-base text-white/80 sm:text-lg">{t('body2')}</p>
+        </div>
 
-          <dl className="mt-10 grid grid-cols-1 gap-8 border-t border-navy-100 pt-8 sm:grid-cols-3 sm:gap-6 sm:divide-x sm:divide-navy-100">
-            {stats.map((stat) => (
-              <div key={stat.label} className="sm:pl-6 sm:first:pl-0">
-                <dt className="font-display text-4xl font-bold text-secondary">
-                  <Counter value={stat.value} />
-                </dt>
-                <dd className="mt-1.5 text-sm text-muted-foreground">{stat.label}</dd>
-              </div>
-            ))}
-          </dl>
-        </Reveal>
-
-        <Reveal delay={150} className="relative">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl ring-1 ring-navy-900/5">
-            <Image
-              src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1600&auto=format&fit=crop"
-              alt=""
-              fill
-              className="object-cover transition-transform duration-700 hover:scale-105"
-            />
-          </div>
-
-          <div className="absolute -bottom-6 -left-6 hidden rounded-2xl bg-card px-6 py-5 shadow-xl shadow-navy-900/10 ring-1 ring-navy-100 sm:block">
-            <p className="font-display text-3xl font-bold text-secondary">
-              <Counter value={stats[1]?.value ?? ''} />
-            </p>
-            <p className="mt-0.5 max-w-[12rem] text-xs text-muted-foreground">{stats[1]?.label}</p>
-          </div>
-        </Reveal>
-      </div>
+        <dl className="mt-14 grid grid-cols-1 gap-8 border-t border-white/15 pt-10 sm:grid-cols-3 sm:gap-6 sm:divide-x sm:divide-white/15">
+          {stats.map((stat) => (
+            <div key={stat.label} className="sm:pl-6 sm:first:pl-0">
+              <dt className="font-display text-4xl font-bold text-cyan-300 sm:text-5xl">
+                <Counter value={stat.value} />
+              </dt>
+              <dd className="mt-2 text-sm text-white/70 sm:text-base">{stat.label}</dd>
+            </div>
+          ))}
+        </dl>
+      </Reveal>
     </section>
   );
 }

@@ -39,7 +39,7 @@ export function TeamSection() {
                 alt={member.name}
                 fill
                 sizes="(min-width: 1024px) 20vw, 33vw"
-                className="object-cover object-top transition-transform duration-700 group-hover:scale-110"
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/10 to-transparent" />
               <span className="absolute left-4 top-4 font-display text-xs font-bold text-white/40">
