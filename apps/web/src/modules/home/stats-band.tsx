@@ -24,9 +24,9 @@ export function StatsBand() {
             </p>
             <p className="mt-2 text-sm text-muted-foreground">{stat.label}</p>
             {stat.flags ? (
-              <div className="mt-2 flex gap-1.5">
+              <div className="mt-1.5 flex gap-1">
                 {routing.locales.map((loc) => (
-                  <FlagIcon key={loc} locale={loc} className="h-3.5 w-[19px] rounded-[2px]" />
+                  <FlagIcon key={loc} locale={loc} className="h-2 w-[11px] rounded-[1px]" />
                 ))}
               </div>
             ) : null}
