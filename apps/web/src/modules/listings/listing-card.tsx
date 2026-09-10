@@ -4,13 +4,13 @@ import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import type { Listing } from './types';
 
-const badgeTone: Record<NonNullable<Listing['badge']>['tone'], string> = {
+export const badgeTone: Record<NonNullable<Listing['badge']>['tone'], string> = {
   new: 'bg-secondary text-secondary-foreground',
   priceDrop: 'bg-terracotta-500 text-white',
   underOffer: 'bg-navy-800 text-white'
 };
 
-const energyClassTone: Record<Listing['energyClass'], string> = {
+export const energyClassTone: Record<Listing['energyClass'], string> = {
   A: 'bg-cyan-100 text-cyan-600',
   B: 'bg-emerald-100 text-emerald-700',
   C: 'bg-yellow-100 text-yellow-700',
@@ -20,7 +20,7 @@ const energyClassTone: Record<Listing['energyClass'], string> = {
   G: 'bg-red-200 text-red-800'
 };
 
-function formatPrice(listing: Listing, locale: string) {
+export function formatPrice(listing: Listing, locale: string) {
   const formatted = new Intl.NumberFormat(locale === 'en' ? 'en-LU' : 'fr-LU', {
     style: 'currency',
     currency: 'EUR',

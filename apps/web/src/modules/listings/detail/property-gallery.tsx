@@ -9,9 +9,7 @@ import { cn } from '@/lib/utils';
 type Tab = 'photos' | 'plans';
 
 const SWIPE_THRESHOLD = 50;
-const SWIPE_INTENT_THRESHOLD = 10;
 const AUTOPLAY_DELAY_MS = 5000;
-const SLIDE_TRANSITION = 'transform 400ms cubic-bezier(0.22, 1, 0.36, 1)';
 
 export function PropertyGallery({
   title,
@@ -26,11 +24,10 @@ export function PropertyGallery({
   const [tab, setTab] = useState<Tab>('photos');
   const [index, setIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [dragOffset, setDragOffset] = useState(0);
-  const [dragging, setDragging] = useState(false);
   const [paused, setPaused] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
   const dragStartX = useRef<number | null>(null);
+  const dragDeltaX = useRef(0);
   const activePointerId = useRef<number | null>(null);
   const hasSwipedRef = useRef(false);
 
@@ -52,14 +49,14 @@ export function PropertyGallery({
   }, [lightboxOpen]);
 
   useEffect(() => {
-    if (tab !== 'photos' || images.length <= 1 || lightboxOpen || paused || dragging) return;
+    if (tab !== 'photos' || images.length <= 1 || lightboxOpen || paused) return;
 
     const id = setInterval(() => {
       setIndex((current) => (current + 1) % images.length);
     }, AUTOPLAY_DELAY_MS);
 
     return () => clearInterval(id);
-  }, [tab, images.length, lightboxOpen, paused, dragging]);
+  }, [tab, images.length, lightboxOpen, paused]);
 
   function handleDialogKeyDown(e: React.KeyboardEvent) {
     if (e.key === 'Escape') setLightboxOpen(false);
@@ -70,33 +67,24 @@ export function PropertyGallery({
   function handlePointerDown(e: PointerEvent<HTMLDivElement>) {
     if (e.pointerType === 'mouse' && e.button !== 0) return;
     dragStartX.current = e.clientX;
+    dragDeltaX.current = 0;
     activePointerId.current = e.pointerId;
     hasSwipedRef.current = false;
     setPaused(true);
+    e.currentTarget.setPointerCapture(e.pointerId);
   }
 
   function handlePointerMove(e: PointerEvent<HTMLDivElement>) {
     if (dragStartX.current === null || activePointerId.current !== e.pointerId) return;
-    const delta = e.clientX - dragStartX.current;
-    if (Math.abs(delta) > SWIPE_INTENT_THRESHOLD) {
-      if (!hasSwipedRef.current) {
-        e.currentTarget.setPointerCapture(e.pointerId);
-        setDragging(true);
-      }
-      hasSwipedRef.current = true;
-    }
-    setDragOffset(delta);
+    dragDeltaX.current = e.clientX - dragStartX.current;
+    if (Math.abs(dragDeltaX.current) > SWIPE_THRESHOLD / 2) hasSwipedRef.current = true;
   }
 
   function handlePointerEnd(e: PointerEvent<HTMLDivElement>) {
     if (dragStartX.current === null || activePointerId.current !== e.pointerId) return;
-    setDragging(false);
-    setDragOffset((offset) => {
-      if (Math.abs(offset) > SWIPE_THRESHOLD && items.length > 1) {
-        step(offset > 0 ? -1 : 1);
-      }
-      return 0;
-    });
+    if (Math.abs(dragDeltaX.current) > SWIPE_THRESHOLD && items.length > 1) {
+      step(dragDeltaX.current > 0 ? -1 : 1);
+    }
     dragStartX.current = null;
     activePointerId.current = null;
   }
@@ -109,52 +97,41 @@ export function PropertyGallery({
     setLightboxOpen(true);
   }
 
-  function renderTrack({ lightbox }: { lightbox: boolean }) {
-    return (
-      <div
-        className="flex h-full"
-        style={{
-          width: `${items.length * 100}%`,
-          transform: `translateX(calc(${-index * (100 / items.length)}% + ${dragOffset}px))`,
-          transition: dragging ? 'none' : SLIDE_TRANSITION
-        }}
+  function renderSlides({ lightbox }: { lightbox: boolean }) {
+    return items.map((src, i) => (
+      <button
+        key={src}
+        type="button"
+        onClick={lightbox ? undefined : handleImageClick}
+        tabIndex={lightbox || i !== index ? -1 : undefined}
+        aria-hidden={lightbox || i !== index ? true : undefined}
+        className={cn(
+          'absolute inset-0 block size-full transition-opacity duration-500 ease-out',
+          i === index ? 'z-10 opacity-100' : 'pointer-events-none z-0 opacity-0',
+          !lightbox && 'cursor-pointer'
+        )}
       >
-        {items.map((src, i) => (
-          <button
-            key={src}
-            type="button"
-            onClick={lightbox ? undefined : handleImageClick}
-            tabIndex={lightbox ? -1 : undefined}
-            aria-hidden={lightbox ? true : undefined}
-            className={cn(
-              'relative h-full shrink-0',
-              lightbox ? 'cursor-default' : dragging ? 'cursor-grabbing' : 'cursor-grab'
-            )}
-            style={{ width: `${100 / items.length}%` }}
-          >
-            <Image
-              src={src}
-              alt={`${title} — ${i + 1}/${items.length}`}
-              fill
-              priority={i === index}
-              draggable={false}
-              onDragStart={(e) => e.preventDefault()}
-              className={cn(
-                'pointer-events-none',
-                !lightbox && 'transition-transform duration-500 group-hover:scale-110',
-                tab === 'photos'
-                  ? lightbox
-                    ? 'object-contain'
-                    : 'object-cover'
-                  : lightbox
-                    ? 'bg-white object-contain'
-                    : 'object-contain p-4'
-              )}
-            />
-          </button>
-        ))}
-      </div>
-    );
+        <Image
+          src={src}
+          alt={`${title} — ${i + 1}/${items.length}`}
+          fill
+          priority={i === index}
+          draggable={false}
+          onDragStart={(e) => e.preventDefault()}
+          className={cn(
+            'pointer-events-none',
+            !lightbox && 'transition-transform duration-500 group-hover:scale-110',
+            tab === 'photos'
+              ? lightbox
+                ? 'object-contain'
+                : 'object-cover'
+              : lightbox
+                ? 'bg-white object-contain'
+                : 'object-contain p-4'
+          )}
+        />
+      </button>
+    ));
   }
 
   return (
@@ -189,14 +166,14 @@ export function PropertyGallery({
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
-        {renderTrack({ lightbox: false })}
+        {renderSlides({ lightbox: false })}
 
         {items.length > 1 ? (
           <>
             <button
               type="button"
               onClick={() => step(-1)}
-              className="absolute left-3 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-navy-900 opacity-0 transition-opacity hover:bg-white group-hover:opacity-100 sm:opacity-100"
+              className="absolute left-3 top-1/2 z-20 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-navy-900 opacity-0 transition-opacity hover:bg-white group-hover:opacity-100 sm:opacity-100"
               aria-label={t('galleryPrevious')}
             >
               <ChevronLeft className="size-4" />
@@ -204,7 +181,7 @@ export function PropertyGallery({
             <button
               type="button"
               onClick={() => step(1)}
-              className="absolute right-3 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-navy-900 opacity-0 transition-opacity hover:bg-white group-hover:opacity-100 sm:opacity-100"
+              className="absolute right-3 top-1/2 z-20 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-navy-900 opacity-0 transition-opacity hover:bg-white group-hover:opacity-100 sm:opacity-100"
               aria-label={t('galleryNext')}
             >
               <ChevronRight className="size-4" />
@@ -213,7 +190,7 @@ export function PropertyGallery({
         ) : null}
 
         {tab === 'photos' && items.length > 1 ? (
-          <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5">
+          <div className="absolute bottom-3 left-1/2 z-20 flex -translate-x-1/2 gap-1.5">
             {items.map((src, i) => (
               <button
                 key={src}
@@ -308,13 +285,13 @@ export function PropertyGallery({
           ) : null}
 
           <div
-            className="relative h-full max-h-[80vh] w-full max-w-5xl touch-pan-y select-none overflow-hidden"
+            className="relative h-full max-h-[80vh] w-full max-w-5xl touch-pan-y select-none"
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerEnd}
             onPointerCancel={handlePointerEnd}
           >
-            {renderTrack({ lightbox: true })}
+            {renderSlides({ lightbox: true })}
           </div>
         </div>
       ) : null}
