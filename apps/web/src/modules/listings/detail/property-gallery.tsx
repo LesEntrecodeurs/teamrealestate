@@ -11,6 +11,7 @@ type Tab = 'photos' | 'plans';
 const SWIPE_THRESHOLD = 50;
 const SWIPE_INTENT_THRESHOLD = 10;
 const AUTOPLAY_DELAY_MS = 5000;
+const SLIDE_TRANSITION = 'transform 400ms cubic-bezier(0.22, 1, 0.36, 1)';
 
 export function PropertyGallery({
   title,
@@ -34,7 +35,6 @@ export function PropertyGallery({
   const hasSwipedRef = useRef(false);
 
   const items = tab === 'photos' ? images : floorPlans;
-  const active = items[index] ?? items[0];
 
   function selectTab(next: Tab) {
     setTab(next);
@@ -73,14 +73,18 @@ export function PropertyGallery({
     activePointerId.current = e.pointerId;
     hasSwipedRef.current = false;
     setPaused(true);
-    setDragging(true);
-    e.currentTarget.setPointerCapture(e.pointerId);
   }
 
   function handlePointerMove(e: PointerEvent<HTMLDivElement>) {
     if (dragStartX.current === null || activePointerId.current !== e.pointerId) return;
     const delta = e.clientX - dragStartX.current;
-    if (Math.abs(delta) > SWIPE_INTENT_THRESHOLD) hasSwipedRef.current = true;
+    if (Math.abs(delta) > SWIPE_INTENT_THRESHOLD) {
+      if (!hasSwipedRef.current) {
+        e.currentTarget.setPointerCapture(e.pointerId);
+        setDragging(true);
+      }
+      hasSwipedRef.current = true;
+    }
     setDragOffset(delta);
   }
 
@@ -103,6 +107,54 @@ export function PropertyGallery({
       return;
     }
     setLightboxOpen(true);
+  }
+
+  function renderTrack({ lightbox }: { lightbox: boolean }) {
+    return (
+      <div
+        className="flex h-full"
+        style={{
+          width: `${items.length * 100}%`,
+          transform: `translateX(calc(${-index * (100 / items.length)}% + ${dragOffset}px))`,
+          transition: dragging ? 'none' : SLIDE_TRANSITION
+        }}
+      >
+        {items.map((src, i) => (
+          <button
+            key={src}
+            type="button"
+            onClick={lightbox ? undefined : handleImageClick}
+            tabIndex={lightbox ? -1 : undefined}
+            aria-hidden={lightbox ? true : undefined}
+            className={cn(
+              'relative h-full shrink-0',
+              lightbox ? 'cursor-default' : dragging ? 'cursor-grabbing' : 'cursor-grab'
+            )}
+            style={{ width: `${100 / items.length}%` }}
+          >
+            <Image
+              src={src}
+              alt={`${title} — ${i + 1}/${items.length}`}
+              fill
+              priority={i === index}
+              draggable={false}
+              onDragStart={(e) => e.preventDefault()}
+              className={cn(
+                'pointer-events-none',
+                !lightbox && 'transition-transform duration-500 group-hover:scale-110',
+                tab === 'photos'
+                  ? lightbox
+                    ? 'object-contain'
+                    : 'object-cover'
+                  : lightbox
+                    ? 'bg-white object-contain'
+                    : 'object-contain p-4'
+              )}
+            />
+          </button>
+        ))}
+      </div>
+    );
   }
 
   return (
@@ -137,31 +189,7 @@ export function PropertyGallery({
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
-        <button
-          type="button"
-          onClick={handleImageClick}
-          className={cn(
-            'absolute inset-0 block size-full',
-            dragging ? 'cursor-grabbing' : 'cursor-grab'
-          )}
-          style={{
-            transform: `translateX(${dragOffset}px)`,
-            transition: dragging ? 'none' : 'transform 300ms ease'
-          }}
-        >
-          <Image
-            src={active ?? ''}
-            alt={`${title} — ${index + 1}/${items.length}`}
-            fill
-            priority
-            draggable={false}
-            onDragStart={(e) => e.preventDefault()}
-            className={cn(
-              'pointer-events-none transition-transform duration-500 group-hover:scale-110',
-              tab === 'photos' ? 'object-cover' : 'object-contain p-4'
-            )}
-          />
-        </button>
+        {renderTrack({ lightbox: false })}
 
         {items.length > 1 ? (
           <>
@@ -286,25 +314,7 @@ export function PropertyGallery({
             onPointerUp={handlePointerEnd}
             onPointerCancel={handlePointerEnd}
           >
-            <div
-              className="relative size-full"
-              style={{
-                transform: `translateX(${dragOffset}px)`,
-                transition: dragging ? 'none' : 'transform 300ms ease'
-              }}
-            >
-              <Image
-                src={active ?? ''}
-                alt={`${title} — ${index + 1}/${items.length}`}
-                fill
-                draggable={false}
-                onDragStart={(e) => e.preventDefault()}
-                className={cn(
-                  'pointer-events-none',
-                  tab === 'photos' ? 'object-contain' : 'bg-white object-contain'
-                )}
-              />
-            </div>
+            {renderTrack({ lightbox: true })}
           </div>
         </div>
       ) : null}

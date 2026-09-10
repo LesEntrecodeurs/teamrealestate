@@ -43,7 +43,7 @@ export function ListingCard({
   return (
     <Link
       href={`/${listing.transactionType === 'sale' ? 'acheter' : 'louer'}/${listing.slug}`}
-      className="group flex h-full flex-col bg-card ring-1 ring-border transition-shadow hover:shadow-xl hover:shadow-navy-900/10"
+      className="group flex h-full flex-col overflow-hidden rounded-2xl bg-card shadow-md shadow-navy-950/5 ring-1 ring-border transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-navy-950/15"
     >
       <div className={cn('relative overflow-hidden', large ? 'aspect-[16/11]' : 'aspect-[4/3]')}>
         <Image
@@ -53,14 +53,14 @@ export function ListingCard({
           sizes={large ? '(min-width: 1024px) 50vw, 100vw' : '(min-width: 1024px) 25vw, 100vw'}
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <div className="absolute left-0 top-0 flex flex-col gap-1.5">
-          <span className="bg-secondary px-3 py-1.5 text-[10px] font-semibold uppercase tracking-widest text-secondary-foreground">
+        <div className="absolute left-3 top-3 flex flex-col gap-1.5">
+          <span className="w-fit rounded-full bg-secondary px-3 py-1.5 text-[10px] font-semibold uppercase tracking-widest text-secondary-foreground shadow-sm">
             {listing.transactionType === 'sale' ? 'À vendre' : 'À louer'}
           </span>
           {listing.badge ? (
             <span
               className={cn(
-                'w-fit px-3 py-1.5 text-[10px] font-semibold uppercase tracking-widest',
+                'w-fit rounded-full px-3 py-1.5 text-[10px] font-semibold uppercase tracking-widest shadow-sm',
                 badgeTone[listing.badge.tone]
               )}
             >
@@ -82,7 +82,7 @@ export function ListingCard({
           </p>
           <span
             className={cn(
-              'flex size-7 shrink-0 items-center justify-center text-xs font-bold',
+              'flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-bold',
               energyClassTone[listing.energyClass]
             )}
           >
@@ -91,7 +91,10 @@ export function ListingCard({
         </div>
 
         <p
-          className={cn('font-medium text-foreground', large ? 'text-lg' : 'line-clamp-1 text-sm')}
+          className={cn(
+            'font-semibold text-foreground',
+            large ? 'text-lg' : 'line-clamp-1 text-base'
+          )}
         >
           {listing.title}
         </p>

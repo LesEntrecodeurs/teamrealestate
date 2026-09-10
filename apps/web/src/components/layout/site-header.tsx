@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import type { MouseEvent } from 'react';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { FlagIcon } from '@/components/ui/flag-icon';
 import { mainNav } from '@/config/navigation';
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { routing } from '@/i18n/routing';
@@ -143,18 +144,18 @@ export function SiteHeader() {
                   href={pathname}
                   locale={loc}
                   onClick={(event) => handleLocaleClick(event, loc)}
+                  aria-label={loc}
+                  title={loc}
                   className={cn(
-                    'rounded-md px-3 py-2 uppercase transition-colors',
+                    'flex items-center justify-center rounded-md p-1.5 transition-colors',
                     loc === locale
                       ? scrolled
-                        ? 'bg-white/15 text-white'
-                        : 'bg-navy-900 text-white'
-                      : scrolled
-                        ? 'text-white/50 hover:text-white'
-                        : 'text-navy-400 hover:text-navy-900'
+                        ? 'bg-white/15'
+                        : 'bg-navy-900'
+                      : 'opacity-60 hover:opacity-100'
                   )}
                 >
-                  {loc}
+                  <FlagIcon locale={loc} className="h-4 w-[22px] rounded-[2px]" />
                 </Link>
               ))}
             </div>
@@ -236,18 +237,18 @@ export function SiteHeader() {
                   href={pathname}
                   locale={loc}
                   onClick={(event) => handleLocaleClick(event, loc)}
+                  aria-label={loc}
+                  title={loc}
                   className={cn(
-                    'rounded-md px-3 py-2 uppercase transition-colors',
+                    'flex items-center justify-center rounded-md p-1.5 transition-colors',
                     loc === locale
                       ? scrolled
-                        ? 'bg-white/15 text-white'
-                        : 'bg-navy-900 text-white'
-                      : scrolled
-                        ? 'text-white/50 hover:text-white'
-                        : 'text-navy-400 hover:text-navy-900'
+                        ? 'bg-white/15'
+                        : 'bg-navy-900'
+                      : 'opacity-60 hover:opacity-100'
                   )}
                 >
-                  {loc}
+                  <FlagIcon locale={loc} className="h-4 w-[22px] rounded-[2px]" />
                 </Link>
               ))}
             </div>
