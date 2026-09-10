@@ -1,23 +1,17 @@
 import type { Metadata } from 'next';
-import { Fraunces, Inter } from 'next/font/google';
+import { Red_Hat_Display } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { SiteFooter } from '@/components/layout/site-footer';
 import { SiteHeader } from '@/components/layout/site-header';
+import { ScrollToTop } from '@/components/ui/scroll-to-top';
 import { routing } from '@/i18n/routing';
 import '../globals.css';
 
-const inter = Inter({
+const redHatDisplay = Red_Hat_Display({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-red-hat-display',
   display: 'swap'
-});
-
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  variable: '--font-fraunces',
-  display: 'swap',
-  axes: ['opsz', 'SOFT', 'WONK']
 });
 
 export const metadata: Metadata = {
@@ -47,12 +41,13 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={locale} className={`${inter.variable} ${fraunces.variable}`}>
+    <html lang={locale} className={redHatDisplay.variable}>
       <body className="flex min-h-svh flex-col antialiased">
         <NextIntlClientProvider>
           <SiteHeader />
           <main className="flex-1">{children}</main>
           <SiteFooter />
+          <ScrollToTop />
         </NextIntlClientProvider>
       </body>
     </html>
