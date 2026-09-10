@@ -149,70 +149,63 @@ export function SiteHeader() {
       </div>
 
       {open ? (
-        <>
-          <button
-            type="button"
-            aria-label="Fermer le menu"
-            onClick={() => setOpen(false)}
-            className="fixed inset-0 z-40 bg-navy-950/40 backdrop-blur-sm lg:hidden"
-          />
-          <div
-            className={cn(
-              'relative z-50 mx-auto mt-2 flex max-w-7xl flex-col gap-1 rounded-2xl border px-5 py-3 shadow-lg backdrop-blur-sm lg:hidden',
-              scrolled
-                ? 'border-white/10 bg-navy-900/95 text-white shadow-black/20'
-                : 'border-navy-100 bg-white/95 text-navy-900 shadow-navy-900/10'
-            )}
-          >
+        <div
+          className={cn(
+            'fixed inset-0 z-40 flex flex-col px-6 pb-8 pt-24 lg:hidden',
+            scrolled ? 'bg-navy-900 text-white' : 'bg-white text-navy-900'
+          )}
+        >
+          <nav className="flex flex-1 flex-col items-start justify-center gap-2">
             {mainNav.map((item) => (
               <Link
                 key={item.key}
                 href={item.href}
                 onClick={() => setOpen(false)}
                 className={cn(
-                  'border-b py-3.5 text-base font-medium',
-                  scrolled
-                    ? 'border-white/10 text-white/85 hover:text-white'
-                    : 'border-navy-100 text-navy-700 hover:text-navy-900'
+                  'py-2 text-4xl font-medium',
+                  scrolled ? 'text-white hover:text-cyan-300' : 'text-navy-900 hover:text-cyan-600'
                 )}
               >
                 {t(item.key)}
               </Link>
             ))}
-            <div className="mt-3 flex items-center justify-between gap-3">
-              <div
-                className={cn(
-                  'flex items-center gap-1 rounded-lg p-1 text-base font-semibold',
-                  scrolled ? 'bg-white/5' : 'bg-navy-50'
-                )}
-              >
-                {routing.locales.map((loc) => (
-                  <Link
-                    key={loc}
-                    href={pathname}
-                    locale={loc}
-                    onClick={(event) => handleLocaleClick(event, loc)}
-                    className={cn(
-                      'rounded-md px-3 py-2 uppercase transition-colors',
-                      loc === locale
-                        ? scrolled
-                          ? 'bg-white/15 text-white'
-                          : 'bg-navy-900 text-white'
-                        : scrolled
-                          ? 'text-white/50 hover:text-white'
-                          : 'text-navy-400 hover:text-navy-900'
-                    )}
-                  >
-                    {loc}
-                  </Link>
-                ))}
-              </div>
-              <Button asChild variant="accent">
-                <Link href="/vendre">{t('estimate')}</Link>
-              </Button>
+          </nav>
+
+          <div className="flex flex-col gap-4">
+            <div
+              className={cn(
+                'flex w-fit items-center gap-1 rounded-lg p-1 text-sm font-semibold',
+                scrolled ? 'bg-white/5' : 'bg-navy-50'
+              )}
+            >
+              {routing.locales.map((loc) => (
+                <Link
+                  key={loc}
+                  href={pathname}
+                  locale={loc}
+                  onClick={(event) => handleLocaleClick(event, loc)}
+                  className={cn(
+                    'rounded-md px-3 py-2 uppercase transition-colors',
+                    loc === locale
+                      ? scrolled
+                        ? 'bg-white/15 text-white'
+                        : 'bg-navy-900 text-white'
+                      : scrolled
+                        ? 'text-white/50 hover:text-white'
+                        : 'text-navy-400 hover:text-navy-900'
+                  )}
+                >
+                  {loc}
+                </Link>
+              ))}
             </div>
+            <Button asChild variant="accent" size="lg" className="w-full">
+              <Link href="/vendre" onClick={() => setOpen(false)}>
+                {t('estimate')}
+              </Link>
+            </Button>
           </div>
-        </>
+        </div>
       ) : null}
     </header>
   );
