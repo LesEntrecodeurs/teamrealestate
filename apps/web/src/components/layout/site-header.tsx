@@ -38,11 +38,16 @@ export function SiteHeader() {
   // navigation, instead of relying on a cached reference to the old page's.
   // biome-ignore lint/correctness/useExhaustiveDependencies: see above
   useEffect(() => {
+    const heroEl = document.getElementById('top');
+    if (!heroEl) {
+      // No light hero to blend with (secondary pages open on a dark
+      // PageHeader banner instead) — stay in the dark header style.
+      setScrolled(true);
+      return;
+    }
+
     const headerOffset = 96;
-    const getThreshold = () => {
-      const heroEl = document.getElementById('top');
-      return heroEl ? heroEl.offsetHeight - headerOffset : headerOffset;
-    };
+    const getThreshold = () => heroEl.offsetHeight - headerOffset;
     const onScroll = () => setScrolled(window.scrollY > getThreshold());
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });

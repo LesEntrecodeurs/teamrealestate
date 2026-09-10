@@ -154,8 +154,10 @@ export function PropertyGallery({
             alt={`${title} — ${index + 1}/${items.length}`}
             fill
             priority
+            draggable={false}
+            onDragStart={(e) => e.preventDefault()}
             className={cn(
-              'transition-transform duration-500 group-hover:scale-[1.02]',
+              'pointer-events-none transition-transform duration-500 group-hover:scale-110',
               tab === 'photos' ? 'object-cover' : 'object-contain p-4'
             )}
           />
@@ -216,7 +218,12 @@ export function PropertyGallery({
                 src={src}
                 alt=""
                 fill
-                className={tab === 'photos' ? 'object-cover' : 'bg-muted object-contain p-1'}
+                draggable={false}
+                onDragStart={(e) => e.preventDefault()}
+                className={cn(
+                  'pointer-events-none',
+                  tab === 'photos' ? 'object-cover' : 'bg-muted object-contain p-1'
+                )}
               />
             </button>
           ))}
@@ -290,7 +297,12 @@ export function PropertyGallery({
                 src={active ?? ''}
                 alt={`${title} — ${index + 1}/${items.length}`}
                 fill
-                className={tab === 'photos' ? 'object-contain' : 'bg-white object-contain'}
+                draggable={false}
+                onDragStart={(e) => e.preventDefault()}
+                className={cn(
+                  'pointer-events-none',
+                  tab === 'photos' ? 'object-contain' : 'bg-white object-contain'
+                )}
               />
             </div>
           </div>

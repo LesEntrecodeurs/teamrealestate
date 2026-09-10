@@ -85,8 +85,8 @@ export function Hero() {
 
       <HeroSquares />
 
-      <div className="relative flex min-h-[540px] flex-col pb-6 sm:min-h-[640px] sm:pb-8 lg:min-h-[68vh]">
-        <div className="flex flex-1 items-center">
+      <div className="relative flex min-h-[540px] flex-col pb-20 sm:min-h-[640px] sm:pb-24 lg:min-h-[68vh]">
+        <div className="flex flex-1 flex-col justify-center gap-6">
           <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-6 text-white sm:px-8 lg:grid-cols-12">
             <div className="lg:col-span-8">
               <p className="mb-5 text-sm font-medium uppercase tracking-[0.15em] text-cyan-300">
@@ -102,115 +102,115 @@ export function Hero() {
               <p className="max-w-sm text-base text-white/75 sm:text-lg">{t('subtitle')}</p>
             </div>
           </div>
-        </div>
 
-        <form
-          className="relative z-10 mx-auto mt-6 flex w-full max-w-7xl flex-col gap-3 px-6 sm:px-8"
-          onSubmit={handleSearch}
-        >
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <div className="relative flex-1">
-              <Search className="pointer-events-none absolute left-5 top-1/2 size-5 -translate-y-1/2 text-navy-400" />
-              <input
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder={t('aiPlaceholder')}
-                className="h-16 w-full rounded-xl border border-navy-100 bg-white pl-13 pr-11 text-base text-navy-900 shadow-lg shadow-navy-950/15 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none"
-              />
-              {query ? (
+          <form
+            className="relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-3 px-6 sm:px-8"
+            onSubmit={handleSearch}
+          >
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <div className="relative flex-1">
+                <Search className="pointer-events-none absolute left-5 top-1/2 size-5 -translate-y-1/2 text-navy-400" />
+                <input
+                  type="text"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder={t('aiPlaceholder')}
+                  className="h-16 w-full rounded-xl border border-navy-100 bg-white pl-13 pr-11 text-base text-navy-900 shadow-lg shadow-navy-950/15 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none"
+                />
+                {query ? (
+                  <button
+                    type="button"
+                    onClick={() => setQuery('')}
+                    aria-label={t('aiSubmit')}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-navy-400 hover:text-navy-700"
+                  >
+                    <X className="size-5" />
+                  </button>
+                ) : null}
+              </div>
+              <div className="flex gap-3">
                 <button
                   type="button"
-                  onClick={() => setQuery('')}
-                  aria-label={t('aiSubmit')}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-navy-400 hover:text-navy-700"
+                  onClick={() => setFiltersOpen((v) => !v)}
+                  aria-expanded={filtersOpen}
+                  aria-label={t('filterType')}
+                  title={t('filterType')}
+                  className={cn(
+                    'flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border bg-white shadow-lg shadow-navy-950/15 transition-colors',
+                    filtersOpen
+                      ? 'border-cyan-500 text-cyan-600'
+                      : 'border-navy-100 text-navy-700 hover:border-navy-300'
+                  )}
                 >
-                  <X className="size-5" />
+                  <Sliders className="size-5" />
                 </button>
-              ) : null}
-            </div>
-            <div className="flex gap-3">
-              <button
-                type="button"
-                onClick={() => setFiltersOpen((v) => !v)}
-                aria-expanded={filtersOpen}
-                aria-label={t('filterType')}
-                title={t('filterType')}
-                className={cn(
-                  'flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border bg-white shadow-lg shadow-navy-950/15 transition-colors',
-                  filtersOpen
-                    ? 'border-cyan-500 text-cyan-600'
-                    : 'border-navy-100 text-navy-700 hover:border-navy-300'
-                )}
-              >
-                <Sliders className="size-5" />
-              </button>
-              <Button
-                type="submit"
-                variant="accent"
-                size="lg"
-                className="h-16 flex-1 rounded-xl text-base shadow-lg shadow-navy-950/15 sm:flex-none"
-              >
-                {t('aiSubmit')}
-                <ArrowRight className="size-4" />
-              </Button>
-            </div>
-          </div>
-
-          <div
-            className={cn(
-              'grid transition-all duration-300 ease-out',
-              filtersOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
-            )}
-          >
-            <div className="overflow-hidden">
-              <div className="flex flex-col gap-3 pt-1 sm:flex-row">
-                <div className="flex-1 rounded-xl border border-navy-100 bg-white px-2 shadow-md shadow-navy-950/10">
-                  <SelectField
-                    value={type}
-                    onChange={setType}
-                    placeholder={t('filterTypeAny')}
-                    ariaLabel={t('filterType')}
-                    options={[
-                      { value: '', label: t('filterTypeAny') },
-                      { value: 'apartment', label: t('filterTypeApartment') },
-                      { value: 'house', label: t('filterTypeHouse') }
-                    ]}
-                  />
-                </div>
-                <input
-                  type="text"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  placeholder={t('filterLocationPlaceholder')}
-                  className="h-13 flex-1 rounded-xl border border-navy-100 bg-white px-5 text-base text-navy-900 shadow-md shadow-navy-950/10 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none"
-                />
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  value={budget}
-                  onChange={(e) => setBudget(e.target.value)}
-                  placeholder={t('filterBudget')}
-                  className="h-13 flex-1 rounded-xl border border-navy-100 bg-white px-5 text-base text-navy-900 shadow-md shadow-navy-950/10 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none"
-                />
+                <Button
+                  type="submit"
+                  variant="accent"
+                  size="lg"
+                  className="h-16 flex-1 rounded-xl text-base shadow-lg shadow-navy-950/15 sm:flex-none"
+                >
+                  {t('aiSubmit')}
+                  <ArrowRight className="size-4" />
+                </Button>
               </div>
             </div>
-          </div>
 
-          <div className="flex flex-wrap items-center gap-2 pt-1 text-sm text-white/70">
-            <span className="font-medium">{t('tryLabel')}</span>
-            {suggestions.map((s) => (
-              <button
-                key={s}
-                type="button"
-                onClick={() => setQuery(s)}
-                className="rounded-xl border border-white/25 bg-white/10 px-3 py-1.5 font-medium text-white/85 transition-colors hover:border-white/45 hover:bg-white/20"
-              >
-                {s}
-              </button>
-            ))}
-          </div>
-        </form>
+            <div
+              className={cn(
+                'grid transition-all duration-300 ease-out',
+                filtersOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+              )}
+            >
+              <div className="overflow-hidden">
+                <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+                  <div className="flex-1 rounded-xl border border-navy-100 bg-white px-2 shadow-md shadow-navy-950/10">
+                    <SelectField
+                      value={type}
+                      onChange={setType}
+                      placeholder={t('filterTypeAny')}
+                      ariaLabel={t('filterType')}
+                      options={[
+                        { value: '', label: t('filterTypeAny') },
+                        { value: 'apartment', label: t('filterTypeApartment') },
+                        { value: 'house', label: t('filterTypeHouse') }
+                      ]}
+                    />
+                  </div>
+                  <input
+                    type="text"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    placeholder={t('filterLocationPlaceholder')}
+                    className="h-13 flex-1 rounded-xl border border-navy-100 bg-white px-5 text-base text-navy-900 shadow-md shadow-navy-950/10 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none"
+                  />
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    value={budget}
+                    onChange={(e) => setBudget(e.target.value)}
+                    placeholder={t('filterBudget')}
+                    className="h-13 flex-1 rounded-xl border border-navy-100 bg-white px-5 text-base text-navy-900 shadow-md shadow-navy-950/10 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2 pt-1 text-sm text-white/70">
+              <span className="font-medium">{t('tryLabel')}</span>
+              {suggestions.map((s) => (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => setQuery(s)}
+                  className="rounded-xl border border-white/25 bg-white/10 px-3 py-1.5 font-medium text-white/85 transition-colors hover:border-white/45 hover:bg-white/20"
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+          </form>
+        </div>
       </div>
 
       <svg
