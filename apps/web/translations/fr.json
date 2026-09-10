@@ -48,7 +48,7 @@
       "viewAll": "Voir tous les biens"
     },
     "agency": {
-      "eyebrow": "02 — L'agence",
+      "eyebrow": "L'agence",
       "title1": "Pas un agent.",
       "title2": "Une équipe entière derrière votre projet.",
       "body1": "Chez Team Real Estate, votre dossier n'appartient pas à une seule personne. Recherche, négociation, juridique, suivi : chaque expertise de l'équipe travaille votre projet en commun.",
@@ -58,15 +58,21 @@
       "stat2Value": "+200",
       "stat2Label": "biens vendus et loués",
       "stat3Value": "Une équipe",
-      "stat3Label": "à votre service, du premier contact à la signature"
+      "stat3Label": "à votre service, du premier contact à la signature",
+      "learnMore": "En savoir plus sur l'agence"
     },
     "team": {
       "eyebrow": "L'équipe",
-      "title": "Les visages derrière votre projet"
+      "title": "Les visages derrière votre projet",
+      "roleCofounder": "Cofondateur",
+      "roleRental": "Location & gestion",
+      "roleLegal": "Juridique & notariat",
+      "roleValuation": "Estimation & analyse"
     },
     "why": {
       "eyebrow": "03 — Pourquoi Team",
       "title": "L'avantage du collectif, concrètement",
+      "hubLabel": "Toute l’équipe",
       "item1Title": "Disponibilité permanente",
       "item1Body": "Un membre de l'équipe est toujours joignable. Vos visites et vos questions n'attendent jamais une seule personne.",
       "item2Title": "Expertise mutualisée",

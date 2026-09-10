@@ -59,7 +59,7 @@
       "viewAll": "View all listings"
     },
     "agency": {
-      "eyebrow": "02 — The agency",
+      "eyebrow": "The agency",
       "title1": "Not one agent.",
       "title2": "A whole team behind your project.",
       "body1": "At Team Real Estate, your file doesn't belong to a single person. Search, negotiation, legal, follow-up: every expertise on the team works your project together.",
@@ -69,15 +69,21 @@
       "stat2Value": "200+",
       "stat2Label": "properties sold and let",
       "stat3Value": "One team",
-      "stat3Label": "at your service, from first contact to signature"
+      "stat3Label": "at your service, from first contact to signature",
+      "learnMore": "Learn more about the agency"
     },
     "team": {
       "eyebrow": "The team",
-      "title": "The faces behind your project"
+      "title": "The faces behind your project",
+      "roleCofounder": "Co-founder",
+      "roleRental": "Rental & property management",
+      "roleLegal": "Legal & notarial",
+      "roleValuation": "Valuation & analysis"
     },
     "why": {
       "eyebrow": "03 — Why Team",
       "title": "The advantage of a team, in practice",
+      "hubLabel": "The whole team",
       "item1Title": "Always available",
       "item1Body": "A team member is always reachable. Your viewings and questions never wait on a single person.",
       "item2Title": "Shared expertise",

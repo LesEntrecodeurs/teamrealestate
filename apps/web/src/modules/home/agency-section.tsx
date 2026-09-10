@@ -1,7 +1,10 @@
+import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { Button } from '@/components/ui/button';
 import { Counter } from '@/components/ui/counter';
 import { Reveal } from '@/components/ui/reveal';
+import { Link } from '@/i18n/navigation';
 
 export function AgencySection() {
   const t = useTranslations('HomePage.agency');
@@ -21,8 +24,9 @@ export function AgencySection() {
           fill
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-navy-950/78" />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/30 to-navy-950/40" />
+        <div className="absolute inset-0 bg-navy-950/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/85 to-navy-950/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-navy-950/50" />
       </div>
 
       <Reveal className="relative mx-auto max-w-7xl px-6 sm:px-8">
@@ -31,13 +35,20 @@ export function AgencySection() {
             <span className="h-1.5 w-6 rounded-full bg-cyan-300" />
             {t('eyebrow')}
           </p>
-          <h2 className="font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
+          <h2 className="bg-gradient-to-r from-white to-cyan-200 bg-clip-text font-display text-3xl font-bold leading-tight text-transparent drop-shadow-sm sm:text-4xl lg:text-5xl">
             {t('title1')}
             <br />
             {t('title2')}
           </h2>
           <p className="mt-6 text-base text-white/80 sm:text-lg">{t('body1')}</p>
           <p className="mt-4 text-base text-white/80 sm:text-lg">{t('body2')}</p>
+
+          <Button asChild variant="outline-invert" size="lg" className="mt-8">
+            <Link href="/agence">
+              {t('learnMore')}
+              <ArrowRight className="size-4" />
+            </Link>
+          </Button>
         </div>
 
         <dl className="mt-14 grid grid-cols-1 gap-8 border-t border-white/15 pt-10 sm:grid-cols-3 sm:gap-6 sm:divide-x sm:divide-white/15">

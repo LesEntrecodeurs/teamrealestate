@@ -59,7 +59,7 @@
       "viewAll": "Alle Immobilien ansehen"
     },
     "agency": {
-      "eyebrow": "02 — Die Agentur",
+      "eyebrow": "Die Agentur",
       "title1": "Kein einzelner Makler.",
       "title2": "Ein ganzes Team hinter Ihrem Projekt.",
       "body1": "Bei Team Real Estate gehört Ihr Dossier nicht nur einer Person. Suche, Verhandlung, Recht, Betreuung: jede Expertise des Teams arbeitet gemeinsam an Ihrem Projekt.",
@@ -69,15 +69,21 @@
       "stat2Value": "+200",
       "stat2Label": "verkaufte und vermietete Immobilien",
       "stat3Value": "Ein Team",
-      "stat3Label": "an Ihrer Seite, vom ersten Kontakt bis zur Unterschrift"
+      "stat3Label": "an Ihrer Seite, vom ersten Kontakt bis zur Unterschrift",
+      "learnMore": "Mehr über die Agentur erfahren"
     },
     "team": {
       "eyebrow": "Das Team",
-      "title": "Die Gesichter hinter Ihrem Projekt"
+      "title": "Die Gesichter hinter Ihrem Projekt",
+      "roleCofounder": "Mitbegründer",
+      "roleRental": "Vermietung & Verwaltung",
+      "roleLegal": "Recht & Notariat",
+      "roleValuation": "Bewertung & Analyse"
     },
     "why": {
       "eyebrow": "03 — Warum Team",
       "title": "Der Vorteil des Kollektivs, ganz konkret",
+      "hubLabel": "Das ganze Team",
       "item1Title": "Ständige Erreichbarkeit",
       "item1Body": "Ein Teammitglied ist immer erreichbar. Ihre Besichtigungen und Fragen warten nie auf eine einzige Person.",
       "item2Title": "Gebündelte Expertise",

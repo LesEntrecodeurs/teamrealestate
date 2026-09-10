@@ -8,14 +8,44 @@ import { Reveal } from '@/components/ui/reveal';
  * lifestyle shot) suggest these are stock placeholders picked to fill the
  * layout, not the real team's photos. Confirm with the client before ship;
  * see docs/charte-graphique.md.
+ *
+ * `focus` compensates for how differently each placeholder frames its
+ * subject (Pol's is already a tight crop, Camille's is a wide seated shot)
+ * so the faces read at a similar size across the grid — real photos should
+ * make this unnecessary.
  */
 const team = [
-  { name: 'Jonathan Forrett', role: 'Cofondateur', photo: '/team/jonathan-forrett.jpg' },
-  { name: 'Jean-Marc Estgen', role: 'Cofondateur', photo: '/team/jean-marc-estgen.jpg' },
-  { name: 'Camille Origer', role: 'Location & gestion', photo: '/team/camille-origer.jpg' },
-  { name: 'Pol Faber', role: 'Juridique & notariat', photo: '/team/pol-faber.jpg' },
-  { name: 'Yasmine Khelifi', role: 'Estimation & analyse', photo: '/team/yasmine-khelifi.jpg' }
-];
+  {
+    name: 'Jonathan Forrett',
+    roleKey: 'roleCofounder',
+    photo: '/team/jonathan-forrett.jpg',
+    focus: { scale: 1.2, position: '50% 22%' }
+  },
+  {
+    name: 'Jean-Marc Estgen',
+    roleKey: 'roleCofounder',
+    photo: '/team/jean-marc-estgen.jpg',
+    focus: { scale: 1.2, position: '50% 28%' }
+  },
+  {
+    name: 'Camille Origer',
+    roleKey: 'roleRental',
+    photo: '/team/camille-origer.jpg',
+    focus: { scale: 2.2, position: '50% 16%' }
+  },
+  {
+    name: 'Pol Faber',
+    roleKey: 'roleLegal',
+    photo: '/team/pol-faber.jpg',
+    focus: { scale: 1, position: '50% 22%' }
+  },
+  {
+    name: 'Yasmine Khelifi',
+    roleKey: 'roleValuation',
+    photo: '/team/yasmine-khelifi.jpg',
+    focus: { scale: 1.3, position: '50% 20%' }
+  }
+] as const;
 
 export function TeamSection() {
   const t = useTranslations('HomePage.team');
@@ -39,7 +69,14 @@ export function TeamSection() {
                 alt={member.name}
                 fill
                 sizes="(min-width: 1024px) 20vw, 33vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                style={
+                  {
+                    objectPosition: member.focus.position,
+                    transformOrigin: member.focus.position,
+                    '--base-scale': member.focus.scale
+                  } as React.CSSProperties
+                }
+                className="scale-[var(--base-scale)] object-cover transition-transform duration-700 group-hover:scale-[calc(var(--base-scale)*1.08)]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/10 to-transparent" />
               <span className="absolute left-4 top-4 font-display text-xs font-bold text-white/40">
@@ -50,7 +87,7 @@ export function TeamSection() {
                   {member.name}
                 </p>
                 <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-cyan-300">
-                  {member.role}
+                  {t(member.roleKey)}
                 </p>
               </div>
             </div>
