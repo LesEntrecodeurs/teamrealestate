@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { SelectField } from '@/components/ui/select-field';
 import { useRouter } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 
@@ -38,7 +39,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden bg-navy-950 pb-20 sm:pb-24"
+      className="relative -mt-[84px] overflow-hidden bg-navy-950 pt-[84px] pb-20 sm:-mt-[104px] sm:pt-[104px] sm:pb-24"
       style={{ clipPath: 'polygon(0 0, 100% 0, 100% 97%, 0 100%)' }}
     >
       <div className="absolute inset-0">
@@ -141,56 +142,55 @@ export function Hero() {
 
             <form
               className={cn(
-                'col-start-1 row-start-1 flex flex-col gap-3 transition-all duration-300 ease-out sm:flex-row sm:items-end',
+                'col-start-1 row-start-1 flex flex-col gap-3 transition-all duration-300 ease-out',
                 mode === 'filters'
                   ? 'translate-y-0 opacity-100'
                   : 'pointer-events-none translate-y-1 opacity-0'
               )}
               onSubmit={submitFilters}
             >
-              <label className="flex flex-1 flex-col gap-1.5 text-xs font-medium text-white/70">
-                {t('filterType')}
-                <select
-                  value={type}
-                  onChange={(e) => setType(e.target.value)}
-                  className="h-13 rounded-md border border-white/15 bg-white/5 px-3 text-sm text-white focus:border-cyan-400 focus:outline-none"
-                >
-                  <option className="text-navy-900" value="">
-                    {t('filterTypeAny')}
-                  </option>
-                  <option className="text-navy-900" value="apartment">
-                    {t('filterTypeApartment')}
-                  </option>
-                  <option className="text-navy-900" value="house">
-                    {t('filterTypeHouse')}
-                  </option>
-                </select>
-              </label>
-              <label className="flex flex-1 flex-col gap-1.5 text-xs font-medium text-white/70">
-                {t('filterLocation')}
-                <input
-                  type="text"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  placeholder={t('filterLocationPlaceholder')}
-                  className="h-13 rounded-md border border-white/15 bg-white/5 px-3 text-sm text-white placeholder:text-white/40 focus:border-cyan-400 focus:outline-none"
-                />
-              </label>
-              <label className="flex flex-1 flex-col gap-1.5 text-xs font-medium text-white/70">
-                {t('filterBudget')}
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  value={budget}
-                  onChange={(e) => setBudget(e.target.value)}
-                  placeholder="750 000"
-                  className="h-13 rounded-md border border-white/15 bg-white/5 px-3 text-sm text-white placeholder:text-white/40 focus:border-cyan-400 focus:outline-none"
-                />
-              </label>
-              <Button type="submit" variant="accent" size="lg" className="shrink-0">
-                {t('filterSubmit')}
-                <ArrowRight className="size-4" />
-              </Button>
+              <p className="text-sm text-white/60">{t('filterHelper')}</p>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
+                <div className="flex flex-1 flex-col gap-1.5 text-xs font-medium text-white/70">
+                  {t('filterType')}
+                  <SelectField
+                    value={type}
+                    onChange={setType}
+                    placeholder={t('filterTypeAny')}
+                    ariaLabel={t('filterType')}
+                    options={[
+                      { value: '', label: t('filterTypeAny') },
+                      { value: 'apartment', label: t('filterTypeApartment') },
+                      { value: 'house', label: t('filterTypeHouse') }
+                    ]}
+                  />
+                </div>
+                <label className="flex flex-1 flex-col gap-1.5 text-xs font-medium text-white/70">
+                  {t('filterLocation')}
+                  <input
+                    type="text"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    placeholder={t('filterLocationPlaceholder')}
+                    className="h-13 rounded-md border border-white/15 bg-white/5 px-3 text-sm text-white placeholder:text-white/40 focus:border-cyan-400 focus:outline-none"
+                  />
+                </label>
+                <label className="flex flex-1 flex-col gap-1.5 text-xs font-medium text-white/70">
+                  {t('filterBudget')}
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    value={budget}
+                    onChange={(e) => setBudget(e.target.value)}
+                    placeholder="750 000"
+                    className="h-13 rounded-md border border-white/15 bg-white/5 px-3 text-sm text-white placeholder:text-white/40 focus:border-cyan-400 focus:outline-none"
+                  />
+                </label>
+                <Button type="submit" variant="accent" size="lg" className="shrink-0">
+                  {t('filterSubmit')}
+                  <ArrowRight className="size-4" />
+                </Button>
+              </div>
             </form>
           </div>
         </div>
