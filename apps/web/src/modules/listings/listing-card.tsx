@@ -42,7 +42,7 @@ export function ListingCard({
 
   return (
     <Link
-      href={`/biens/${listing.slug}`}
+      href={`/${listing.transactionType === 'sale' ? 'acheter' : 'louer'}/${listing.slug}`}
       className="group flex h-full flex-col bg-card ring-1 ring-border transition-shadow hover:shadow-xl hover:shadow-navy-900/10"
     >
       <div className={cn('relative overflow-hidden', large ? 'aspect-[16/11]' : 'aspect-[4/3]')}>

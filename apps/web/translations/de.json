@@ -117,7 +117,30 @@
     "description": "Beschreibung",
     "descriptionBody": "Diese Immobilie gehört zu unserer Auswahl in {location}. Fotos, Grundrisse und eine ausführliche Beschreibung erscheinen automatisch, sobald die Anbindung an Apimo aktiv ist — diese Seite zeigt bereits die finale Struktur.",
     "contactAgent": "Team kontaktieren",
-    "requestVisit": "Besichtigung anfragen"
+    "requestVisit": "Besichtigung anfragen",
+    "galleryPhotosTab": "Fotos",
+    "galleryPlansTab": "Grundrisse",
+    "galleryClose": "Schließen",
+    "galleryPrevious": "Vorheriges Foto",
+    "galleryNext": "Nächstes Foto",
+    "featuresTitle": "Ausstattung",
+    "pointsOfInterestTitle": "Sehenswürdigkeiten in der Nähe",
+    "contactFormTitle": "Team zu dieser Immobilie kontaktieren",
+    "contactFormSubtitle": "Eine Frage, eine Besichtigungsanfrage? Unser Team antwortet innerhalb von 24 Stunden.",
+    "nameLabel": "Name",
+    "phoneLabel": "Telefon",
+    "emailLabel": "E-Mail",
+    "messageLabel": "Nachricht",
+    "messagePlaceholder": "Hallo, ich interessiere mich für „{title}“, könnten Sie mich kontaktieren?",
+    "submit": "Senden",
+    "submitSuccess": "Vielen Dank, Ihre Anfrage wurde gesendet. Wir melden uns in Kürze bei Ihnen.",
+    "shareTitle": "Teilen",
+    "shareCopyLink": "Link kopieren",
+    "shareCopied": "Link kopiert",
+    "shareEmail": "Per E-Mail teilen",
+    "shareFacebook": "Auf Facebook teilen",
+    "shareLinkedin": "Auf LinkedIn teilen",
+    "shareX": "Auf X teilen"
   },
   "SellPage": {
     "eyebrow": "Verkaufen mit Team Real Estate",
@@ -156,6 +179,12 @@
     "privacyTitle": "Datenschutzerklärung",
     "termsTitle": "Allgemeine Geschäftsbedingungen",
     "placeholder": "Dieser Inhalt wird mit den rechtlichen Angaben von Team Real Estate S.à r.l. vervollständigt."
+  },
+  "NotFoundPage": {
+    "title": "Diese Immobilie gibt es (noch) nicht.",
+    "subtitle": "Die gesuchte Seite wurde verschoben oder existiert nicht. Das ganze Team bleibt in der Zwischenzeit für Ihr echtes Projekt erreichbar.",
+    "backHome": "Zurück zur Startseite",
+    "browseListings": "Immobilien ansehen"
   },
   "Footer": {
     "tagline": "Immobilien, im Team gespielt. Immobilienagentur in Luxemburg-Stadt.",

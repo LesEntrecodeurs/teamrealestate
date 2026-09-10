@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" fill="none" role="img" aria-labelledby="title">
+  <title id="title">Plan indicatif de l'appartement</title>
+  <rect width="800" height="560" fill="#f7fbfa" />
+  <g stroke="#15273f" stroke-width="4" stroke-linejoin="round">
+    <rect x="60" y="60" width="680" height="440" />
+    <line x1="420" y1="60" x2="420" y2="500" />
+    <line x1="60" y1="280" x2="420" y2="280" />
+    <line x1="420" y1="340" x2="620" y2="340" />
+    <line x1="620" y1="60" x2="620" y2="500" />
+  </g>
+  <g stroke="#cfd8e0" stroke-width="3">
+    <line x1="340" y1="280" x2="420" y2="280" />
+    <line x1="500" y1="340" x2="500" y2="420" />
+    <line x1="150" y1="60" x2="150" y2="130" />
+  </g>
+  <g fill="#57708c" font-family="Helvetica, Arial, sans-serif" font-size="18" letter-spacing="1">
+    <text x="140" y="180">SÉJOUR</text>
+    <text x="140" y="400">CHAMBRE</text>
+    <text x="460" y="150">TERRASSE</text>
+    <text x="460" y="420">SDB</text>
+    <text x="650" y="280">CUISINE</text>
+  </g>
+  <text x="60" y="40" fill="#15273f" font-family="Fraunces, Georgia, serif" font-size="22" font-weight="700">
+    Plan de l'appartement
+  </text>
+  <text x="60" y="540" fill="#8d9fad" font-family="Helvetica, Arial, sans-serif" font-size="14">
+    Plan indicatif — non contractuel
+  </text>
+</svg>

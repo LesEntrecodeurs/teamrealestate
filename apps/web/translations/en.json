@@ -117,7 +117,30 @@
     "description": "Description",
     "descriptionBody": "This property is part of our {location} selection. Photos, floor plans and a full description will populate automatically once the Apimo connection is live — this page previews the final structure.",
     "contactAgent": "Contact the team",
-    "requestVisit": "Request a viewing"
+    "requestVisit": "Request a viewing",
+    "galleryPhotosTab": "Photos",
+    "galleryPlansTab": "Floor plans",
+    "galleryClose": "Close",
+    "galleryPrevious": "Previous photo",
+    "galleryNext": "Next photo",
+    "featuresTitle": "Features",
+    "pointsOfInterestTitle": "Nearby points of interest",
+    "contactFormTitle": "Contact the team about this property",
+    "contactFormSubtitle": "A question, a viewing request? Our team replies within 24h.",
+    "nameLabel": "Name",
+    "phoneLabel": "Phone",
+    "emailLabel": "Email",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Hello, I’m interested in “{title}”, could you get back to me?",
+    "submit": "Send",
+    "submitSuccess": "Thank you, your request has been sent. We’ll get back to you shortly.",
+    "shareTitle": "Share",
+    "shareCopyLink": "Copy link",
+    "shareCopied": "Link copied",
+    "shareEmail": "Share by email",
+    "shareFacebook": "Share on Facebook",
+    "shareLinkedin": "Share on LinkedIn",
+    "shareX": "Share on X"
   },
   "SellPage": {
     "eyebrow": "Selling with Team Real Estate",
@@ -156,6 +179,12 @@
     "privacyTitle": "Privacy policy",
     "termsTitle": "Terms & conditions",
     "placeholder": "This content will be completed with Team Real Estate S.à r.l.'s legal information."
+  },
+  "NotFoundPage": {
+    "title": "This property doesn't exist (yet).",
+    "subtitle": "The page you're looking for has moved or was never built. In the meantime, the whole team is still available for your real project.",
+    "backHome": "Back to home",
+    "browseListings": "See listings"
   },
   "Footer": {
     "tagline": "Real estate, played as a team. Real estate agency in Luxembourg City.",

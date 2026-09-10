@@ -117,7 +117,30 @@
     "description": "Description",
     "descriptionBody": "Ce bien fait partie de notre sélection {location}. Photos, plans et descriptif détaillé arrivent automatiquement dès la connexion avec Apimo — cette fiche est un aperçu de la structure finale.",
     "contactAgent": "Contacter l'équipe",
-    "requestVisit": "Demander une visite"
+    "requestVisit": "Demander une visite",
+    "galleryPhotosTab": "Photos",
+    "galleryPlansTab": "Plans",
+    "galleryClose": "Fermer",
+    "galleryPrevious": "Photo précédente",
+    "galleryNext": "Photo suivante",
+    "featuresTitle": "Caractéristiques",
+    "pointsOfInterestTitle": "Points d'intérêt à proximité",
+    "contactFormTitle": "Contacter l’équipe pour ce bien",
+    "contactFormSubtitle": "Une question, une demande de visite ? Notre équipe vous répond sous 24h.",
+    "nameLabel": "Nom",
+    "phoneLabel": "Téléphone",
+    "emailLabel": "Email",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Bonjour, je suis intéressé(e) par « {title} », pourriez-vous me recontacter ?",
+    "submit": "Envoyer",
+    "submitSuccess": "Merci, votre demande a bien été envoyée. Nous vous recontactons rapidement.",
+    "shareTitle": "Partager",
+    "shareCopyLink": "Copier le lien",
+    "shareCopied": "Lien copié",
+    "shareEmail": "Partager par email",
+    "shareFacebook": "Partager sur Facebook",
+    "shareLinkedin": "Partager sur LinkedIn",
+    "shareX": "Partager sur X"
   },
   "SellPage": {
     "eyebrow": "Vendre avec Team Real Estate",
@@ -156,6 +179,12 @@
     "privacyTitle": "Politique de confidentialité",
     "termsTitle": "Conditions générales",
     "placeholder": "Ce contenu sera complété avec les informations juridiques de Team Real Estate S.à r.l."
+  },
+  "NotFoundPage": {
+    "title": "Ce bien n'existe pas (encore).",
+    "subtitle": "La page que vous cherchez a changé d'adresse ou n'a jamais été construite. Pendant ce temps, toute l'équipe reste disponible pour votre vrai projet.",
+    "backHome": "Retour à l'accueil",
+    "browseListings": "Voir les biens"
   },
   "Footer": {
     "tagline": "L'immobilier joue collectif. Agence immobilière à Luxembourg-Ville.",

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" fill="none" role="img" aria-labelledby="title">
+  <title id="title">Plan indicatif de l'étage</title>
+  <rect width="800" height="560" fill="#f7fbfa" />
+  <g stroke="#15273f" stroke-width="4" stroke-linejoin="round">
+    <rect x="60" y="60" width="680" height="440" />
+    <line x1="440" y1="60" x2="440" y2="500" />
+    <line x1="60" y1="260" x2="440" y2="260" />
+    <line x1="440" y1="240" x2="740" y2="240" />
+    <line x1="620" y1="240" x2="620" y2="500" />
+  </g>
+  <g stroke="#cfd8e0" stroke-width="3">
+    <line x1="360" y1="260" x2="440" y2="260" />
+    <line x1="440" y1="380" x2="510" y2="380" />
+    <line x1="150" y1="60" x2="150" y2="130" />
+  </g>
+  <g fill="#57708c" font-family="Helvetica, Arial, sans-serif" font-size="18" letter-spacing="1">
+    <text x="140" y="170">SUITE PARENTALE</text>
+    <text x="140" y="390">CHAMBRE 3</text>
+    <text x="480" y="160">DÉGAGEMENT</text>
+    <text x="480" y="380">SDB</text>
+    <text x="650" y="380">DRESSING</text>
+  </g>
+  <text x="60" y="40" fill="#15273f" font-family="Fraunces, Georgia, serif" font-size="22" font-weight="700">
+    Étage
+  </text>
+  <text x="60" y="540" fill="#8d9fad" font-family="Helvetica, Arial, sans-serif" font-size="14">
+    Plan indicatif — non contractuel
+  </text>
+</svg>

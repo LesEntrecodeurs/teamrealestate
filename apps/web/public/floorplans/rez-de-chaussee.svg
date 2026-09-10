@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" fill="none" role="img" aria-labelledby="title">
+  <title id="title">Plan indicatif du rez-de-chaussée</title>
+  <rect width="800" height="560" fill="#f7fbfa" />
+  <g stroke="#15273f" stroke-width="4" stroke-linejoin="round">
+    <rect x="60" y="60" width="680" height="440" />
+    <line x1="60" y1="300" x2="380" y2="300" />
+    <line x1="380" y1="60" x2="380" y2="500" />
+    <line x1="380" y1="380" x2="560" y2="380" />
+    <line x1="560" y1="300" x2="560" y2="500" />
+    <line x1="60" y1="180" x2="220" y2="180" />
+  </g>
+  <g stroke="#cfd8e0" stroke-width="3">
+    <line x1="150" y1="300" x2="220" y2="300" />
+    <line x1="470" y1="60" x2="470" y2="140" />
+    <line x1="380" y1="440" x2="450" y2="440" />
+  </g>
+  <g fill="#57708c" font-family="Helvetica, Arial, sans-serif" font-size="18" letter-spacing="1">
+    <text x="150" y="200">CHAMBRE 1</text>
+    <text x="150" y="380">CHAMBRE 2</text>
+    <text x="460" y="200">SALON</text>
+    <text x="460" y="450">CUISINE</text>
+    <text x="600" y="380">SDB</text>
+  </g>
+  <g stroke="#00a0be" stroke-width="4" stroke-linecap="round">
+    <path d="M60 60 v-16 h680 v16" opacity="0" />
+  </g>
+  <text x="60" y="40" fill="#15273f" font-family="Fraunces, Georgia, serif" font-size="22" font-weight="700">
+    Rez-de-chaussée
+  </text>
+  <text x="60" y="540" fill="#8d9fad" font-family="Helvetica, Arial, sans-serif" font-size="14">
+    Plan indicatif — non contractuel
+  </text>
+</svg>

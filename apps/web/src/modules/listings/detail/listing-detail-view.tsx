@@ -1,47 +1,37 @@
 import { ArrowLeft, BedDouble, Gauge, Ruler } from 'lucide-react';
-import Image from 'next/image';
-import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { Button } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
-import { mockListings } from '@/modules/listings/mock-data';
+import type { Listing } from '@/modules/listings/types';
+import { PropertyContactForm } from './property-contact-form';
+import { PropertyGallery } from './property-gallery';
+import { PropertyHighlights } from './property-highlights';
+import { PropertyShare } from './property-share';
 
-export function generateStaticParams() {
-  return mockListings.map((listing) => ({ slug: listing.slug }));
-}
-
-export default async function ListingDetailPage({
-  params
-}: {
-  params: Promise<{ slug: string; locale: string }>;
-}) {
-  const { slug, locale } = await params;
-  const listing = mockListings.find((l) => l.slug === slug);
-
-  if (!listing) {
-    notFound();
-  }
-
+export async function ListingDetailView({ listing, locale }: { listing: Listing; locale: string }) {
   const t = await getTranslations('ListingDetail');
   const price = new Intl.NumberFormat(locale === 'en' ? 'en-LU' : 'fr-LU', {
     style: 'currency',
     currency: 'EUR',
     maximumFractionDigits: 0
   }).format(listing.price);
+  const backHref = listing.transactionType === 'sale' ? '/acheter' : '/louer';
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-28 sm:px-8">
+    <div className="mx-auto max-w-7xl px-6 pb-20 pt-10 sm:px-8 sm:pt-14">
       <Link
-        href="/acheter"
+        href={backHref}
         className="mb-8 flex w-fit items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground"
       >
         <ArrowLeft className="size-4" />
         {t('back')}
       </Link>
 
-      <div className="relative aspect-[16/9] overflow-hidden rounded-3xl">
-        <Image src={listing.image} alt={listing.title} fill priority className="object-cover" />
-      </div>
+      <PropertyGallery
+        title={listing.title}
+        images={listing.images}
+        floorPlans={listing.floorPlans}
+      />
 
       <div className="mt-8 flex flex-col gap-8 lg:flex-row lg:justify-between">
         <div>
@@ -53,6 +43,9 @@ export default async function ListingDetailPage({
             {price}
             {listing.transactionType === 'rent' ? '/mois' : ''}
           </p>
+          <div className="mt-4">
+            <PropertyShare title={listing.title} />
+          </div>
         </div>
 
         <div className="flex shrink-0 flex-col gap-3 sm:flex-row lg:flex-col">
@@ -94,6 +87,17 @@ export default async function ListingDetailPage({
         <p className="mt-3 max-w-2xl text-muted-foreground">
           {t('descriptionBody', { location: listing.location })}
         </p>
+      </div>
+
+      <div className="mt-14">
+        <PropertyHighlights
+          features={listing.features}
+          pointsOfInterest={listing.pointsOfInterest}
+        />
+      </div>
+
+      <div className="mt-14 max-w-2xl">
+        <PropertyContactForm listingTitle={listing.title} />
       </div>
     </div>
   );
