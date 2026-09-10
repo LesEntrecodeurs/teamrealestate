@@ -41,7 +41,7 @@ export function TypewriterText({ phrases, className }: { phrases: string[]; clas
 
   return (
     <span className={className}>
-      <span aria-hidden="true">
+      <span aria-hidden="true" className="sm:whitespace-nowrap">
         {display}
         {!reducedMotion ? (
           <span

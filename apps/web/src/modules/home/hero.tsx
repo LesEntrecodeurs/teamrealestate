@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, Sliders, Sparkles } from 'lucide-react';
+import { ArrowRight, Search, Sliders } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
@@ -14,7 +14,7 @@ import { cn } from '@/lib/utils';
 export function Hero() {
   const t = useTranslations('HomePage.hero');
   const router = useRouter();
-  const [mode, setMode] = useState<'ai' | 'filters'>('ai');
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [type, setType] = useState('');
   const [location, setLocation] = useState('');
@@ -53,16 +53,10 @@ export function Hero() {
     };
   }, []);
 
-  function submitAi(e: React.FormEvent) {
+  function handleSearch(e: React.FormEvent) {
     e.preventDefault();
     const params = new URLSearchParams();
     if (query.trim()) params.set('q', query.trim());
-    router.push(`/acheter${params.toString() ? `?${params.toString()}` : ''}`);
-  }
-
-  function submitFilters(e: React.FormEvent) {
-    e.preventDefault();
-    const params = new URLSearchParams();
     if (type) params.set('type', type);
     if (location.trim()) params.set('location', location.trim());
     if (budget.trim()) params.set('budget', budget.trim());
@@ -98,7 +92,7 @@ export function Hero() {
               <p className="mb-5 text-sm font-medium uppercase tracking-[0.15em] text-cyan-300">
                 {t('eyebrow')}
               </p>
-              <h1 className="font-display text-6xl font-bold leading-[0.98] sm:text-7xl lg:text-8xl">
+              <h1 className="font-display text-5xl font-bold leading-[1.05] sm:text-7xl sm:leading-[0.98] lg:text-8xl">
                 {t('title1')}
                 <br />
                 <TypewriterText phrases={t.raw('titleRotating')} className="text-cyan-300" />
@@ -123,133 +117,118 @@ export function Hero() {
         </svg>
       </section>
 
-      <div className="relative z-10 mx-auto -mt-16 w-full max-w-7xl px-6 sm:-mt-20 sm:px-8">
-        <div className="rounded-2xl border border-white bg-white p-2 shadow-2xl shadow-navy-950/30 ring-1 ring-navy-900/5">
-          <div className="mb-3 flex w-fit gap-1 rounded-xl bg-navy-50 p-1">
-            <button
-              type="button"
-              onClick={() => setMode('ai')}
-              className={cn(
-                'flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium transition-all duration-300',
-                mode === 'ai'
-                  ? 'bg-white text-navy-900 shadow-sm'
-                  : 'text-navy-600 hover:text-navy-900'
-              )}
-            >
-              <Sparkles className="size-4" />
-              {t('tabAi')}
-            </button>
-            <button
-              type="button"
-              onClick={() => setMode('filters')}
-              className={cn(
-                'flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium transition-all duration-300',
-                mode === 'filters'
-                  ? 'bg-white text-navy-900 shadow-sm'
-                  : 'text-navy-600 hover:text-navy-900'
-              )}
-            >
-              <Sliders className="size-4" />
-              {t('tabFilters')}
-            </button>
-          </div>
+      <div className="relative z-10 mx-auto -mt-10 w-full max-w-7xl px-6 sm:-mt-14 sm:px-8">
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-cyan-500 via-cyan-600 to-navy-900 p-3 shadow-2xl shadow-navy-950/60 ring-1 ring-white/15 sm:p-4">
+          <div
+            className="pointer-events-none absolute -right-12 -top-20 size-64 rounded-full bg-white/15 blur-3xl"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute -bottom-16 left-1/4 size-56 rounded-full bg-navy-900/20 blur-3xl"
+            aria-hidden
+          />
 
-          {/* Both forms are always mounted and stacked in the same grid cell —
-              the container's height is the taller of the two at every
-              breakpoint, so switching tabs never resizes the hero. Only
-              opacity/translate animate. */}
-          <div className="grid p-3 sm:p-4">
-            <form
-              className={cn(
-                'col-start-1 row-start-1 flex flex-col gap-3 transition-all duration-300 ease-out',
-                mode === 'ai'
-                  ? 'translate-y-0 opacity-100'
-                  : 'pointer-events-none -translate-y-1 opacity-0'
-              )}
-              onSubmit={submitAi}
-            >
-              <p className="text-sm text-navy-600">{t('aiHelper')}</p>
-              <div className="flex flex-col gap-2 sm:flex-row">
+          <form className="relative flex flex-col gap-3 p-1 sm:p-2" onSubmit={handleSearch}>
+            <p className="text-base font-medium text-white/80">{t('aiHelper')}</p>
+
+            <div className="flex flex-col gap-2 sm:flex-row">
+              <div className="relative flex-1">
+                <Search className="pointer-events-none absolute left-4 top-1/2 size-5 -translate-y-1/2 text-white/50" />
                 <input
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder={t('aiPlaceholder')}
-                  className="h-13 flex-1 rounded-md border border-navy-200 bg-white px-4 text-sm text-navy-900 placeholder:text-navy-500 focus:border-cyan-500 focus:outline-none"
+                  className="h-14 w-full rounded-md border border-white/15 bg-white/5 pl-11 pr-4 text-base text-white placeholder:text-white/45 focus:border-white focus:outline-none"
                 />
-                <Button type="submit" variant="accent" size="lg" className="shrink-0">
+              </div>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setFiltersOpen((v) => !v)}
+                  aria-expanded={filtersOpen}
+                  aria-label={t('filterType')}
+                  className={cn(
+                    'flex h-14 shrink-0 items-center justify-center rounded-md border px-4 transition-colors',
+                    filtersOpen
+                      ? 'border-white bg-white text-cyan-700'
+                      : 'border-white/30 bg-white/10 text-white hover:bg-white/20'
+                  )}
+                >
+                  <Sliders className="size-5" />
+                </button>
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="flex-1 bg-white text-base text-cyan-700 hover:bg-navy-950 hover:text-white sm:flex-none"
+                >
                   {t('aiSubmit')}
                   <ArrowRight className="size-4" />
                 </Button>
               </div>
-              <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-navy-600">
-                <span>{t('tryLabel')}</span>
-                {suggestions.map((s) => (
-                  <button
-                    key={s}
-                    type="button"
-                    onClick={() => setQuery(s)}
-                    className="rounded-full border border-navy-200 px-3 py-1.5 text-navy-700 transition-colors hover:border-navy-400 hover:text-navy-900"
-                  >
-                    {s}
-                  </button>
-                ))}
-              </div>
-            </form>
+            </div>
 
-            <form
+            <div
               className={cn(
-                'col-start-1 row-start-1 flex flex-col gap-3 transition-all duration-300 ease-out',
-                mode === 'filters'
-                  ? 'translate-y-0 opacity-100'
-                  : 'pointer-events-none translate-y-1 opacity-0'
+                'grid transition-all duration-300 ease-out',
+                filtersOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
               )}
-              onSubmit={submitFilters}
             >
-              <p className="text-sm text-navy-600">{t('filterHelper')}</p>
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
-                <div className="flex flex-1 flex-col gap-1.5 text-xs font-medium text-navy-700">
-                  {t('filterType')}
-                  <SelectField
-                    value={type}
-                    onChange={setType}
-                    placeholder={t('filterTypeAny')}
-                    ariaLabel={t('filterType')}
-                    options={[
-                      { value: '', label: t('filterTypeAny') },
-                      { value: 'apartment', label: t('filterTypeApartment') },
-                      { value: 'house', label: t('filterTypeHouse') }
-                    ]}
-                  />
+              <div className="overflow-hidden">
+                <div className="flex flex-col gap-3 border-t border-white/10 pt-4 sm:flex-row sm:items-end">
+                  <div className="flex flex-1 flex-col gap-1.5 text-sm font-semibold text-white/80">
+                    {t('filterType')}
+                    <SelectField
+                      value={type}
+                      onChange={setType}
+                      placeholder={t('filterTypeAny')}
+                      ariaLabel={t('filterType')}
+                      options={[
+                        { value: '', label: t('filterTypeAny') },
+                        { value: 'apartment', label: t('filterTypeApartment') },
+                        { value: 'house', label: t('filterTypeHouse') }
+                      ]}
+                    />
+                  </div>
+                  <label className="flex flex-1 flex-col gap-1.5 text-sm font-semibold text-white/80">
+                    {t('filterLocation')}
+                    <input
+                      type="text"
+                      value={location}
+                      onChange={(e) => setLocation(e.target.value)}
+                      placeholder={t('filterLocationPlaceholder')}
+                      className="h-13 rounded-md border border-white/15 bg-white/5 px-3 text-base text-white placeholder:text-white/45 focus:border-white focus:outline-none"
+                    />
+                  </label>
+                  <label className="flex flex-1 flex-col gap-1.5 text-sm font-semibold text-white/80">
+                    {t('filterBudget')}
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      value={budget}
+                      onChange={(e) => setBudget(e.target.value)}
+                      placeholder="750 000"
+                      className="h-13 rounded-md border border-white/15 bg-white/5 px-3 text-base text-white placeholder:text-white/45 focus:border-white focus:outline-none"
+                    />
+                  </label>
                 </div>
-                <label className="flex flex-1 flex-col gap-1.5 text-xs font-medium text-navy-700">
-                  {t('filterLocation')}
-                  <input
-                    type="text"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                    placeholder={t('filterLocationPlaceholder')}
-                    className="h-13 rounded-md border border-navy-200 bg-white px-3 text-sm text-navy-900 placeholder:text-navy-500 focus:border-cyan-500 focus:outline-none"
-                  />
-                </label>
-                <label className="flex flex-1 flex-col gap-1.5 text-xs font-medium text-navy-700">
-                  {t('filterBudget')}
-                  <input
-                    type="text"
-                    inputMode="numeric"
-                    value={budget}
-                    onChange={(e) => setBudget(e.target.value)}
-                    placeholder="750 000"
-                    className="h-13 rounded-md border border-navy-200 bg-white px-3 text-sm text-navy-900 placeholder:text-navy-500 focus:border-cyan-500 focus:outline-none"
-                  />
-                </label>
-                <Button type="submit" variant="accent" size="lg" className="shrink-0">
-                  {t('filterSubmit')}
-                  <ArrowRight className="size-4" />
-                </Button>
               </div>
-            </form>
-          </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2 pt-1 text-sm text-white/60">
+              <span className="font-medium">{t('tryLabel')}</span>
+              {suggestions.map((s) => (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => setQuery(s)}
+                  className="rounded-full border border-white/20 px-3 py-1.5 font-medium text-white/80 transition-colors hover:border-white/40 hover:text-white"
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+          </form>
         </div>
       </div>
     </>

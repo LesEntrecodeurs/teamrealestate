@@ -7,6 +7,11 @@ export interface ListingBadge {
   tone: 'new' | 'priceDrop' | 'underOffer';
 }
 
+export interface PointOfInterest {
+  label: string;
+  distance: string;
+}
+
 export interface Listing {
   id: string;
   slug: string;
@@ -19,6 +24,10 @@ export interface Listing {
   rooms: number;
   energyClass: EnergyClass;
   image: string;
+  images: string[];
+  floorPlans: string[];
+  features: string[];
+  pointsOfInterest: PointOfInterest[];
   badge?: ListingBadge;
   featured?: boolean;
 }
