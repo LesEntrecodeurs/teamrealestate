@@ -59,35 +59,35 @@ export function SelectField({
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="flex h-13 w-full items-center justify-between rounded-md border border-white/15 bg-white/5 px-3 text-left text-sm text-white transition-colors hover:border-white/30 focus:border-cyan-400 focus:outline-none"
+        className="flex h-13 w-full items-center justify-between rounded-md border border-white/25 bg-white/10 px-3 text-left text-sm text-white transition-colors hover:border-white/40 focus:border-cyan-300 focus:outline-none"
       >
-        <span className={selected ? 'text-white' : 'text-white/40'}>
+        <span className={selected ? 'text-white' : 'text-white/50'}>
           {selected ? selected.label : placeholder}
         </span>
         <ChevronDown
-          className={cn('size-4 text-white/50 transition-transform', open && 'rotate-180')}
+          className={cn('size-4 text-white/60 transition-transform', open && 'rotate-180')}
         />
       </button>
 
       {open ? (
-        <div className="absolute left-0 right-0 top-[calc(100%+6px)] z-20 max-h-64 overflow-hidden rounded-md border border-white/15 bg-navy-900 shadow-xl shadow-black/40">
+        <div className="absolute left-0 right-0 top-[calc(100%+6px)] z-20 max-h-64 overflow-hidden rounded-md border border-white/15 bg-navy-900/90 shadow-xl shadow-black/40 backdrop-blur-xl">
           {searchable ? (
             <div className="flex items-center gap-2 border-b border-white/10 px-3 py-2.5">
-              <Search className="size-4 shrink-0 text-white/40" />
+              <Search className="size-4 shrink-0 text-white/50" />
               <input
                 ref={searchRef}
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder={searchPlaceholder}
-                className="w-full bg-transparent text-sm text-white placeholder:text-white/40 focus:outline-none"
+                className="w-full bg-transparent text-sm text-white placeholder:text-white/50 focus:outline-none"
               />
             </div>
           ) : null}
 
           <ul className="max-h-52 overflow-y-auto py-1">
             {filtered.length === 0 ? (
-              <li className="px-3 py-2.5 text-sm text-white/40">—</li>
+              <li className="px-3 py-2.5 text-sm text-white/50">—</li>
             ) : (
               filtered.map((option) => (
                 <li key={option.value}>

@@ -11,7 +11,7 @@
     "hero": {
       "eyebrow": "Agence immobilière à Luxembourg-Ville",
       "title1": "L'immobilier",
-      "title2": "joue collectif.",
+      "titleRotating": ["joue collectif.", "avance en équipe.", "reste disponible."],
       "subtitle": "Team Real Estate réunit recherche, négociation, juridique et estimation dans une seule équipe — pour un projet qui avance, sans jamais dépendre d'une seule personne.",
       "tabAi": "Assistant IA",
       "tabFilters": "Recherche par filtres",

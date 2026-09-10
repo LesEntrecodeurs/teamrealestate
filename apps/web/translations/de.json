@@ -11,7 +11,7 @@
     "hero": {
       "eyebrow": "Immobilienagentur in Luxemburg-Stadt",
       "title1": "Immobilien,",
-      "title2": "im Team gespielt.",
+      "titleRotating": ["im Team gespielt.", "bewegt sich im Team.", "ist immer erreichbar."],
       "subtitle": "Team Real Estate vereint Suche, Verhandlung, Recht und Bewertung in einem Team — damit Ihr Projekt vorankommt, ohne je von einer einzigen Person abzuhängen.",
       "tabAi": "KI-Assistent",
       "tabFilters": "Filtersuche",

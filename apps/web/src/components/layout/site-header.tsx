@@ -3,69 +3,142 @@
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
-import { useState } from 'react';
+import type { MouseEvent } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { mainNav } from '@/config/navigation';
-import { Link, usePathname } from '@/i18n/navigation';
+import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { routing } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
+
+const navItemWidth: Record<(typeof mainNav)[number]['key'], string> = {
+  buy: 'min-w-[8ch]',
+  rent: 'min-w-[7ch]',
+  sell: 'min-w-[10ch]',
+  agency: 'min-w-[12ch]',
+  contact: 'min-w-[8ch]'
+};
+
+type Locale = (typeof routing.locales)[number];
+
+type ViewTransitionDocument = Document & {
+  startViewTransition?: (callback: () => void | Promise<void>) => void;
+};
 
 export function SiteHeader() {
   const t = useTranslations('Nav');
   const locale = useLocale();
   const pathname = usePathname();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const heroEl = document.getElementById('top');
+    const headerOffset = 96;
+    const getThreshold = () => (heroEl ? heroEl.offsetHeight - headerOffset : headerOffset);
+    const onScroll = () => setScrolled(window.scrollY > getThreshold());
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
+  }, []);
+
+  function handleLocaleClick(event: MouseEvent<HTMLAnchorElement>, loc: Locale) {
+    if (loc === locale) return;
+    const doc = document as ViewTransitionDocument;
+    if (!doc.startViewTransition) return;
+    event.preventDefault();
+    doc.startViewTransition(() => router.replace(pathname, { locale: loc }));
+  }
 
   return (
-    <header className="sticky top-0 z-50 px-4 pt-4 sm:px-6 sm:pt-5 lg:px-8">
-      <div className="mx-auto flex max-w-7xl items-center gap-3">
-        <div className="flex flex-1 items-center justify-between gap-6 rounded-2xl border border-navy-100 bg-white/95 px-6 py-4 text-navy-900 shadow-lg shadow-navy-900/10 backdrop-blur-sm lg:w-fit lg:flex-none lg:justify-start lg:gap-11 lg:px-7 lg:py-4">
+    <header className="sticky top-0 z-50 px-4 pt-6 sm:px-6 sm:pt-8 lg:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-center">
+        <div
+          className={cn(
+            'flex w-full items-center justify-between gap-6 rounded-2xl border px-6 py-4 shadow-lg backdrop-blur-sm transition-colors duration-300 lg:w-auto lg:justify-start lg:gap-10 lg:px-7',
+            scrolled
+              ? 'border-white/10 bg-navy-900/95 text-white shadow-black/20'
+              : 'border-navy-100 bg-white/95 text-navy-900 shadow-navy-900/10'
+          )}
+        >
           <Link href="/" className="flex shrink-0 items-center gap-3" aria-label="Team Real Estate">
             <Image
-              src="/logo/team-logo.png"
+              src={scrolled ? '/logo/team-wordmark-negatif.png' : '/logo/team-wordmark.png'}
               alt="Team Real Estate"
-              width={132}
-              height={122}
-              className="h-11 w-auto"
+              width={800}
+              height={267}
+              className="h-9 w-auto"
               priority
             />
           </Link>
 
-          <nav className="hidden items-center gap-9 lg:flex">
+          <nav className="hidden items-center gap-8 lg:flex">
             {mainNav.map((item) => (
               <Link
                 key={item.key}
                 href={item.href}
-                className="group relative py-1 text-base font-medium text-navy-600 transition-colors hover:text-navy-900"
+                className={cn(
+                  'group relative py-1 text-center text-base font-medium transition-colors',
+                  scrolled ? 'text-white/80 hover:text-white' : 'text-navy-600 hover:text-navy-900',
+                  navItemWidth[item.key]
+                )}
               >
                 {t(item.key)}
-                <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-cyan-500 transition-all duration-300 group-hover:w-full" />
+                <span
+                  className={cn(
+                    'absolute -bottom-0.5 left-0 h-px w-0 transition-all duration-300 group-hover:w-full',
+                    scrolled ? 'bg-cyan-400' : 'bg-cyan-500'
+                  )}
+                />
               </Link>
             ))}
           </nav>
 
           <div className="hidden items-center gap-4 lg:flex">
-            <span className="h-7 w-px bg-navy-100" aria-hidden />
-            <div className="flex items-center gap-1 rounded-lg bg-navy-50 p-1 text-base font-semibold">
+            <span
+              className={cn('h-7 w-px', scrolled ? 'bg-white/15' : 'bg-navy-100')}
+              aria-hidden
+            />
+            <div
+              className={cn(
+                'flex items-center gap-1 rounded-lg p-1 text-base font-semibold',
+                scrolled ? 'bg-white/5' : 'bg-navy-50'
+              )}
+            >
               {routing.locales.map((loc) => (
                 <Link
                   key={loc}
                   href={pathname}
                   locale={loc}
+                  onClick={(event) => handleLocaleClick(event, loc)}
                   className={cn(
                     'rounded-md px-3 py-2 uppercase transition-colors',
-                    loc === locale ? 'bg-navy-900 text-white' : 'text-navy-400 hover:text-navy-900'
+                    loc === locale
+                      ? scrolled
+                        ? 'bg-white/15 text-white'
+                        : 'bg-navy-900 text-white'
+                      : scrolled
+                        ? 'text-white/50 hover:text-white'
+                        : 'text-navy-400 hover:text-navy-900'
                   )}
                 >
                   {loc}
                 </Link>
               ))}
             </div>
+            <Button asChild variant="accent" size="lg" className="min-w-[20ch] shrink-0">
+              <Link href="/vendre">{t('estimate')}</Link>
+            </Button>
           </div>
 
           <button
             type="button"
-            className="p-1 text-navy-900 lg:hidden"
+            className={cn('p-1 lg:hidden', scrolled ? 'text-white' : 'text-navy-900')}
             onClick={() => setOpen((v) => !v)}
             aria-label="Menu"
             aria-expanded={open}
@@ -73,45 +146,73 @@ export function SiteHeader() {
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
         </div>
-
-        <Button asChild variant="accent" size="lg" className="hidden shrink-0 lg:inline-flex">
-          <Link href="/vendre">{t('estimate')}</Link>
-        </Button>
       </div>
 
       {open ? (
-        <div className="mx-auto mt-2 flex max-w-7xl flex-col gap-1 rounded-2xl border border-navy-100 bg-white/95 px-5 py-4 text-navy-900 shadow-lg shadow-navy-900/10 backdrop-blur-sm lg:hidden">
-          {mainNav.map((item) => (
-            <Link
-              key={item.key}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              className="border-b border-navy-100 py-3.5 text-base font-medium text-navy-700 hover:text-navy-900"
-            >
-              {t(item.key)}
-            </Link>
-          ))}
-          <div className="mt-3 flex items-center justify-between gap-3">
-            <div className="flex items-center gap-1 rounded-lg bg-navy-50 p-1 text-base font-semibold">
-              {routing.locales.map((loc) => (
-                <Link
-                  key={loc}
-                  href={pathname}
-                  locale={loc}
-                  className={cn(
-                    'rounded-md px-3 py-2 uppercase transition-colors',
-                    loc === locale ? 'bg-navy-900 text-white' : 'text-navy-400 hover:text-navy-900'
-                  )}
-                >
-                  {loc}
-                </Link>
-              ))}
+        <>
+          <button
+            type="button"
+            aria-label="Fermer le menu"
+            onClick={() => setOpen(false)}
+            className="fixed inset-0 z-40 bg-navy-950/40 backdrop-blur-sm lg:hidden"
+          />
+          <div
+            className={cn(
+              'relative z-50 mx-auto mt-2 flex max-w-7xl flex-col gap-1 rounded-2xl border px-5 py-3 shadow-lg backdrop-blur-sm lg:hidden',
+              scrolled
+                ? 'border-white/10 bg-navy-900/95 text-white shadow-black/20'
+                : 'border-navy-100 bg-white/95 text-navy-900 shadow-navy-900/10'
+            )}
+          >
+            {mainNav.map((item) => (
+              <Link
+                key={item.key}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className={cn(
+                  'border-b py-3.5 text-base font-medium',
+                  scrolled
+                    ? 'border-white/10 text-white/85 hover:text-white'
+                    : 'border-navy-100 text-navy-700 hover:text-navy-900'
+                )}
+              >
+                {t(item.key)}
+              </Link>
+            ))}
+            <div className="mt-3 flex items-center justify-between gap-3">
+              <div
+                className={cn(
+                  'flex items-center gap-1 rounded-lg p-1 text-base font-semibold',
+                  scrolled ? 'bg-white/5' : 'bg-navy-50'
+                )}
+              >
+                {routing.locales.map((loc) => (
+                  <Link
+                    key={loc}
+                    href={pathname}
+                    locale={loc}
+                    onClick={(event) => handleLocaleClick(event, loc)}
+                    className={cn(
+                      'rounded-md px-3 py-2 uppercase transition-colors',
+                      loc === locale
+                        ? scrolled
+                          ? 'bg-white/15 text-white'
+                          : 'bg-navy-900 text-white'
+                        : scrolled
+                          ? 'text-white/50 hover:text-white'
+                          : 'text-navy-400 hover:text-navy-900'
+                    )}
+                  >
+                    {loc}
+                  </Link>
+                ))}
+              </div>
+              <Button asChild variant="accent">
+                <Link href="/vendre">{t('estimate')}</Link>
+              </Button>
             </div>
-            <Button asChild variant="accent">
-              <Link href="/vendre">{t('estimate')}</Link>
-            </Button>
           </div>
-        </div>
+        </>
       ) : null}
     </header>
   );

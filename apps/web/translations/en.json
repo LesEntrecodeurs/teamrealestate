@@ -11,7 +11,7 @@
     "hero": {
       "eyebrow": "Real estate agency in Luxembourg City",
       "title1": "Real estate,",
-      "title2": "played as a team.",
+      "titleRotating": ["played as a team.", "moves as one team.", "never stops for you."],
       "subtitle": "Team Real Estate brings search, negotiation, legal and valuation together in one team — so your project moves forward without ever depending on a single person.",
       "tabAi": "AI Assistant",
       "tabFilters": "Filter search",
