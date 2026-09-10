@@ -54,7 +54,7 @@
       "review3Body": "Efficient search: they understood our criteria in one conversation and found our home within three weeks."
     },
     "featured": {
-      "eyebrow": "01 — Selection",
+      "eyebrow": "Selection",
       "title": "A selection curated by the whole team",
       "viewAll": "View all listings"
     },
@@ -93,12 +93,6 @@
       "body": "Official price-per-m² data, comparable sales and the team's expertise: get a realistic price range before you sell.",
       "cta": "Value my property",
       "disclaimer": "An indicative estimate, never a price commitment."
-    },
-    "cta": {
-      "title": "A real estate project? Let's talk.",
-      "subtitle": "Valuation, selling, searching: tell us about your project, the whole team takes it on.",
-      "primary": "Value my property",
-      "secondary": "Contact us"
     }
   },
   "ListingsPage": {

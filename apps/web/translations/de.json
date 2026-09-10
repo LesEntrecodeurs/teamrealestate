@@ -54,7 +54,7 @@
       "review3Body": "Effiziente Suche: Sie haben unsere Kriterien in einem Gespräch verstanden und in drei Wochen die passende Immobilie gefunden."
     },
     "featured": {
-      "eyebrow": "01 — Auswahl",
+      "eyebrow": "Auswahl",
       "title": "Eine Auswahl, getroffen vom gesamten Team",
       "viewAll": "Alle Immobilien ansehen"
     },
@@ -93,12 +93,6 @@
       "body": "Offizielle Preise pro m², vergleichbare Verkäufe und die Expertise des Teams: erhalten Sie eine realistische Preisspanne, bevor Sie verkaufen.",
       "cta": "Immobilie bewerten",
       "disclaimer": "Eine unverbindliche Einschätzung, niemals eine Preiszusage."
-    },
-    "cta": {
-      "title": "Ein Immobilienprojekt? Sprechen wir darüber.",
-      "subtitle": "Bewertung, Verkauf, Suche: schildern Sie Ihr Projekt, das ganze Team kümmert sich darum.",
-      "primary": "Immobilie bewerten",
-      "secondary": "Kontaktieren Sie uns"
     }
   },
   "ListingsPage": {

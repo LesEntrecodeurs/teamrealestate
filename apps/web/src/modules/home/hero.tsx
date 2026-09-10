@@ -214,7 +214,7 @@ export function Hero() {
       </div>
 
       <svg
-        className="absolute inset-x-0 bottom-0 h-16 w-full text-ecru-50 sm:h-24"
+        className="absolute inset-x-0 bottom-0 h-16 w-full text-card sm:h-24"
         viewBox="0 0 1440 120"
         preserveAspectRatio="none"
         aria-hidden

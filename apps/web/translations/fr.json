@@ -43,7 +43,7 @@
       "stat4Label": "langues parlées (FR · EN · DE)"
     },
     "featured": {
-      "eyebrow": "01 — Sélection",
+      "eyebrow": "Sélection",
       "title": "Une sélection signée par toute l'équipe",
       "viewAll": "Voir tous les biens"
     },
@@ -93,12 +93,6 @@
       "body": "Prix au m² officiels, ventes comparables et expertise de l'équipe : obtenez une fourchette de prix réaliste avant de vendre.",
       "cta": "Estimer mon bien",
       "disclaimer": "Une estimation indicative, jamais un engagement de prix."
-    },
-    "cta": {
-      "title": "Un projet immobilier ? Parlons-en.",
-      "subtitle": "Estimation, vente, recherche : posez votre projet, toute l'équipe s'en saisit.",
-      "primary": "Estimer mon bien",
-      "secondary": "Nous contacter"
     }
   },
   "ListingsPage": {

@@ -1,5 +1,4 @@
 import { AgencySection } from '@/modules/home/agency-section';
-import { CtaBand } from '@/modules/home/cta-band';
 import { EstimatorTeaser } from '@/modules/home/estimator-teaser';
 import { FeaturedListings } from '@/modules/home/featured-listings';
 import { Hero } from '@/modules/home/hero';
@@ -19,7 +18,6 @@ export default function HomePage() {
       <WhyTeam />
       <ReviewsSection />
       <EstimatorTeaser />
-      <CtaBand />
     </>
   );
 }

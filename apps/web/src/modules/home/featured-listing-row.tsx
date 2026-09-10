@@ -23,7 +23,7 @@ export function FeaturedListingRow({
   return (
     <Link
       href={`/${listing.transactionType === 'sale' ? 'acheter' : 'louer'}/${listing.slug}`}
-      className="group flex flex-col gap-5 py-8 sm:flex-row sm:items-center sm:gap-6"
+      className="group flex flex-col gap-5 py-8 sm:flex-row sm:items-start sm:gap-6"
     >
       <span className="hidden shrink-0 font-display text-5xl font-bold text-navy-100 transition-colors duration-300 group-hover:text-cyan-100 sm:block lg:text-6xl">
         {String(index + 1).padStart(2, '0')}
@@ -73,7 +73,7 @@ export function FeaturedListingRow({
         </div>
       </div>
 
-      <div className="flex shrink-0 flex-row items-center justify-between gap-4 sm:flex-col sm:items-end sm:justify-center sm:gap-2">
+      <div className="flex shrink-0 flex-row items-center justify-between gap-4 sm:flex-col sm:items-end sm:gap-2">
         <p className="whitespace-nowrap font-display text-2xl font-bold text-foreground sm:text-3xl">
           {formatPrice(listing, locale)}
         </p>

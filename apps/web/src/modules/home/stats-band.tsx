@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { Counter } from '@/components/ui/counter';
 import { Reveal } from '@/components/ui/reveal';
+import { WaveDots } from '@/components/ui/wave-dots';
 
 export function StatsBand() {
   const t = useTranslations('HomePage.statsBand');
@@ -14,13 +15,16 @@ export function StatsBand() {
 
   return (
     <section className="bg-card">
-      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-10 px-6 py-14 sm:px-8 lg:grid-cols-4 lg:py-16">
+      <div className="mx-auto max-w-7xl px-6 pt-10 sm:px-8 sm:pt-12">
+        <WaveDots className="h-8 w-full sm:h-10" />
+      </div>
+      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-8 gap-y-12 px-6 pb-16 sm:px-8 lg:grid-cols-4 lg:pb-20">
         {stats.map((stat, i) => (
-          <Reveal key={stat.label} delay={i * 90} className="border-t border-navy-100 pt-5">
-            <p className="font-display text-4xl font-bold text-foreground sm:text-5xl">
+          <Reveal key={stat.label} delay={i * 90}>
+            <p className="font-display text-6xl font-bold text-secondary sm:text-7xl">
               <Counter value={stat.value} />
             </p>
-            <p className="mt-2 text-sm text-muted-foreground">{stat.label}</p>
+            <p className="mt-3 text-base font-medium text-muted-foreground">{stat.label}</p>
           </Reveal>
         ))}
       </div>
