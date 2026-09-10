@@ -48,4 +48,4 @@ COPY --from=installer --chown=nestjs:nestjs /app .
 
 EXPOSE $PORT
 
-CMD ["node", "apps/api/dist/src/main.js"]
+CMD ["node", "apps/api/dist/main.js"]
