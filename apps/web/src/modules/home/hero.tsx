@@ -86,7 +86,7 @@ export function Hero() {
       <HeroSquares />
 
       <div className="relative flex min-h-[540px] flex-col pb-20 sm:min-h-[640px] sm:pb-24 lg:min-h-[68vh]">
-        <div className="flex flex-1 flex-col justify-center gap-6">
+        <div className="flex flex-1 flex-col justify-center gap-10 sm:gap-12">
           <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-6 text-white sm:px-8 lg:grid-cols-12">
             <div className="lg:col-span-8">
               <p className="mb-5 text-sm font-medium uppercase tracking-[0.15em] text-cyan-300">

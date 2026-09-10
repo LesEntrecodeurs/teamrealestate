@@ -1,4 +1,4 @@
-import { ArrowRight, MapPin } from 'lucide-react';
+import { ArrowRight, MapPin, Zap } from 'lucide-react';
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
@@ -23,13 +23,13 @@ export function FeaturedListingRow({
   return (
     <Link
       href={`/${listing.transactionType === 'sale' ? 'acheter' : 'louer'}/${listing.slug}`}
-      className="group grid grid-cols-1 items-center gap-6 py-10 sm:grid-cols-12 sm:gap-8"
+      className="group flex flex-col gap-5 py-8 sm:flex-row sm:items-center sm:gap-6"
     >
-      <span className="hidden font-display text-6xl font-bold text-navy-100 transition-colors duration-300 group-hover:text-cyan-100 sm:col-span-1 sm:block">
+      <span className="hidden shrink-0 font-display text-5xl font-bold text-navy-100 transition-colors duration-300 group-hover:text-cyan-100 sm:block lg:text-6xl">
         {String(index + 1).padStart(2, '0')}
       </span>
 
-      <div className="relative aspect-[16/10] overflow-hidden rounded-2xl sm:col-span-4">
+      <div className="relative aspect-[16/10] shrink-0 overflow-hidden rounded-2xl sm:w-56 lg:w-64">
         <Image
           src={listing.image}
           alt={listing.title}
@@ -54,7 +54,7 @@ export function FeaturedListingRow({
         </div>
       </div>
 
-      <div className="flex flex-col gap-2.5 sm:col-span-5">
+      <div className="flex min-w-0 flex-1 flex-col gap-2.5">
         <p className="font-display text-2xl font-bold text-foreground transition-colors group-hover:text-secondary sm:text-3xl">
           {listing.title}
         </p>
@@ -73,21 +73,26 @@ export function FeaturedListingRow({
         </div>
       </div>
 
-      <div className="flex flex-row items-center justify-between sm:col-span-2 sm:flex-col sm:items-end sm:justify-center sm:gap-3">
-        <div className="flex items-center gap-3 sm:flex-col sm:items-end sm:gap-2">
-          <p className="font-display text-2xl font-bold text-foreground sm:text-3xl">
-            {formatPrice(listing, locale)}
-          </p>
-          <span
-            className={cn(
-              'flex size-7 items-center justify-center rounded-full text-xs font-bold',
-              energyClassTone[listing.energyClass]
-            )}
-          >
-            {listing.energyClass}
-          </span>
-        </div>
-        <ArrowRight className="size-5 shrink-0 text-muted-foreground transition-all duration-300 group-hover:translate-x-1 group-hover:text-secondary" />
+      <div className="flex shrink-0 flex-row items-center justify-between gap-4 sm:flex-col sm:items-end sm:justify-center sm:gap-2">
+        <p className="whitespace-nowrap font-display text-2xl font-bold text-foreground sm:text-3xl">
+          {formatPrice(listing, locale)}
+        </p>
+        <span
+          title={`Classe énergie ${listing.energyClass}`}
+          className={cn(
+            'inline-flex items-center gap-1 whitespace-nowrap rounded-lg px-2.5 py-1.5 text-sm font-bold',
+            energyClassTone[listing.energyClass]
+          )}
+        >
+          <Zap className="size-3.5" />
+          {listing.energyClass}
+        </span>
+      </div>
+
+      <div className="hidden shrink-0 sm:block">
+        <span className="flex size-11 items-center justify-center rounded-full border border-border text-muted-foreground transition-all duration-300 group-hover:border-secondary group-hover:bg-secondary group-hover:text-secondary-foreground">
+          <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+        </span>
       </div>
     </Link>
   );
