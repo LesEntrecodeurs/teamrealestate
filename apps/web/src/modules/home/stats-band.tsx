@@ -1,8 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { Counter } from '@/components/ui/counter';
-import { FlagIcon } from '@/components/ui/flag-icon';
 import { Reveal } from '@/components/ui/reveal';
-import { routing } from '@/i18n/routing';
 
 export function StatsBand() {
   const t = useTranslations('HomePage.statsBand');
@@ -11,7 +9,7 @@ export function StatsBand() {
     { value: t('stat1Value'), label: t('stat1Label') },
     { value: t('stat2Value'), label: t('stat2Label') },
     { value: t('stat3Value'), label: t('stat3Label') },
-    { value: t('stat4Value'), label: t('stat4Label'), flags: true }
+    { value: t('stat4Value'), label: t('stat4Label') }
   ];
 
   return (
@@ -23,13 +21,6 @@ export function StatsBand() {
               <Counter value={stat.value} />
             </p>
             <p className="mt-2 text-sm text-muted-foreground">{stat.label}</p>
-            {stat.flags ? (
-              <div className="mt-1.5 flex gap-1">
-                {routing.locales.map((loc) => (
-                  <FlagIcon key={loc} locale={loc} className="h-2 w-[11px] rounded-[1px]" />
-                ))}
-              </div>
-            ) : null}
           </Reveal>
         ))}
       </div>

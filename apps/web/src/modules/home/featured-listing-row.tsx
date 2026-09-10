@@ -1,4 +1,4 @@
-import { MapPin } from 'lucide-react';
+import { ArrowRight, MapPin } from 'lucide-react';
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
@@ -11,34 +11,40 @@ const propertyTypeLabel: Record<Listing['propertyType'], string> = {
   penthouse: 'Penthouse'
 };
 
-export function FeaturedListingRow({ listing, locale }: { listing: Listing; locale: string }) {
+export function FeaturedListingRow({
+  listing,
+  locale,
+  index
+}: {
+  listing: Listing;
+  locale: string;
+  index: number;
+}) {
   return (
     <Link
       href={`/${listing.transactionType === 'sale' ? 'acheter' : 'louer'}/${listing.slug}`}
-      className="group flex items-center gap-5 border-b border-border py-5 transition-colors hover:bg-navy-50 sm:gap-6"
+      className="group grid grid-cols-1 items-center gap-6 py-10 sm:grid-cols-12 sm:gap-8"
     >
-      <div className="relative size-20 shrink-0 overflow-hidden rounded-xl sm:size-24">
+      <span className="hidden font-display text-6xl font-bold text-navy-100 transition-colors duration-300 group-hover:text-cyan-100 sm:col-span-1 sm:block">
+        {String(index + 1).padStart(2, '0')}
+      </span>
+
+      <div className="relative aspect-[16/10] overflow-hidden rounded-2xl sm:col-span-4">
         <Image
           src={listing.image}
           alt={listing.title}
           fill
-          sizes="96px"
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          sizes="(min-width: 640px) 33vw, 100vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-110"
         />
-      </div>
-
-      <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-        <p className="truncate font-display text-lg font-bold text-foreground sm:text-xl">
-          {listing.title}
-        </p>
-        <div className="flex flex-wrap items-center gap-1.5">
-          <span className="rounded-full bg-secondary px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-secondary-foreground">
+        <div className="absolute left-3 top-3 flex flex-col gap-1.5">
+          <span className="w-fit rounded-full bg-secondary px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-secondary-foreground shadow-sm">
             {listing.transactionType === 'sale' ? 'À vendre' : 'À louer'}
           </span>
           {listing.badge ? (
             <span
               className={cn(
-                'rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide',
+                'w-fit rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide shadow-sm',
                 badgeTone[listing.badge.tone]
               )}
             >
@@ -46,27 +52,42 @@ export function FeaturedListingRow({ listing, locale }: { listing: Listing; loca
             </span>
           ) : null}
         </div>
-        <div className="flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">
-          <MapPin className="size-3.5 shrink-0" />
-          <span className="truncate">
-            {listing.location} · {propertyTypeLabel[listing.propertyType]} · {listing.surface} m² ·{' '}
+      </div>
+
+      <div className="flex flex-col gap-2.5 sm:col-span-5">
+        <p className="font-display text-2xl font-bold text-foreground transition-colors group-hover:text-secondary sm:text-3xl">
+          {listing.title}
+        </p>
+        <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+          <MapPin className="size-4 shrink-0" />
+          {listing.location}
+        </div>
+        <div className="flex items-center gap-3 text-sm text-muted-foreground">
+          <span>{propertyTypeLabel[listing.propertyType]}</span>
+          <span>·</span>
+          <span>{listing.surface} m²</span>
+          <span>·</span>
+          <span>
             {listing.rooms} {listing.rooms > 1 ? 'chambres' : 'chambre'}
           </span>
         </div>
       </div>
 
-      <div className="flex shrink-0 flex-col items-end gap-2">
-        <p className="font-display text-xl font-bold text-foreground sm:text-2xl">
-          {formatPrice(listing, locale)}
-        </p>
-        <span
-          className={cn(
-            'flex size-7 items-center justify-center rounded-full text-xs font-bold',
-            energyClassTone[listing.energyClass]
-          )}
-        >
-          {listing.energyClass}
-        </span>
+      <div className="flex flex-row items-center justify-between sm:col-span-2 sm:flex-col sm:items-end sm:justify-center sm:gap-3">
+        <div className="flex items-center gap-3 sm:flex-col sm:items-end sm:gap-2">
+          <p className="font-display text-2xl font-bold text-foreground sm:text-3xl">
+            {formatPrice(listing, locale)}
+          </p>
+          <span
+            className={cn(
+              'flex size-7 items-center justify-center rounded-full text-xs font-bold',
+              energyClassTone[listing.energyClass]
+            )}
+          >
+            {listing.energyClass}
+          </span>
+        </div>
+        <ArrowRight className="size-5 shrink-0 text-muted-foreground transition-all duration-300 group-hover:translate-x-1 group-hover:text-secondary" />
       </div>
     </Link>
   );

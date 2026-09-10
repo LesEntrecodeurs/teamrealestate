@@ -31,10 +31,10 @@ export function FeaturedListings() {
         </Link>
       </div>
 
-      <div className="flex flex-col">
+      <div className="flex flex-col divide-y divide-border">
         {listings.map((listing, i) => (
-          <Reveal key={listing.id} delay={i * 60}>
-            <FeaturedListingRow listing={listing} locale={locale} />
+          <Reveal key={listing.id} delay={i * 80}>
+            <FeaturedListingRow listing={listing} locale={locale} index={i} />
           </Reveal>
         ))}
       </div>
