@@ -31,6 +31,16 @@
       "filterBudget": "Budget max",
       "filterSubmit": "Voir les biens"
     },
+    "statsBand": {
+      "stat1Value": "16 ans",
+      "stat1Label": "d'expérience à Luxembourg",
+      "stat2Value": "+200",
+      "stat2Label": "biens vendus et loués",
+      "stat3Value": "5",
+      "stat3Label": "expertises réunies en une équipe",
+      "stat4Value": "3",
+      "stat4Label": "langues parlées (FR · EN · DE)"
+    },
     "featured": {
       "eyebrow": "01 — Sélection",
       "title": "Une sélection signée par toute l'équipe",
@@ -64,6 +74,17 @@
       "item3Body": "Votre projet avance sans interruption : congés, absences ou pics d'activité ne ralentissent jamais votre dossier.",
       "item4Title": "Technologie au service du client",
       "item4Body": "Recherche assistée par IA, estimation instantanée, alertes ciblées : nos outils accélèrent ce qui compte pour vous."
+    },
+    "reviews": {
+      "eyebrow": "Avis Google",
+      "title": "Ce que nos clients en disent",
+      "reviewsCount": "avis Google",
+      "review1Author": "Sophie M.",
+      "review1Body": "Une équipe réactive du premier appel à la signature. On sentait qu'on n'était jamais dépendant d'une seule personne.",
+      "review2Author": "David K.",
+      "review2Body": "Estimation précise et honnête, sans survente. Le suivi juridique a rassuré toute la famille.",
+      "review3Author": "Amélie R.",
+      "review3Body": "Recherche efficace : ils ont compris nos critères en un échange et nous ont trouvé le bien en trois semaines."
     },
     "estimator": {
       "eyebrow": "Votre projet de vente",

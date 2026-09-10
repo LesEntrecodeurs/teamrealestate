@@ -1,6 +1,7 @@
 import { ArrowRight, Calculator } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
+import { Reveal } from '@/components/ui/reveal';
 import { Link } from '@/i18n/navigation';
 
 /**
@@ -13,7 +14,7 @@ export function EstimatorTeaser() {
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:py-28">
-      <div className="relative overflow-hidden rounded-3xl bg-navy-900 px-8 py-14 text-white sm:px-14 sm:py-16">
+      <Reveal className="relative overflow-hidden rounded-xl bg-navy-900 px-8 py-14 text-white sm:px-14 sm:py-16">
         <div className="absolute -right-16 -top-16 size-64 rounded-full bg-cyan-500/20 blur-3xl" />
         <div className="absolute -bottom-20 left-1/3 size-72 rounded-full bg-terracotta-500/10 blur-3xl" />
 
@@ -38,7 +39,7 @@ export function EstimatorTeaser() {
             <p className="text-xs text-white/50">{t('disclaimer')}</p>
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

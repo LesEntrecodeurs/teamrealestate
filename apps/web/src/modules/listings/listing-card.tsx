@@ -29,28 +29,38 @@ function formatPrice(listing: Listing, locale: string) {
   return listing.transactionType === 'rent' ? `${formatted}/mois` : formatted;
 }
 
-export function ListingCard({ listing, locale = 'fr' }: { listing: Listing; locale?: string }) {
+export function ListingCard({
+  listing,
+  locale = 'fr',
+  size = 'default'
+}: {
+  listing: Listing;
+  locale?: string;
+  size?: 'default' | 'large';
+}) {
+  const large = size === 'large';
+
   return (
     <Link
       href={`/biens/${listing.slug}`}
-      className="group flex flex-col overflow-hidden rounded-2xl bg-card ring-1 ring-border transition-shadow hover:shadow-xl hover:shadow-navy-900/10"
+      className="group flex h-full flex-col bg-card ring-1 ring-border transition-shadow hover:shadow-xl hover:shadow-navy-900/10"
     >
-      <div className="relative aspect-[4/3] overflow-hidden">
+      <div className={cn('relative overflow-hidden', large ? 'aspect-[16/11]' : 'aspect-[4/3]')}>
         <Image
           src={listing.image}
           alt={listing.title}
           fill
-          sizes="(min-width: 1024px) 33vw, 100vw"
+          sizes={large ? '(min-width: 1024px) 50vw, 100vw' : '(min-width: 1024px) 25vw, 100vw'}
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <div className="absolute left-3 top-3 flex flex-col gap-2">
-          <span className="rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
+        <div className="absolute left-0 top-0 flex flex-col gap-1.5">
+          <span className="bg-secondary px-3 py-1.5 text-[10px] font-semibold uppercase tracking-widest text-secondary-foreground">
             {listing.transactionType === 'sale' ? 'À vendre' : 'À louer'}
           </span>
           {listing.badge ? (
             <span
               className={cn(
-                'w-fit rounded-full px-3 py-1 text-xs font-semibold',
+                'w-fit px-3 py-1.5 text-[10px] font-semibold uppercase tracking-widest',
                 badgeTone[listing.badge.tone]
               )}
             >
@@ -60,14 +70,19 @@ export function ListingCard({ listing, locale = 'fr' }: { listing: Listing; loca
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col gap-3 p-5">
+      <div className={cn('flex flex-1 flex-col gap-3', large ? 'p-6' : 'p-5')}>
         <div className="flex items-start justify-between gap-3">
-          <p className="font-display text-2xl font-medium text-foreground">
+          <p
+            className={cn(
+              'font-display font-medium text-foreground',
+              large ? 'text-3xl' : 'text-2xl'
+            )}
+          >
             {formatPrice(listing, locale)}
           </p>
           <span
             className={cn(
-              'flex size-7 shrink-0 items-center justify-center rounded-md text-xs font-bold',
+              'flex size-7 shrink-0 items-center justify-center text-xs font-bold',
               energyClassTone[listing.energyClass]
             )}
           >
@@ -75,7 +90,11 @@ export function ListingCard({ listing, locale = 'fr' }: { listing: Listing; loca
           </span>
         </div>
 
-        <p className="line-clamp-1 text-sm font-medium text-foreground">{listing.title}</p>
+        <p
+          className={cn('font-medium text-foreground', large ? 'text-lg' : 'line-clamp-1 text-sm')}
+        >
+          {listing.title}
+        </p>
 
         <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
           <MapPin className="size-4" />

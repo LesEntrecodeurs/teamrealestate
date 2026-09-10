@@ -5,48 +5,79 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { useRouter } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 
 export function Hero() {
   const t = useTranslations('HomePage.hero');
+  const router = useRouter();
   const [mode, setMode] = useState<'ai' | 'filters'>('ai');
+  const [query, setQuery] = useState('');
+  const [type, setType] = useState('');
+  const [location, setLocation] = useState('');
+  const [budget, setBudget] = useState('');
 
   const suggestions = [t('try1'), t('try2'), t('try3')];
 
+  function submitAi(e: React.FormEvent) {
+    e.preventDefault();
+    const params = new URLSearchParams();
+    if (query.trim()) params.set('q', query.trim());
+    router.push(`/acheter${params.toString() ? `?${params.toString()}` : ''}`);
+  }
+
+  function submitFilters(e: React.FormEvent) {
+    e.preventDefault();
+    const params = new URLSearchParams();
+    if (type) params.set('type', type);
+    if (location.trim()) params.set('location', location.trim());
+    if (budget.trim()) params.set('budget', budget.trim());
+    router.push(`/acheter${params.toString() ? `?${params.toString()}` : ''}`);
+  }
+
   return (
-    <section id="top" className="relative overflow-hidden">
+    <section
+      id="top"
+      className="relative overflow-hidden bg-navy-950 pb-20 sm:pb-24"
+      style={{ clipPath: 'polygon(0 0, 100% 0, 100% 97%, 0 100%)' }}
+    >
       <div className="absolute inset-0">
         <Image
           src="https://images.unsplash.com/photo-1516550893923-42d28e5677af?q=80&w=2400&auto=format&fit=crop"
           alt=""
           fill
           priority
-          className="object-cover"
+          className="animate-hero-zoom object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-950/85 via-navy-950/55 to-navy-950/90" />
+        <div className="absolute inset-0 bg-navy-950/65" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/10 to-transparent" />
       </div>
 
-      <div className="relative mx-auto flex max-w-7xl flex-col gap-10 px-6 pb-16 pt-20 text-white sm:px-8 sm:pt-28 lg:pb-24 lg:pt-36">
-        <div className="max-w-2xl">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-cyan-300">
+      <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 pt-24 text-white sm:px-8 sm:pt-32 lg:grid-cols-12 lg:pt-40">
+        <div className="lg:col-span-8">
+          <p className="mb-5 text-sm font-medium uppercase tracking-[0.15em] text-cyan-300">
             {t('eyebrow')}
           </p>
-          <h1 className="font-display text-5xl font-medium leading-[1.05] sm:text-6xl lg:text-7xl">
+          <h1 className="font-display text-6xl font-medium leading-[0.98] sm:text-7xl lg:text-8xl">
             {t('title1')}
             <br />
             <span className="text-cyan-300">{t('title2')}</span>
           </h1>
-          <p className="mt-6 max-w-xl text-base text-white/80 sm:text-lg">{t('subtitle')}</p>
         </div>
+        <div className="flex items-end lg:col-span-4">
+          <p className="max-w-sm text-base text-white/75 sm:text-lg">{t('subtitle')}</p>
+        </div>
+      </div>
 
-        <div className="w-full max-w-3xl rounded-2xl border border-white/15 bg-navy-950/60 p-3 shadow-2xl shadow-black/20 backdrop-blur-xl sm:p-4">
-          <div className="mb-4 flex w-fit gap-1 rounded-full bg-white/10 p-1">
+      <div className="relative mx-auto mt-12 max-w-7xl px-6 sm:px-8">
+        <div className="rounded-lg border border-white/15 bg-white/[0.06] p-2 shadow-2xl shadow-black/30 backdrop-blur-sm">
+          <div className="mb-3 flex w-fit gap-1 rounded-md bg-black/20 p-1">
             <button
               type="button"
               onClick={() => setMode('ai')}
               className={cn(
-                'flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition-colors',
-                mode === 'ai' ? 'bg-secondary text-secondary-foreground' : 'text-white/70'
+                'flex items-center gap-1.5 rounded px-4 py-2 text-sm font-medium transition-all duration-300',
+                mode === 'ai' ? 'bg-white text-navy-900' : 'text-white/70 hover:text-white'
               )}
             >
               <Sparkles className="size-4" />
@@ -56,8 +87,8 @@ export function Hero() {
               type="button"
               onClick={() => setMode('filters')}
               className={cn(
-                'flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition-colors',
-                mode === 'filters' ? 'bg-white text-navy-900' : 'text-white/70'
+                'flex items-center gap-1.5 rounded px-4 py-2 text-sm font-medium transition-all duration-300',
+                mode === 'filters' ? 'bg-white text-navy-900' : 'text-white/70 hover:text-white'
               )}
             >
               <Sliders className="size-4" />
@@ -65,65 +96,103 @@ export function Hero() {
             </button>
           </div>
 
-          {mode === 'ai' ? (
-            <div className="flex flex-col gap-3">
-              <p className="px-1 text-sm text-white/70">{t('aiHelper')}</p>
+          {/* Both forms are always mounted and stacked in the same grid cell —
+              the container's height is the taller of the two at every
+              breakpoint, so switching tabs never resizes the hero. Only
+              opacity/translate animate. */}
+          <div className="grid p-3 sm:p-4">
+            <form
+              className={cn(
+                'col-start-1 row-start-1 flex flex-col gap-3 transition-all duration-300 ease-out',
+                mode === 'ai'
+                  ? 'translate-y-0 opacity-100'
+                  : 'pointer-events-none -translate-y-1 opacity-0'
+              )}
+              onSubmit={submitAi}
+            >
+              <p className="text-sm text-white/60">{t('aiHelper')}</p>
               <div className="flex flex-col gap-2 sm:flex-row">
                 <input
                   type="text"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
                   placeholder={t('aiPlaceholder')}
-                  className="h-13 flex-1 rounded-xl border border-white/15 bg-white/5 px-4 text-sm text-white placeholder:text-white/40 focus:border-cyan-400 focus:outline-none"
+                  className="h-13 flex-1 rounded-md border border-white/15 bg-white/5 px-4 text-sm text-white placeholder:text-white/40 focus:border-cyan-400 focus:outline-none"
                 />
-                <Button variant="accent" size="lg" className="shrink-0">
+                <Button type="submit" variant="accent" size="lg" className="shrink-0">
                   {t('aiSubmit')}
                   <ArrowRight className="size-4" />
                 </Button>
               </div>
-              <div className="flex flex-wrap items-center gap-2 px-1 pt-1 text-xs text-white/60">
+              <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-white/60">
                 <span>{t('tryLabel')}</span>
                 {suggestions.map((s) => (
                   <button
                     key={s}
                     type="button"
+                    onClick={() => setQuery(s)}
                     className="rounded-full border border-white/15 px-3 py-1.5 transition-colors hover:border-white/40 hover:text-white"
                   >
                     {s}
                   </button>
                 ))}
               </div>
-            </div>
-          ) : (
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
+            </form>
+
+            <form
+              className={cn(
+                'col-start-1 row-start-1 flex flex-col gap-3 transition-all duration-300 ease-out sm:flex-row sm:items-end',
+                mode === 'filters'
+                  ? 'translate-y-0 opacity-100'
+                  : 'pointer-events-none translate-y-1 opacity-0'
+              )}
+              onSubmit={submitFilters}
+            >
               <label className="flex flex-1 flex-col gap-1.5 text-xs font-medium text-white/70">
                 {t('filterType')}
-                <select className="h-13 rounded-xl border border-white/15 bg-white/5 px-3 text-sm text-white focus:border-cyan-400 focus:outline-none">
-                  <option className="text-navy-900">{t('filterTypeAny')}</option>
-                  <option className="text-navy-900">{t('filterTypeApartment')}</option>
-                  <option className="text-navy-900">{t('filterTypeHouse')}</option>
+                <select
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}
+                  className="h-13 rounded-md border border-white/15 bg-white/5 px-3 text-sm text-white focus:border-cyan-400 focus:outline-none"
+                >
+                  <option className="text-navy-900" value="">
+                    {t('filterTypeAny')}
+                  </option>
+                  <option className="text-navy-900" value="apartment">
+                    {t('filterTypeApartment')}
+                  </option>
+                  <option className="text-navy-900" value="house">
+                    {t('filterTypeHouse')}
+                  </option>
                 </select>
               </label>
               <label className="flex flex-1 flex-col gap-1.5 text-xs font-medium text-white/70">
                 {t('filterLocation')}
                 <input
                   type="text"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
                   placeholder={t('filterLocationPlaceholder')}
-                  className="h-13 rounded-xl border border-white/15 bg-white/5 px-3 text-sm text-white placeholder:text-white/40 focus:border-cyan-400 focus:outline-none"
+                  className="h-13 rounded-md border border-white/15 bg-white/5 px-3 text-sm text-white placeholder:text-white/40 focus:border-cyan-400 focus:outline-none"
                 />
               </label>
               <label className="flex flex-1 flex-col gap-1.5 text-xs font-medium text-white/70">
                 {t('filterBudget')}
                 <input
                   type="text"
-                  placeholder="750 000 €"
-                  className="h-13 rounded-xl border border-white/15 bg-white/5 px-3 text-sm text-white placeholder:text-white/40 focus:border-cyan-400 focus:outline-none"
+                  inputMode="numeric"
+                  value={budget}
+                  onChange={(e) => setBudget(e.target.value)}
+                  placeholder="750 000"
+                  className="h-13 rounded-md border border-white/15 bg-white/5 px-3 text-sm text-white placeholder:text-white/40 focus:border-cyan-400 focus:outline-none"
                 />
               </label>
-              <Button variant="accent" size="lg" className="shrink-0">
+              <Button type="submit" variant="accent" size="lg" className="shrink-0">
                 {t('filterSubmit')}
                 <ArrowRight className="size-4" />
               </Button>
-            </div>
-          )}
+            </form>
+          </div>
         </div>
       </div>
     </section>

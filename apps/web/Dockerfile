@@ -6,8 +6,6 @@ RUN apk add --no-cache libc6-compat
 RUN corepack enable && corepack prepare yarn@$YARN_VERSION --activate
 RUN apk update
 
-ENV NODE_ENV=production
-
 FROM base AS builder
 WORKDIR /app
 RUN yarn global add turbo@2.10.12
@@ -17,6 +15,7 @@ RUN turbo prune web --docker
 
 FROM base AS installer
 WORKDIR /app
+RUN yarn global add turbo@2.10.12
 
 # First install the dependencies (as they change less often)
 COPY .gitignore .gitignore
@@ -27,10 +26,11 @@ RUN yarn install --frozen-lockfile
 # Build the project (turbo.json is already part of the pruned output)
 COPY --from=builder /app/out/full/ .
 
-RUN yarn turbo run build --filter=web...
+RUN turbo run build --filter=web...
 
 FROM base AS runner
 ARG PORT=3000
+ENV NODE_ENV=production
 
 WORKDIR /app
 

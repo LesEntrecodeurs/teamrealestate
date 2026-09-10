@@ -1,0 +1,170 @@
+{
+  "Nav": {
+    "buy": "Kaufen",
+    "rent": "Mieten",
+    "sell": "Verkaufen",
+    "agency": "Die Agentur",
+    "contact": "Kontakt",
+    "estimate": "Immobilie bewerten"
+  },
+  "HomePage": {
+    "hero": {
+      "eyebrow": "Immobilienagentur in Luxemburg-Stadt",
+      "title1": "Immobilien,",
+      "title2": "im Team gespielt.",
+      "subtitle": "Team Real Estate vereint Suche, Verhandlung, Recht und Bewertung in einem Team — damit Ihr Projekt vorankommt, ohne je von einer einzigen Person abzuhängen.",
+      "tabAi": "KI-Assistent",
+      "tabFilters": "Filtersuche",
+      "aiHelper": "Beschreiben Sie Ihr Vorhaben in einem Satz — der Assistent durchsucht unser gesamtes Angebot.",
+      "aiPlaceholder": "Eine helle 2-Zimmer-Wohnung nahe dem Bahnhof, mit Balkon, max. 750.000 €",
+      "aiSubmit": "Suche starten",
+      "tryLabel": "Probieren Sie:",
+      "try1": "Haus mit Garten in Strassen",
+      "try2": "Penthouse mit freier Sicht in Belair",
+      "try3": "Kapitalanlage im Bahnhofsviertel",
+      "filterType": "Immobilientyp",
+      "filterTypeAny": "Alle Typen",
+      "filterTypeApartment": "Wohnung",
+      "filterTypeHouse": "Haus",
+      "filterLocation": "Gemeinde",
+      "filterLocationPlaceholder": "Wo suchen Sie?",
+      "filterBudget": "Budget max.",
+      "filterSubmit": "Immobilien ansehen"
+    },
+    "statsBand": {
+      "stat1Value": "16 Jahre",
+      "stat1Label": "Erfahrung in Luxemburg",
+      "stat2Value": "+200",
+      "stat2Label": "verkaufte und vermietete Immobilien",
+      "stat3Value": "5",
+      "stat3Label": "Kompetenzen, ein Team",
+      "stat4Value": "3",
+      "stat4Label": "gesprochene Sprachen (FR · EN · DE)"
+    },
+    "reviews": {
+      "eyebrow": "Google-Bewertungen",
+      "title": "Was unsere Kunden sagen",
+      "reviewsCount": "Google-Bewertungen",
+      "review1Author": "Sophie M.",
+      "review1Body": "Ein reaktionsschnelles Team vom ersten Anruf bis zur Unterschrift. Man spürte, dass man nie von einer einzigen Person abhing.",
+      "review2Author": "David K.",
+      "review2Body": "Eine präzise, ehrliche Bewertung ohne Überverkauf. Die rechtliche Begleitung hat die ganze Familie beruhigt.",
+      "review3Author": "Amélie R.",
+      "review3Body": "Effiziente Suche: Sie haben unsere Kriterien in einem Gespräch verstanden und in drei Wochen die passende Immobilie gefunden."
+    },
+    "featured": {
+      "eyebrow": "01 — Auswahl",
+      "title": "Eine Auswahl, getroffen vom gesamten Team",
+      "viewAll": "Alle Immobilien ansehen"
+    },
+    "agency": {
+      "eyebrow": "02 — Die Agentur",
+      "title1": "Kein einzelner Makler.",
+      "title2": "Ein ganzes Team hinter Ihrem Projekt.",
+      "body1": "Bei Team Real Estate gehört Ihr Dossier nicht nur einer Person. Suche, Verhandlung, Recht, Betreuung: jede Expertise des Teams arbeitet gemeinsam an Ihrem Projekt.",
+      "body2": "Das Ergebnis: ständige Erreichbarkeit, schnellere Entscheidungen und ein stets informierter Ansprechpartner. Wir, statt ich.",
+      "stat1Value": "16 Jahre",
+      "stat1Label": "Erfahrung auf dem luxemburgischen Markt",
+      "stat2Value": "+200",
+      "stat2Label": "verkaufte und vermietete Immobilien",
+      "stat3Value": "Ein Team",
+      "stat3Label": "an Ihrer Seite, vom ersten Kontakt bis zur Unterschrift"
+    },
+    "team": {
+      "eyebrow": "Das Team",
+      "title": "Die Gesichter hinter Ihrem Projekt"
+    },
+    "why": {
+      "eyebrow": "03 — Warum Team",
+      "title": "Der Vorteil des Kollektivs, ganz konkret",
+      "item1Title": "Ständige Erreichbarkeit",
+      "item1Body": "Ein Teammitglied ist immer erreichbar. Ihre Besichtigungen und Fragen warten nie auf eine einzige Person.",
+      "item2Title": "Gebündelte Expertise",
+      "item2Body": "Verhandlung, Recht, Finanzierung, Bewertung: jede Spezialisierung des Teams steht Ihrem Dossier zur Verfügung.",
+      "item3Title": "Durchgehende Betreuung",
+      "item3Body": "Ihr Projekt kommt ohne Unterbrechung voran: Urlaub, Abwesenheiten oder Stoßzeiten verlangsamen Ihr Dossier nie.",
+      "item4Title": "Technologie im Dienst des Kunden",
+      "item4Body": "KI-gestützte Suche, Sofortbewertung, gezielte Benachrichtigungen: unsere Tools beschleunigen, was für Sie zählt."
+    },
+    "estimator": {
+      "eyebrow": "Ihr Verkaufsvorhaben",
+      "title": "Eine zuverlässige Bewertung in wenigen Minuten",
+      "body": "Offizielle Preise pro m², vergleichbare Verkäufe und die Expertise des Teams: erhalten Sie eine realistische Preisspanne, bevor Sie verkaufen.",
+      "cta": "Immobilie bewerten",
+      "disclaimer": "Eine unverbindliche Einschätzung, niemals eine Preiszusage."
+    },
+    "cta": {
+      "title": "Ein Immobilienprojekt? Sprechen wir darüber.",
+      "subtitle": "Bewertung, Verkauf, Suche: schildern Sie Ihr Projekt, das ganze Team kümmert sich darum.",
+      "primary": "Immobilie bewerten",
+      "secondary": "Kontaktieren Sie uns"
+    }
+  },
+  "ListingsPage": {
+    "buyTitle": "Kaufen in Luxemburg",
+    "buySubtitle": "Alle unsere Verkaufsangebote, ausgewählt und betreut vom Team.",
+    "rentTitle": "Mieten in Luxemburg",
+    "rentSubtitle": "Unsere verfügbaren Mietobjekte, vom Studio bis zum Familienhaus.",
+    "resultsCount": "{count} Immobilien",
+    "empty": "Derzeit passt keine Immobilie zu Ihrer Suche."
+  },
+  "ListingDetail": {
+    "back": "Zurück zu den Immobilien",
+    "surface": "Fläche",
+    "rooms": "Zimmer",
+    "energyClass": "Energieklasse",
+    "description": "Beschreibung",
+    "descriptionBody": "Diese Immobilie gehört zu unserer Auswahl in {location}. Fotos, Grundrisse und eine ausführliche Beschreibung erscheinen automatisch, sobald die Anbindung an Apimo aktiv ist — diese Seite zeigt bereits die finale Struktur.",
+    "contactAgent": "Team kontaktieren",
+    "requestVisit": "Besichtigung anfragen"
+  },
+  "SellPage": {
+    "eyebrow": "Verkaufen mit Team Real Estate",
+    "title": "Was ist Ihre Immobilie wert?",
+    "subtitle": "Unser Bewertungstool startet in Kürze: offizielle Preise pro m², vergleichbare Verkäufe und die Expertise des Teams für eine realistische Preisspanne — niemals eine Preiszusage.",
+    "notifyTitle": "Benachrichtigt werden, sobald es startet",
+    "emailPlaceholder": "sie@email.com",
+    "notifySubmit": "Benachrichtigen",
+    "notifySuccess": "Danke — wir melden uns, sobald es startet!",
+    "orContact": "In der Zwischenzeit sprechen wir direkt darüber:",
+    "contactCta": "Team kontaktieren"
+  },
+  "AgencyPage": {
+    "eyebrow": "Die Agentur",
+    "title": "Ein Team, kein einzelner Makler",
+    "subtitle": "Suche, Verhandlung, Recht, Bewertung: fünf Kompetenzen vereint, damit Ihr Dossier nie auf eine einzige Person wartet.",
+    "teamTitle": "Das ganze Team"
+  },
+  "ContactPage": {
+    "eyebrow": "Kontakt",
+    "title": "Ein Immobilienprojekt? Sprechen wir darüber.",
+    "subtitle": "Beschreiben Sie Ihr Projekt, das gesamte Team kümmert sich darum — Sie warten nie auf eine einzige Person.",
+    "nameLabel": "Name",
+    "emailLabel": "E-Mail",
+    "phoneLabel": "Telefon",
+    "messageLabel": "Ihre Nachricht",
+    "submit": "Senden",
+    "submitSuccess": "Danke, Ihre Nachricht wurde erfolgreich gesendet.",
+    "addressTitle": "Unsere Büros",
+    "address": "12 place de la Gare\nL-1616 Luxembourg",
+    "phoneTitle": "Telefon",
+    "emailTitle": "E-Mail"
+  },
+  "LegalPage": {
+    "legalNoticeTitle": "Impressum",
+    "privacyTitle": "Datenschutzerklärung",
+    "termsTitle": "Allgemeine Geschäftsbedingungen",
+    "placeholder": "Dieser Inhalt wird mit den rechtlichen Angaben von Team Real Estate S.à r.l. vervollständigt."
+  },
+  "Footer": {
+    "tagline": "Immobilien, im Team gespielt. Immobilienagentur in Luxemburg-Stadt.",
+    "writeUs": "Schreiben wir gemeinsam an Ihrem Projekt",
+    "servicesTitle": "Leistungen",
+    "agencyTitle": "Agentur",
+    "legalNotice": "Impressum",
+    "privacy": "Datenschutzerklärung",
+    "terms": "Allgemeine Geschäftsbedingungen",
+    "backToTop": "Nach oben",
+    "rightsReserved": "Alle Rechte vorbehalten."
+  }
+}

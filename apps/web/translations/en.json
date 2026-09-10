@@ -31,6 +31,27 @@
       "filterBudget": "Max budget",
       "filterSubmit": "See listings"
     },
+    "statsBand": {
+      "stat1Value": "16 years",
+      "stat1Label": "of experience in Luxembourg",
+      "stat2Value": "200+",
+      "stat2Label": "properties sold and let",
+      "stat3Value": "5",
+      "stat3Label": "areas of expertise, one team",
+      "stat4Value": "3",
+      "stat4Label": "languages spoken (FR · EN · DE)"
+    },
+    "reviews": {
+      "eyebrow": "Google reviews",
+      "title": "What our clients say",
+      "reviewsCount": "Google reviews",
+      "review1Author": "Sophie M.",
+      "review1Body": "A responsive team from the first call to the signature. You could feel you never depended on a single person.",
+      "review2Author": "David K.",
+      "review2Body": "An accurate, honest valuation with no overselling. The legal follow-up reassured the whole family.",
+      "review3Author": "Amélie R.",
+      "review3Body": "Efficient search: they understood our criteria in one conversation and found our home within three weeks."
+    },
     "featured": {
       "eyebrow": "01 — Selection",
       "title": "A selection curated by the whole team",

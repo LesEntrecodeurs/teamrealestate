@@ -3,6 +3,8 @@ import { CtaBand } from '@/modules/home/cta-band';
 import { EstimatorTeaser } from '@/modules/home/estimator-teaser';
 import { FeaturedListings } from '@/modules/home/featured-listings';
 import { Hero } from '@/modules/home/hero';
+import { ReviewsSection } from '@/modules/home/reviews-section';
+import { StatsBand } from '@/modules/home/stats-band';
 import { TeamSection } from '@/modules/home/team-section';
 import { WhyTeam } from '@/modules/home/why-team';
 
@@ -10,10 +12,12 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <StatsBand />
       <FeaturedListings />
       <AgencySection />
       <TeamSection />
       <WhyTeam />
+      <ReviewsSection />
       <EstimatorTeaser />
       <CtaBand />
     </>

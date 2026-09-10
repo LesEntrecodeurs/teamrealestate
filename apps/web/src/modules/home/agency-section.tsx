@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { Counter } from '@/components/ui/counter';
+import { Reveal } from '@/components/ui/reveal';
 
 export function AgencySection() {
   const t = useTranslations('HomePage.agency');
@@ -13,9 +15,8 @@ export function AgencySection() {
   return (
     <section className="bg-navy-50">
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 py-20 sm:px-8 lg:grid-cols-2 lg:py-28">
-        <div>
-          <p className="mb-3 flex items-center gap-2 text-sm font-semibold text-accent">
-            <span className="h-px w-6 bg-accent" />
+        <Reveal>
+          <p className="mb-3 flex items-center gap-2 text-sm font-medium uppercase tracking-[0.15em] text-accent">
             {t('eyebrow')}
           </p>
           <h2 className="font-display text-3xl font-medium leading-tight text-foreground sm:text-4xl">
@@ -29,21 +30,23 @@ export function AgencySection() {
           <dl className="mt-10 grid grid-cols-1 gap-6 border-t border-navy-100 pt-8 sm:grid-cols-3">
             {stats.map((stat) => (
               <div key={stat.label}>
-                <dt className="font-display text-3xl font-medium text-secondary">{stat.value}</dt>
+                <dt className="font-display text-3xl font-medium text-secondary">
+                  <Counter value={stat.value} />
+                </dt>
                 <dd className="mt-1 text-sm text-muted-foreground">{stat.label}</dd>
               </div>
             ))}
           </dl>
-        </div>
+        </Reveal>
 
-        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+        <Reveal delay={150} className="relative aspect-[4/3] overflow-hidden rounded-lg">
           <Image
             src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1600&auto=format&fit=crop"
             alt=""
             fill
             className="object-cover"
           />
-        </div>
+        </Reveal>
       </div>
     </section>
   );

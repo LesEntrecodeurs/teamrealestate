@@ -1,11 +1,20 @@
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import { PageHeader } from '@/components/layout/page-header';
+import { filterListings } from '@/modules/listings/filter-listings';
 import { ListingsGrid } from '@/modules/listings/listings-grid';
 import { mockListings } from '@/modules/listings/mock-data';
 
-export default function BuyPage() {
-  const t = useTranslations('ListingsPage');
-  const listings = mockListings.filter((l) => l.transactionType === 'sale');
+export default async function BuyPage({
+  searchParams
+}: {
+  searchParams: Promise<{ q?: string; type?: string; location?: string; budget?: string }>;
+}) {
+  const params = await searchParams;
+  const t = await getTranslations('ListingsPage');
+  const listings = filterListings(
+    mockListings.filter((l) => l.transactionType === 'sale'),
+    params
+  );
 
   return (
     <>

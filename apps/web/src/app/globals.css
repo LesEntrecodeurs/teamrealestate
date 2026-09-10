@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --radius: 0.75rem;
+  --radius: 0.375rem;
 
   /* Brand — sampled from the client logo (navy + cyan) */
   --navy-950: #0a1420;
@@ -136,4 +136,17 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@keyframes hero-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+.animate-hero-zoom {
+  animation: hero-zoom 20s ease-out forwards;
 }
