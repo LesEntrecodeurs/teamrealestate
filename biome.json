@@ -29,6 +29,9 @@
       "jsxQuoteStyle": "double",
       "semicolons": "always",
       "trailingCommas": "none"
+    },
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": true
     }
   },
   "css": {

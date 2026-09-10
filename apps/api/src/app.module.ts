@@ -4,6 +4,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ScheduleModule } from '@nestjs/schedule';
 import { HealthController } from './health.controller';
+import { ApimoModule } from './modules/apimo/apimo.module';
 import { ErrorInterceptor } from './shared/application/interceptors/error.interceptor';
 import { SharedModule } from './shared/shared.module';
 
@@ -12,7 +13,8 @@ import { SharedModule } from './shared/shared.module';
     ConfigModule.forRoot({ isGlobal: true }),
     EventEmitterModule.forRoot({ wildcard: true }),
     ScheduleModule.forRoot(),
-    SharedModule
+    SharedModule,
+    ApimoModule
     // Feature modules are registered here as they're built.
   ],
   controllers: [HealthController],
