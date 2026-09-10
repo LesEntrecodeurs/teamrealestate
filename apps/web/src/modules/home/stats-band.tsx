@@ -17,7 +17,7 @@ export function StatsBand() {
       <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-10 px-6 py-14 sm:px-8 lg:grid-cols-4 lg:py-16">
         {stats.map((stat, i) => (
           <Reveal key={stat.label} delay={i * 90} className="border-t border-navy-100 pt-5">
-            <p className="font-display text-4xl font-medium text-foreground sm:text-5xl">
+            <p className="font-display text-4xl font-bold text-foreground sm:text-5xl">
               <Counter value={stat.value} />
             </p>
             <p className="mt-2 text-sm text-muted-foreground">{stat.label}</p>

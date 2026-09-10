@@ -3,7 +3,7 @@
 import { ArrowRight, Sliders, Sparkles } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { HeroSquares } from '@/components/ui/hero-squares';
 import { SelectField } from '@/components/ui/select-field';
@@ -21,6 +21,37 @@ export function Hero() {
   const [budget, setBudget] = useState('');
 
   const suggestions = [t('try1'), t('try2'), t('try3')];
+  const imageRef = useRef<HTMLDivElement>(null);
+  const heroSectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const image = imageRef.current;
+    const section = heroSectionRef.current;
+    if (!image || !section || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
+    const MAX_SCALE = 1.15;
+    const MIN_SCALE = 1;
+    let frame = 0;
+
+    function onScroll() {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        const progress = Math.min(window.scrollY / (section?.offsetHeight ?? 1), 1);
+        const scale = MAX_SCALE - (MAX_SCALE - MIN_SCALE) * progress;
+        if (image) image.style.transform = `scale(${scale})`;
+        frame = 0;
+      });
+    }
+
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, []);
 
   function submitAi(e: React.FormEvent) {
     e.preventDefault();
@@ -42,16 +73,19 @@ export function Hero() {
     <>
       <section
         id="top"
+        ref={heroSectionRef}
         className="relative -mt-[92px] overflow-hidden bg-navy-950 pt-[92px] sm:-mt-[116px] sm:pt-[116px]"
       >
-        <div className="absolute inset-0">
-          <Image
-            src="https://images.unsplash.com/photo-1516550893923-42d28e5677af?q=80&w=2400&auto=format&fit=crop"
-            alt=""
-            fill
-            priority
-            className="animate-hero-zoom object-cover"
-          />
+        <div className="absolute inset-0 overflow-hidden">
+          <div ref={imageRef} className="absolute inset-0 origin-center">
+            <Image
+              src="https://images.unsplash.com/photo-1516550893923-42d28e5677af?q=80&w=2400&auto=format&fit=crop"
+              alt=""
+              fill
+              priority
+              className="object-cover"
+            />
+          </div>
           <div className="absolute inset-0 bg-navy-950/65" />
           <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/10 to-transparent" />
         </div>
@@ -64,7 +98,7 @@ export function Hero() {
               <p className="mb-5 text-sm font-medium uppercase tracking-[0.15em] text-cyan-300">
                 {t('eyebrow')}
               </p>
-              <h1 className="font-display text-6xl font-medium leading-[0.98] sm:text-7xl lg:text-8xl">
+              <h1 className="font-display text-6xl font-bold leading-[0.98] sm:text-7xl lg:text-8xl">
                 {t('title1')}
                 <br />
                 <TypewriterText phrases={t.raw('titleRotating')} className="text-cyan-300" />
@@ -89,8 +123,8 @@ export function Hero() {
         </svg>
       </section>
 
-      <div className="relative z-10 mx-auto -mt-6 w-full max-w-7xl px-6 sm:-mt-8 sm:px-8">
-        <div className="rounded-2xl border border-navy-100 bg-white p-2 shadow-2xl shadow-navy-900/15">
+      <div className="relative z-10 mx-auto -mt-16 w-full max-w-7xl px-6 sm:-mt-20 sm:px-8">
+        <div className="rounded-2xl border border-white bg-white p-2 shadow-2xl shadow-navy-950/30 ring-1 ring-navy-900/5">
           <div className="mb-3 flex w-fit gap-1 rounded-xl bg-navy-50 p-1">
             <button
               type="button"

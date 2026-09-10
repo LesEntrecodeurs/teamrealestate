@@ -18,7 +18,7 @@ export function FeaturedListings() {
           {t('eyebrow')}
         </p>
         <div className="flex flex-wrap items-end justify-between gap-4 lg:col-span-9">
-          <h2 className="max-w-xl font-display text-3xl font-medium text-foreground sm:text-4xl">
+          <h2 className="max-w-xl font-display text-3xl font-bold text-foreground sm:text-4xl">
             {t('title')}
           </h2>
           <Link

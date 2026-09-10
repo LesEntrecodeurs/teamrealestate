@@ -17,7 +17,7 @@ export function WhyTeam() {
         <p className="text-sm font-medium uppercase tracking-[0.15em] text-accent lg:col-span-3">
           {t('eyebrow')}
         </p>
-        <h2 className="font-display text-3xl font-medium text-foreground sm:text-4xl lg:col-span-9">
+        <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl lg:col-span-9">
           {t('title')}
         </h2>
       </div>

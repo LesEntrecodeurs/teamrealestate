@@ -46,7 +46,7 @@ export default async function ListingDetailPage({
       <div className="mt-8 flex flex-col gap-8 lg:flex-row lg:justify-between">
         <div>
           <p className="text-sm font-medium text-secondary">{listing.location}</p>
-          <h1 className="mt-1 font-display text-3xl font-medium text-foreground sm:text-4xl">
+          <h1 className="mt-1 font-display text-3xl font-bold text-foreground sm:text-4xl">
             {listing.title}
           </h1>
           <p className="mt-3 font-display text-2xl text-foreground">
@@ -90,7 +90,7 @@ export default async function ListingDetailPage({
       </div>
 
       <div className="mt-10">
-        <h2 className="font-display text-xl font-medium text-foreground">{t('description')}</h2>
+        <h2 className="font-display text-xl font-bold text-foreground">{t('description')}</h2>
         <p className="mt-3 max-w-2xl text-muted-foreground">
           {t('descriptionBody', { location: listing.location })}
         </p>

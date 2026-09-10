@@ -19,7 +19,7 @@ export default function SellPage() {
         <p className="mt-6 text-sm font-semibold uppercase tracking-widest text-cyan-300">
           {t('eyebrow')}
         </p>
-        <h1 className="mt-3 font-display text-4xl font-medium sm:text-5xl">{t('title')}</h1>
+        <h1 className="mt-3 font-display text-4xl font-bold sm:text-5xl">{t('title')}</h1>
         <p className="mt-5 max-w-lg text-white/70">{t('subtitle')}</p>
 
         <div className="mt-10 w-full max-w-md rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur">

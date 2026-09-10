@@ -19,7 +19,7 @@ export function AgencySection() {
           <p className="mb-3 flex items-center gap-2 text-sm font-medium uppercase tracking-[0.15em] text-accent">
             {t('eyebrow')}
           </p>
-          <h2 className="font-display text-3xl font-medium leading-tight text-foreground sm:text-4xl">
+          <h2 className="font-display text-3xl font-bold leading-tight text-foreground sm:text-4xl">
             {t('title1')}
             <br />
             {t('title2')}
@@ -30,7 +30,7 @@ export function AgencySection() {
           <dl className="mt-10 grid grid-cols-1 gap-6 border-t border-navy-100 pt-8 sm:grid-cols-3">
             {stats.map((stat) => (
               <div key={stat.label}>
-                <dt className="font-display text-3xl font-medium text-secondary">
+                <dt className="font-display text-3xl font-bold text-secondary">
                   <Counter value={stat.value} />
                 </dt>
                 <dd className="mt-1 text-sm text-muted-foreground">{stat.label}</dd>

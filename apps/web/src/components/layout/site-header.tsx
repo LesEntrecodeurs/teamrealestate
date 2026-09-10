@@ -47,6 +47,22 @@ export function SiteHeader() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+    const scrollY = window.scrollY;
+    const body = document.body.style;
+    const previous = { position: body.position, top: body.top, width: body.width };
+    body.position = 'fixed';
+    body.top = `-${scrollY}px`;
+    body.width = '100%';
+    return () => {
+      body.position = previous.position;
+      body.top = previous.top;
+      body.width = previous.width;
+      window.scrollTo(0, scrollY);
+    };
+  }, [open]);
+
   function handleLocaleClick(event: MouseEvent<HTMLAnchorElement>, loc: Locale) {
     if (loc === locale) return;
     const doc = document as ViewTransitionDocument;
@@ -151,10 +167,35 @@ export function SiteHeader() {
       {open ? (
         <div
           className={cn(
-            'fixed inset-0 z-40 flex flex-col px-6 pb-8 pt-24 lg:hidden',
+            'fixed inset-0 z-40 flex flex-col overflow-y-auto px-6 pb-8 pt-6 lg:hidden',
             scrolled ? 'bg-navy-900 text-white' : 'bg-white text-navy-900'
           )}
         >
+          <div className="flex items-center justify-between">
+            <Link
+              href="/"
+              onClick={() => setOpen(false)}
+              className="flex shrink-0 items-center gap-3"
+              aria-label="Team Real Estate"
+            >
+              <Image
+                src={scrolled ? '/logo/team-wordmark-negatif.png' : '/logo/team-wordmark.png'}
+                alt="Team Real Estate"
+                width={800}
+                height={267}
+                className="h-9 w-auto"
+              />
+            </Link>
+            <button
+              type="button"
+              className={cn('p-1', scrolled ? 'text-white' : 'text-navy-900')}
+              onClick={() => setOpen(false)}
+              aria-label="Close menu"
+            >
+              <X className="size-5" />
+            </button>
+          </div>
+
           <nav className="flex flex-1 flex-col items-start justify-center gap-2">
             {mainNav.map((item) => (
               <Link

@@ -16,7 +16,7 @@ export function SiteFooter() {
         </p>
         <a
           href="mailto:contact@teamrealestate.eu"
-          className="group flex flex-wrap items-center gap-3 font-display text-3xl font-medium sm:text-5xl"
+          className="group flex flex-wrap items-center gap-3 font-display text-3xl font-bold sm:text-5xl"
         >
           contact@teamrealestate.eu
           <ArrowUpRight className="size-8 shrink-0 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 sm:size-10" />

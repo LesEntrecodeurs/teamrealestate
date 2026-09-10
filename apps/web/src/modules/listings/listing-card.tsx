@@ -74,7 +74,7 @@ export function ListingCard({
         <div className="flex items-start justify-between gap-3">
           <p
             className={cn(
-              'font-display font-medium text-foreground',
+              'font-display font-bold text-foreground',
               large ? 'text-3xl' : 'text-2xl'
             )}
           >

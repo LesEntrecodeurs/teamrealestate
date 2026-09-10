@@ -13,7 +13,7 @@ export function PageHeader({
         <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-cyan-300">
           {eyebrow}
         </p>
-        <h1 className="font-display text-4xl font-medium sm:text-5xl">{title}</h1>
+        <h1 className="font-display text-4xl font-bold sm:text-5xl">{title}</h1>
         {subtitle ? <p className="mt-4 max-w-xl text-white/75">{subtitle}</p> : null}
       </div>
     </div>

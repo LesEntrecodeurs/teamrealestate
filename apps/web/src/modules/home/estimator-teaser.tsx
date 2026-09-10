@@ -26,7 +26,7 @@ export function EstimatorTeaser() {
             <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-cyan-300">
               {t('eyebrow')}
             </p>
-            <h2 className="font-display text-3xl font-medium sm:text-4xl">{t('title')}</h2>
+            <h2 className="font-display text-3xl font-bold sm:text-4xl">{t('title')}</h2>
           </div>
           <p className="text-white/75">{t('body')}</p>
           <div className="flex flex-wrap items-center gap-4">

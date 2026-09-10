@@ -24,12 +24,12 @@ export function ReviewsSection() {
             <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
               {t('eyebrow')}
             </p>
-            <h2 className="font-display text-3xl font-medium text-foreground sm:text-4xl">
+            <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl">
               {t('title')}
             </h2>
           </div>
           <div className="flex items-baseline gap-3">
-            <span className="font-display text-5xl font-medium text-foreground">
+            <span className="font-display text-5xl font-bold text-foreground">
               <Counter value="4.9" durationMs={800} />
             </span>
             <div>
