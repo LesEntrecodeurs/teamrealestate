@@ -24,6 +24,14 @@ export function SiteHeader() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setHasScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   // pathname isn't read inside this effect — it's a re-run trigger so
   // getThreshold picks up the new page's #top (or lack thereof) right after
@@ -79,10 +87,11 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-7xl items-center justify-center">
         <div
           className={cn(
-            'flex w-full items-center justify-between gap-6 rounded-2xl border px-6 py-4 shadow-lg backdrop-blur-sm transition-colors duration-300 lg:w-auto lg:justify-start lg:gap-10 lg:px-7',
+            'flex w-full items-center justify-between gap-6 rounded-2xl border px-6 py-4 backdrop-blur-sm transition-all duration-300 lg:w-auto lg:justify-start lg:gap-10 lg:px-7',
+            hasScrolled ? 'shadow-lg' : 'border-transparent shadow-none',
             scrolled
-              ? 'border-white/10 bg-navy-900/95 text-white shadow-black/20'
-              : 'border-navy-100 bg-white/95 text-navy-900 shadow-navy-900/10'
+              ? cn('bg-navy-900/95 text-white', hasScrolled && 'border-white/10 shadow-black/20')
+              : cn('bg-white/95 text-navy-900', hasScrolled && 'border-navy-100 shadow-navy-900/10')
           )}
         >
           <Link href="/" className="flex shrink-0 items-center gap-3" aria-label="Team Real Estate">

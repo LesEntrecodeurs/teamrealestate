@@ -1,6 +1,6 @@
 'use client';
 
-import { Search, Sliders, Sparkles, X } from 'lucide-react';
+import { Euro, Home, MapPin, Search, Sparkles, X } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
@@ -12,14 +12,13 @@ import { luxembourgLocations } from '@/config/communes';
 import { useRouter } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 
-const MODES = ['buy', 'rent', 'ai', 'estimate'] as const;
+const MODES = ['buy', 'rent', 'estimate', 'ai'] as const;
 type Mode = (typeof MODES)[number];
 
 export function Hero() {
   const t = useTranslations('HomePage.hero');
   const router = useRouter();
   const [mode, setMode] = useState<Mode>('buy');
-  const [filtersOpen, setFiltersOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [type, setType] = useState('');
   const [location, setLocation] = useState('');
@@ -30,19 +29,6 @@ export function Hero() {
   const imageRef = useRef<HTMLDivElement>(null);
   const heroSectionRef = useRef<HTMLElement>(null);
   const searchFormRef = useRef<HTMLFormElement>(null);
-
-  useEffect(() => {
-    if (!filtersOpen) return;
-
-    function onClickOutside(e: MouseEvent) {
-      if (searchFormRef.current && !searchFormRef.current.contains(e.target as Node)) {
-        setFiltersOpen(false);
-      }
-    }
-
-    document.addEventListener('mousedown', onClickOutside);
-    return () => document.removeEventListener('mousedown', onClickOutside);
-  }, [filtersOpen]);
 
   useEffect(() => {
     const image = imageRef.current;
@@ -136,58 +122,88 @@ export function Hero() {
                     onClick={() => setMode(m)}
                     className={cn(
                       'flex items-center gap-1.5 rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors sm:px-5',
-                      mode === m
-                        ? m === 'ai'
-                          ? 'bg-white text-secondary'
-                          : 'bg-white text-navy-900'
-                        : 'text-white/70 hover:text-white'
+                      m === 'ai'
+                        ? mode === m
+                          ? 'bg-white'
+                          : 'bg-white/10 hover:bg-white/15'
+                        : mode === m
+                          ? 'bg-white text-navy-900'
+                          : 'text-white/70 hover:text-white'
                     )}
                   >
-                    {m === 'ai' ? <Sparkles className="size-4" /> : null}
-                    {m === 'buy'
-                      ? t('tabBuy')
-                      : m === 'rent'
-                        ? t('tabRent')
-                        : m === 'ai'
-                          ? t('tabAi')
-                          : t('tabEstimate')}
+                    {m === 'ai' ? (
+                      <Sparkles
+                        className={cn(
+                          'size-4',
+                          mode === m ? 'text-fuchsia-600' : 'text-fuchsia-300'
+                        )}
+                      />
+                    ) : null}
+                    <span
+                      className={
+                        m === 'ai'
+                          ? cn(
+                              'animate-[shimmer_2.5s_linear_infinite] bg-[length:200%_100%] bg-clip-text text-transparent',
+                              mode === m
+                                ? 'bg-[linear-gradient(110deg,#7e22ce_25%,#db2777_50%,#7e22ce_75%)]'
+                                : 'bg-[linear-gradient(110deg,#c4b5fd_25%,#fbcfe8_50%,#c4b5fd_75%)]'
+                            )
+                          : undefined
+                      }
+                    >
+                      {m === 'buy'
+                        ? t('tabBuy')
+                        : m === 'rent'
+                          ? t('tabRent')
+                          : m === 'ai'
+                            ? t('tabAi')
+                            : t('tabEstimate')}
+                    </span>
                   </button>
                 ))}
               </div>
 
-              {mode === 'estimate' ? (
+              <div className="grid">
                 <form
                   onSubmit={handleEstimate}
-                  className="flex flex-col gap-3 rounded-b-2xl rounded-tr-2xl bg-white p-4 shadow-lg shadow-navy-950/15 sm:flex-row sm:items-end sm:p-5"
+                  className={cn(
+                    '[grid-area:1/1] flex flex-col gap-3 pt-3 transition-all duration-300 sm:flex-row sm:items-end sm:pt-3',
+                    mode === 'estimate'
+                      ? 'opacity-100'
+                      : 'pointer-events-none translate-y-1 opacity-0'
+                  )}
                 >
                   <label className="flex-1 text-left">
-                    <span className="mb-1.5 block text-sm font-semibold text-navy-900">
-                      {t('estimateLabel')}
-                    </span>
+                    <span className="sr-only">{t('estimateLabel')}</span>
                     <input
                       type="text"
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
                       placeholder={t('estimatePlaceholder')}
-                      className="h-12 w-full rounded-xl border border-navy-100 bg-white px-4 text-sm text-navy-900 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none sm:h-14 sm:text-base"
+                      className="h-12 w-full rounded-xl border border-navy-100 bg-white px-4 text-sm text-navy-900 shadow-lg shadow-navy-950/15 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none sm:h-16 sm:text-base"
                     />
                   </label>
                   <Button
                     type="submit"
                     variant="accent"
                     size="lg"
-                    className="h-12 rounded-xl sm:h-14"
+                    className="h-12 rounded-xl shadow-lg shadow-navy-950/15 sm:h-16"
                   >
                     {t('estimateSubmit')}
                   </Button>
                 </form>
-              ) : (
+
                 <form
                   ref={searchFormRef}
-                  className="flex flex-col gap-3 rounded-b-2xl rounded-tr-2xl sm:pt-0"
                   onSubmit={handleSearch}
+                  className={cn(
+                    '[grid-area:1/1] flex flex-col gap-3 pt-3 transition-all duration-300 sm:pt-3',
+                    mode !== 'estimate'
+                      ? 'opacity-100'
+                      : 'pointer-events-none translate-y-1 opacity-0'
+                  )}
                 >
-                  <div className="flex flex-col gap-3 pt-3 sm:flex-row sm:pt-3">
+                  <div className="flex flex-col gap-3 sm:flex-row">
                     <div className="relative flex-1">
                       <Search className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-navy-300 sm:left-5 sm:size-5" />
                       <input
@@ -208,84 +224,75 @@ export function Hero() {
                         </button>
                       ) : null}
                     </div>
-                    <div className="flex gap-2 sm:gap-3">
-                      <button
-                        type="submit"
-                        aria-label={t('aiSubmit')}
-                        title={t('aiSubmit')}
-                        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-navy-100 bg-white text-navy-300 shadow-lg shadow-navy-950/15 transition-colors hover:border-navy-300 hover:text-navy-400 sm:h-16 sm:w-16"
-                      >
-                        <Search className="size-4 sm:size-5" />
-                      </button>
-                      {mode !== 'ai' ? (
-                        <button
-                          type="button"
-                          onClick={() => setFiltersOpen((v) => !v)}
-                          aria-expanded={filtersOpen}
-                          aria-label={t('filterType')}
-                          title={t('filterType')}
-                          className={cn(
-                            'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border bg-white shadow-lg shadow-navy-950/15 transition-colors sm:h-16 sm:w-16',
-                            filtersOpen
-                              ? 'border-cyan-500 text-cyan-600'
-                              : 'border-navy-100 text-navy-300 hover:border-navy-300 hover:text-navy-400'
-                          )}
-                        >
-                          <Sliders className="size-4 sm:size-5" />
-                        </button>
-                      ) : null}
-                    </div>
+                    <button
+                      type="submit"
+                      aria-label={t('aiSubmit')}
+                      title={t('aiSubmit')}
+                      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-navy-100 bg-white text-navy-300 shadow-lg shadow-navy-950/15 transition-colors hover:border-navy-300 hover:text-navy-400 sm:h-16 sm:w-16"
+                    >
+                      <Search className="size-4 sm:size-5" />
+                    </button>
                   </div>
 
-                  {mode !== 'ai' ? (
+                  <div className="grid">
                     <div
                       className={cn(
-                        'grid transition-all duration-300 ease-out',
-                        filtersOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                        '[grid-area:1/1] flex flex-col gap-3 pt-1 transition-all duration-300 sm:flex-row',
+                        mode !== 'ai' && mode !== 'estimate'
+                          ? 'opacity-100'
+                          : 'pointer-events-none translate-y-1 opacity-0'
                       )}
                     >
-                      <div className={filtersOpen ? 'overflow-visible' : 'overflow-hidden'}>
-                        <div className="flex flex-col gap-3 pt-1 sm:flex-row">
-                          <div className="flex-1 rounded-xl border border-navy-100 bg-white px-2 shadow-md shadow-navy-950/10">
-                            <SelectField
-                              value={type}
-                              onChange={setType}
-                              placeholder={t('filterTypeAny')}
-                              ariaLabel={t('filterType')}
-                              options={[
-                                { value: '', label: t('filterTypeAny') },
-                                { value: 'apartment', label: t('filterTypeApartment') },
-                                { value: 'house', label: t('filterTypeHouse') }
-                              ]}
-                            />
-                          </div>
-                          <div className="flex-1 rounded-xl border border-navy-100 bg-white px-2 shadow-md shadow-navy-950/10">
-                            <SelectField
-                              value={location}
-                              onChange={setLocation}
-                              placeholder={t('filterLocationPlaceholder')}
-                              ariaLabel={t('filterLocation')}
-                              searchable
-                              searchPlaceholder={t('filterLocationSearchPlaceholder')}
-                              options={luxembourgLocations.map((commune) => ({
-                                value: commune,
-                                label: commune
-                              }))}
-                            />
-                          </div>
-                          <input
-                            type="text"
-                            inputMode="numeric"
-                            value={budget}
-                            onChange={(e) => setBudget(e.target.value)}
-                            placeholder={t('filterBudget')}
-                            className="h-11 flex-1 rounded-xl border border-navy-100 bg-white px-4 text-sm text-navy-900 shadow-md shadow-navy-950/10 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none sm:h-13 sm:px-5 sm:text-base"
-                          />
-                        </div>
+                      <div className="flex-1 rounded-xl border border-navy-100 bg-white px-2 shadow-md shadow-navy-950/10">
+                        <SelectField
+                          value={type}
+                          onChange={setType}
+                          placeholder={t('filterTypeAny')}
+                          ariaLabel={t('filterType')}
+                          icon={Home}
+                          options={[
+                            { value: '', label: t('filterTypeAny') },
+                            { value: 'apartment', label: t('filterTypeApartment') },
+                            { value: 'house', label: t('filterTypeHouse') }
+                          ]}
+                        />
+                      </div>
+                      <div className="flex-1 rounded-xl border border-navy-100 bg-white px-2 shadow-md shadow-navy-950/10">
+                        <SelectField
+                          value={location}
+                          onChange={setLocation}
+                          placeholder={t('filterLocationPlaceholder')}
+                          ariaLabel={t('filterLocation')}
+                          icon={MapPin}
+                          searchable
+                          searchPlaceholder={t('filterLocationSearchPlaceholder')}
+                          options={luxembourgLocations.map((commune) => ({
+                            value: commune,
+                            label: commune
+                          }))}
+                        />
+                      </div>
+                      <div className="relative flex-1">
+                        <Euro className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-navy-400 sm:left-5" />
+                        <input
+                          type="text"
+                          inputMode="numeric"
+                          value={budget}
+                          onChange={(e) => setBudget(e.target.value)}
+                          placeholder={t('filterBudget')}
+                          className="h-11 w-full rounded-xl border border-navy-100 bg-white pl-10 pr-4 text-sm text-navy-900 shadow-md shadow-navy-950/10 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none sm:h-13 sm:pl-12 sm:pr-5 sm:text-base"
+                        />
                       </div>
                     </div>
-                  ) : (
-                    <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-white/70 sm:text-sm">
+
+                    <div
+                      className={cn(
+                        '[grid-area:1/1] flex flex-wrap items-center gap-2 pt-1 text-xs text-white/70 transition-all duration-300 sm:text-sm',
+                        mode === 'ai'
+                          ? 'opacity-100'
+                          : 'pointer-events-none translate-y-1 opacity-0'
+                      )}
+                    >
                       <span className="font-medium">{t('tryLabel')}</span>
                       {suggestions.map((s) => (
                         <button
@@ -298,9 +305,9 @@ export function Hero() {
                         </button>
                       ))}
                     </div>
-                  )}
+                  </div>
                 </form>
-              )}
+              </div>
             </div>
           </div>
         </div>

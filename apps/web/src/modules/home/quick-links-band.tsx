@@ -1,12 +1,12 @@
-import { Calculator, Key, MessageCircle, Search } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
+import { BuyIcon, ContactIcon, EstimateIcon, RentIcon } from './quick-link-icons';
 
 const links = [
-  { key: 'estimate', href: '/vendre', icon: Calculator },
-  { key: 'buy', href: '/acheter', icon: Search },
-  { key: 'rent', href: '/louer', icon: Key },
-  { key: 'contact', href: '/contact', icon: MessageCircle }
+  { key: 'estimate', href: '/vendre', icon: EstimateIcon },
+  { key: 'buy', href: '/acheter', icon: BuyIcon },
+  { key: 'rent', href: '/louer', icon: RentIcon },
+  { key: 'contact', href: '/contact', icon: ContactIcon }
 ] as const;
 
 export function QuickLinksBand() {
@@ -23,7 +23,7 @@ export function QuickLinksBand() {
               className="group flex flex-col items-center gap-3 rounded-xl bg-white px-4 py-6 text-center text-sm font-semibold text-navy-900 transition-colors hover:text-cyan-600"
             >
               <span className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-100 to-cyan-50 text-cyan-600 shadow-inner shadow-cyan-900/5 transition-transform duration-300 group-hover:scale-105">
-                <link.icon className="size-6" strokeWidth={1.75} />
+                <link.icon className="size-6" />
               </span>
               {t(`${link.key}Label`)}
             </Link>

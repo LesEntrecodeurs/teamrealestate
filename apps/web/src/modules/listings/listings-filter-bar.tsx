@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, Search, X } from 'lucide-react';
+import { ArrowRight, Euro, Home, MapPin, Search, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
@@ -66,6 +66,7 @@ export function ListingsFilterBar({
             onChange={setType}
             placeholder={t('filterTypeAny')}
             ariaLabel={t('filterType')}
+            icon={Home}
             options={[
               { value: '', label: t('filterTypeAny') },
               { value: 'apartment', label: t('filterTypeApartment') },
@@ -79,20 +80,24 @@ export function ListingsFilterBar({
             onChange={setLocation}
             placeholder={t('filterLocationPlaceholder')}
             ariaLabel={t('filterLocation')}
+            icon={MapPin}
             searchable
             searchPlaceholder={t('filterLocationSearchPlaceholder')}
             options={luxembourgLocations.map((commune) => ({ value: commune, label: commune }))}
           />
         </div>
-        <input
-          type="text"
-          inputMode="numeric"
-          value={budget}
-          onChange={(e) => setBudget(e.target.value)}
-          placeholder={t('filterBudgetPlaceholder')}
-          aria-label={t('filterBudget')}
-          className="h-13 flex-1 rounded-xl border border-navy-100 bg-white px-4 text-sm text-navy-900 shadow-md shadow-navy-950/10 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none sm:text-base"
-        />
+        <div className="relative flex-1">
+          <Euro className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-navy-400" />
+          <input
+            type="text"
+            inputMode="numeric"
+            value={budget}
+            onChange={(e) => setBudget(e.target.value)}
+            placeholder={t('filterBudgetPlaceholder')}
+            aria-label={t('filterBudget')}
+            className="h-13 w-full rounded-xl border border-navy-100 bg-white pl-10 pr-4 text-sm text-navy-900 shadow-md shadow-navy-950/10 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none sm:text-base"
+          />
+        </div>
         <div className="flex gap-2">
           {hasActiveFilters ? (
             <Button type="button" variant="outline" size="lg" onClick={reset} className="shrink-0">

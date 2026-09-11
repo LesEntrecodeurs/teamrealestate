@@ -1,6 +1,6 @@
 'use client';
 
-import { Check, ChevronDown, Search } from 'lucide-react';
+import { Check, ChevronDown, type LucideIcon, Search } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { cn } from '@/lib/utils';
@@ -17,7 +17,8 @@ export function SelectField({
   placeholder,
   searchable = false,
   searchPlaceholder,
-  ariaLabel
+  ariaLabel,
+  icon: Icon
 }: {
   value: string;
   onChange: (value: string) => void;
@@ -26,6 +27,7 @@ export function SelectField({
   searchable?: boolean;
   searchPlaceholder?: string;
   ariaLabel?: string;
+  icon?: LucideIcon;
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
@@ -88,9 +90,10 @@ export function SelectField({
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="flex h-13 w-full items-center justify-between rounded-xl bg-transparent px-3 text-left text-base text-navy-900 transition-colors focus:outline-none"
+        className="flex h-13 w-full items-center gap-2 rounded-xl bg-transparent px-3 text-left text-base text-navy-900 transition-colors focus:outline-none"
       >
-        <span className={selected ? 'text-navy-900' : 'text-navy-400'}>
+        {Icon ? <Icon className="size-4 shrink-0 text-navy-400" /> : null}
+        <span className={cn('flex-1 truncate', selected ? 'text-navy-900' : 'text-navy-400')}>
           {selected ? selected.label : placeholder}
         </span>
         <ChevronDown
