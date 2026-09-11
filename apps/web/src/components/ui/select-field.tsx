@@ -2,6 +2,7 @@
 
 import { Check, ChevronDown, Search } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { cn } from '@/lib/utils';
 
 export interface SelectOption {
@@ -28,15 +29,43 @@ export function SelectField({
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
+  const [rect, setRect] = useState<{ top: number; left: number; width: number } | null>(null);
+  const [mounted, setMounted] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => setMounted(true), []);
+
+  // The dropdown panel is portaled to <body> — this field is used inside
+  // sections with overflow-hidden (clip-path/rounded edges), which would
+  // otherwise clip the panel wherever it extends beyond the trigger.
+  useEffect(() => {
+    if (!open) return;
+
+    function updateRect() {
+      const el = ref.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      setRect({ top: r.bottom + 6, left: r.left, width: r.width });
+    }
+
+    updateRect();
+    window.addEventListener('scroll', updateRect, { passive: true, capture: true });
+    window.addEventListener('resize', updateRect);
+    return () => {
+      window.removeEventListener('scroll', updateRect, { capture: true });
+      window.removeEventListener('resize', updateRect);
+    };
+  }, [open]);
 
   useEffect(() => {
     function onClickOutside(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setOpen(false);
-        setQuery('');
-      }
+      const target = e.target as Node;
+      if (ref.current?.contains(target)) return;
+      if (panelRef.current?.contains(target)) return;
+      setOpen(false);
+      setQuery('');
     }
     document.addEventListener('mousedown', onClickOutside);
     return () => document.removeEventListener('mousedown', onClickOutside);
@@ -69,49 +98,56 @@ export function SelectField({
         />
       </button>
 
-      {open ? (
-        <div className="absolute left-0 right-0 top-[calc(100%+6px)] z-20 max-h-64 overflow-hidden rounded-md border border-navy-100 bg-white shadow-xl shadow-navy-950/15">
-          {searchable ? (
-            <div className="flex items-center gap-2 border-b border-navy-100 px-3 py-2.5">
-              <Search className="size-4 shrink-0 text-navy-400" />
-              <input
-                ref={searchRef}
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder={searchPlaceholder}
-                className="w-full bg-transparent text-sm text-navy-900 placeholder:text-navy-400 focus:outline-none"
-              />
-            </div>
-          ) : null}
+      {open && mounted && rect
+        ? createPortal(
+            <div
+              ref={panelRef}
+              style={{ top: rect.top, left: rect.left, width: rect.width }}
+              className="fixed z-50 max-h-64 overflow-hidden rounded-md border border-navy-100 bg-white shadow-xl shadow-navy-950/15"
+            >
+              {searchable ? (
+                <div className="flex items-center gap-2 border-b border-navy-100 px-3 py-2.5">
+                  <Search className="size-4 shrink-0 text-navy-400" />
+                  <input
+                    ref={searchRef}
+                    type="text"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder={searchPlaceholder}
+                    className="w-full bg-transparent text-sm text-navy-900 placeholder:text-navy-400 focus:outline-none"
+                  />
+                </div>
+              ) : null}
 
-          <ul className="max-h-52 overflow-y-auto py-1">
-            {filtered.length === 0 ? (
-              <li className="px-3 py-2.5 text-sm text-navy-400">—</li>
-            ) : (
-              filtered.map((option) => (
-                <li key={option.value}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      onChange(option.value);
-                      setOpen(false);
-                      setQuery('');
-                    }}
-                    className={cn(
-                      'flex w-full items-center justify-between px-3 py-2.5 text-left text-sm transition-colors hover:bg-navy-50',
-                      option.value === value ? 'text-cyan-600' : 'text-navy-700'
-                    )}
-                  >
-                    {option.label}
-                    {option.value === value ? <Check className="size-4" /> : null}
-                  </button>
-                </li>
-              ))
-            )}
-          </ul>
-        </div>
-      ) : null}
+              <ul className="max-h-52 overflow-y-auto py-1">
+                {filtered.length === 0 ? (
+                  <li className="px-3 py-2.5 text-sm text-navy-400">—</li>
+                ) : (
+                  filtered.map((option) => (
+                    <li key={option.value}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          onChange(option.value);
+                          setOpen(false);
+                          setQuery('');
+                        }}
+                        className={cn(
+                          'flex w-full items-center justify-between px-3 py-2.5 text-left text-sm transition-colors hover:bg-navy-50',
+                          option.value === value ? 'text-cyan-600' : 'text-navy-700'
+                        )}
+                      >
+                        {option.label}
+                        {option.value === value ? <Check className="size-4" /> : null}
+                      </button>
+                    </li>
+                  ))
+                )}
+              </ul>
+            </div>,
+            document.body
+          )
+        : null}
     </div>
   );
 }
