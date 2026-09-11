@@ -1,9 +1,9 @@
 'use client';
 
-import { LayoutGrid, Map as MapIcon, Rows3 } from 'lucide-react';
+import { LayoutGrid, Map as MapIcon, Rows3, SearchX } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { useLocale, useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { ListingCard } from './listing-card';
 import type { Listing } from './types';
@@ -18,16 +18,14 @@ export function ListingsGrid({ listings }: { listings: Listing[] }) {
   const t = useTranslations('ListingsPage');
   const locale = useLocale();
   const [view, setView] = useState<ViewMode>('split');
-  const [visibleIds, setVisibleIds] = useState<string[] | null>(null);
+  const [visibleIds, setVisibleIds] = useState<Set<string> | null>(null);
 
-  if (listings.length === 0) {
-    return <p className="text-muted-foreground">{t('empty')}</p>;
-  }
+  const handleVisibleChange = useCallback((ids: Set<string>) => {
+    setVisibleIds(ids);
+  }, []);
 
   const displayedListings =
-    view === 'split' && visibleIds
-      ? listings.filter((listing) => visibleIds.includes(listing.id))
-      : listings;
+    view === 'split' && visibleIds ? listings.filter((l) => visibleIds.has(l.id)) : listings;
 
   const views: { key: ViewMode; label: string; icon: typeof LayoutGrid }[] = [
     { key: 'split', label: t('viewSplit'), icon: LayoutGrid },
@@ -63,16 +61,26 @@ export function ListingsGrid({ listings }: { listings: Listing[] }) {
         )}
       >
         {view !== 'map' ? (
-          <div
-            className={cn(
-              'grid grid-cols-1 gap-6 sm:grid-cols-2',
-              view === 'list' && 'xl:grid-cols-3'
-            )}
-          >
-            {listings.map((listing) => (
-              <ListingCard key={listing.id} listing={listing} locale={locale} />
-            ))}
-          </div>
+          displayedListings.length === 0 ? (
+            <div className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-navy-200 bg-navy-50/60 px-6 py-16 text-center">
+              <span className="flex size-12 items-center justify-center rounded-full bg-navy-100 text-navy-400">
+                <SearchX className="size-6" />
+              </span>
+              <p className="font-display text-lg font-bold text-foreground">{t('empty')}</p>
+              <p className="max-w-xs text-sm text-muted-foreground">{t('emptyHint')}</p>
+            </div>
+          ) : (
+            <div
+              className={cn(
+                'grid grid-cols-1 gap-6 sm:grid-cols-2',
+                view === 'list' && 'xl:grid-cols-3'
+              )}
+            >
+              {displayedListings.map((listing) => (
+                <ListingCard key={listing.id} listing={listing} locale={locale} />
+              ))}
+            </div>
+          )
         ) : null}
 
         {view !== 'list' ? (
@@ -84,7 +92,11 @@ export function ListingsGrid({ listings }: { listings: Listing[] }) {
                 : 'h-[420px] lg:sticky lg:top-24 lg:h-[calc(100vh-8rem)]'
             )}
           >
-            <PropertiesMap listings={listings} locale={locale} />
+            <PropertiesMap
+              listings={listings}
+              locale={locale}
+              onVisibleChange={view === 'split' ? handleVisibleChange : undefined}
+            />
           </div>
         ) : null}
       </div>

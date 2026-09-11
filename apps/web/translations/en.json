@@ -42,17 +42,6 @@
       "stat4Value": "3",
       "stat4Label": "languages spoken (FR · EN · DE)"
     },
-    "reviews": {
-      "eyebrow": "Google reviews",
-      "title": "What our clients say",
-      "reviewsCount": "Google reviews",
-      "review1Author": "Sophie M.",
-      "review1Body": "A responsive team from the first call to the signature. You could feel you never depended on a single person.",
-      "review2Author": "David K.",
-      "review2Body": "An accurate, honest valuation with no overselling. The legal follow-up reassured the whole family.",
-      "review3Author": "Amélie R.",
-      "review3Body": "Efficient search: they understood our criteria in one conversation and found our home within three weeks."
-    },
     "featured": {
       "eyebrow": "Selection",
       "title": "A selection curated by the whole team",
@@ -70,7 +59,7 @@
       "stat2Label": "properties sold and let",
       "stat3Value": "One team",
       "stat3Label": "at your service, from first contact to signature",
-      "learnMore": "Learn more about the agency"
+      "learnMore": "Meet the team"
     },
     "team": {
       "eyebrow": "The team",
@@ -108,6 +97,7 @@
     "rentSubtitle": "Our available rentals, from studios to family houses.",
     "resultsCount": "{count} listings",
     "empty": "No listings match right now.",
+    "emptyHint": "Try widening your search, adjusting your filters, or zooming out on the map.",
     "searchLabel": "Search",
     "searchPlaceholder": "Search a property, an area...",
     "filterType": "Property type",

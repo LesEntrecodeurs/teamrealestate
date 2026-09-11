@@ -1,5 +1,6 @@
 'use client';
 
+import { MapPin } from 'lucide-react';
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
@@ -19,10 +20,10 @@ import { LUXEMBOURG_PATH } from './luxembourg-path';
  */
 const CITY_MARKER = { x: 520, y: 791 };
 const NEIGHBORHOODS = [
-  { name: 'Belair', x: 494, y: 760, tooltip: 'top' },
-  { name: 'Limpertsberg', x: 548, y: 744, tooltip: 'top' },
-  { name: 'Quartier Gare', x: 558, y: 806, tooltip: 'bottom' },
-  { name: 'Strassen', x: 462, y: 796, tooltip: 'bottom' }
+  { name: 'Belair', x: 442, y: 698, tooltip: 'top' },
+  { name: 'Limpertsberg', x: 604, y: 650, tooltip: 'top' },
+  { name: 'Quartier Gare', x: 634, y: 836, tooltip: 'bottom' },
+  { name: 'Strassen', x: 346, y: 806, tooltip: 'bottom' }
 ] as const;
 
 function toPercent(value: number) {
@@ -97,10 +98,10 @@ export function LuxembourgMapSection() {
               <circle
                 cx={CITY_MARKER.x}
                 cy={CITY_MARKER.y}
-                r={14}
+                r={26}
                 fill="none"
                 stroke="#d1622c"
-                strokeWidth={3}
+                strokeWidth={5}
                 className="origin-center animate-[radar-pulse_2.4s_ease-out_infinite]"
                 style={{
                   transformBox: 'fill-box',
@@ -111,10 +112,10 @@ export function LuxembourgMapSection() {
               <circle
                 cx={CITY_MARKER.x}
                 cy={CITY_MARKER.y}
-                r={14}
+                r={26}
                 fill="none"
                 stroke="#00a0be"
-                strokeWidth={2}
+                strokeWidth={3.5}
                 className="origin-center animate-[radar-pulse_2.4s_ease-out_1.2s_infinite]"
                 style={{
                   transformBox: 'fill-box',
@@ -127,7 +128,7 @@ export function LuxembourgMapSection() {
             {/* City marker + label */}
             <button
               type="button"
-              className="group/pin absolute z-20 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center transition-opacity duration-500"
+              className="group/pin absolute z-20 flex -translate-x-1/2 -translate-y-full flex-col items-center transition-opacity duration-500"
               style={{
                 left: toPercent(CITY_MARKER.x),
                 top: toPercent(CITY_MARKER.y),
@@ -135,7 +136,13 @@ export function LuxembourgMapSection() {
                 transitionDelay: '850ms'
               }}
             >
-              <span className="block size-4 rounded-full border-2 border-white bg-terracotta-500 shadow-lg transition-transform duration-300 group-hover/pin:scale-125" />
+              <span className="relative flex size-10 items-center justify-center">
+                <span className="absolute size-7 animate-[radar-pulse_2.4s_ease-out_infinite] rounded-full bg-terracotta-500/30 blur-[2px]" />
+                <MapPin
+                  className="relative size-8 fill-terracotta-500 text-white drop-shadow-md transition-transform duration-300 group-hover/pin:scale-110"
+                  strokeWidth={1.5}
+                />
+              </span>
               <span className="pointer-events-none absolute bottom-[calc(100%+10px)] whitespace-nowrap rounded-full bg-navy-900 px-3 py-1.5 text-xs font-semibold text-white shadow-lg transition-all duration-300 group-hover/pin:-translate-y-1 group-focus-visible/pin:-translate-y-1">
                 Luxembourg-Ville
               </span>
@@ -173,7 +180,7 @@ export function LuxembourgMapSection() {
                 <button
                   key={n.name}
                   type="button"
-                  className="group/pin absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center p-3 transition-opacity duration-500"
+                  className="group/pin absolute z-10 flex -translate-x-1/2 -translate-y-full items-center justify-center transition-opacity duration-500"
                   style={{
                     left: toPercent(n.x),
                     top: toPercent(n.y),
@@ -182,13 +189,16 @@ export function LuxembourgMapSection() {
                   }}
                   aria-label={`${n.name} — ${areaListings.length} biens`}
                 >
-                  <span className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                  <span className="relative flex size-8 items-center justify-center">
                     <span
-                      className="size-4 animate-[radar-pulse_2.8s_ease-out_infinite] rounded-full bg-cyan-400/70"
+                      className="absolute size-5 animate-[radar-pulse_2.8s_ease-out_infinite] rounded-full bg-cyan-400/40 blur-[1.5px]"
                       style={{ animationDelay: `${i * 450}ms` }}
                     />
+                    <MapPin
+                      className="relative size-6 fill-secondary text-white drop-shadow transition-transform duration-300 group-hover/pin:scale-125"
+                      strokeWidth={1.5}
+                    />
                   </span>
-                  <span className="relative block size-2.5 rounded-full border-2 border-white bg-secondary shadow transition-transform duration-300 group-hover/pin:scale-150" />
 
                   <span
                     className={cn(

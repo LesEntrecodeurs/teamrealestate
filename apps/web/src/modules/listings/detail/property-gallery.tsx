@@ -71,13 +71,17 @@ export function PropertyGallery({
     activePointerId.current = e.pointerId;
     hasSwipedRef.current = false;
     setPaused(true);
-    e.currentTarget.setPointerCapture(e.pointerId);
   }
 
   function handlePointerMove(e: PointerEvent<HTMLDivElement>) {
     if (dragStartX.current === null || activePointerId.current !== e.pointerId) return;
     dragDeltaX.current = e.clientX - dragStartX.current;
-    if (Math.abs(dragDeltaX.current) > SWIPE_THRESHOLD / 2) hasSwipedRef.current = true;
+    if (Math.abs(dragDeltaX.current) > SWIPE_THRESHOLD / 2) {
+      if (!hasSwipedRef.current) {
+        e.currentTarget.setPointerCapture(e.pointerId);
+      }
+      hasSwipedRef.current = true;
+    }
   }
 
   function handlePointerEnd(e: PointerEvent<HTMLDivElement>) {

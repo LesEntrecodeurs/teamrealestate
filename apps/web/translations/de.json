@@ -42,17 +42,6 @@
       "stat4Value": "3",
       "stat4Label": "gesprochene Sprachen (FR · EN · DE)"
     },
-    "reviews": {
-      "eyebrow": "Google-Bewertungen",
-      "title": "Was unsere Kunden sagen",
-      "reviewsCount": "Google-Bewertungen",
-      "review1Author": "Sophie M.",
-      "review1Body": "Ein reaktionsschnelles Team vom ersten Anruf bis zur Unterschrift. Man spürte, dass man nie von einer einzigen Person abhing.",
-      "review2Author": "David K.",
-      "review2Body": "Eine präzise, ehrliche Bewertung ohne Überverkauf. Die rechtliche Begleitung hat die ganze Familie beruhigt.",
-      "review3Author": "Amélie R.",
-      "review3Body": "Effiziente Suche: Sie haben unsere Kriterien in einem Gespräch verstanden und in drei Wochen die passende Immobilie gefunden."
-    },
     "featured": {
       "eyebrow": "Auswahl",
       "title": "Eine Auswahl, getroffen vom gesamten Team",
@@ -70,7 +59,7 @@
       "stat2Label": "verkaufte und vermietete Immobilien",
       "stat3Value": "Ein Team",
       "stat3Label": "an Ihrer Seite, vom ersten Kontakt bis zur Unterschrift",
-      "learnMore": "Mehr über die Agentur erfahren"
+      "learnMore": "Team kennenlernen"
     },
     "team": {
       "eyebrow": "Das Team",
@@ -108,6 +97,7 @@
     "rentSubtitle": "Unsere verfügbaren Mietobjekte, vom Studio bis zum Familienhaus.",
     "resultsCount": "{count} Immobilien",
     "empty": "Derzeit passt keine Immobilie zu Ihrer Suche.",
+    "emptyHint": "Erweitern Sie Ihre Suche, passen Sie Ihre Filter an oder zoomen Sie auf der Karte heraus.",
     "searchLabel": "Suche",
     "searchPlaceholder": "Nach einer Immobilie oder Gegend suchen...",
     "filterType": "Immobilientyp",

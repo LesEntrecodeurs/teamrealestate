@@ -11,24 +11,12 @@ const propertyTypeLabel: Record<Listing['propertyType'], string> = {
   penthouse: 'Penthouse'
 };
 
-export function FeaturedListingRow({
-  listing,
-  locale,
-  index
-}: {
-  listing: Listing;
-  locale: string;
-  index: number;
-}) {
+export function FeaturedListingRow({ listing, locale }: { listing: Listing; locale: string }) {
   return (
     <Link
       href={`/${listing.transactionType === 'sale' ? 'acheter' : 'louer'}/${listing.slug}`}
       className="group flex flex-col gap-5 py-8 sm:flex-row sm:items-start sm:gap-6"
     >
-      <span className="hidden shrink-0 font-display text-5xl font-bold text-navy-100 transition-colors duration-300 group-hover:text-cyan-100 sm:block lg:text-6xl">
-        {String(index + 1).padStart(2, '0')}
-      </span>
-
       <div className="relative aspect-[16/10] shrink-0 overflow-hidden rounded-2xl sm:w-56 lg:w-64">
         <Image
           src={listing.image}

@@ -232,18 +232,6 @@ export function Hero() {
           </form>
         </div>
       </div>
-
-      <svg
-        className="absolute inset-x-0 bottom-0 h-16 w-full text-card sm:h-24"
-        viewBox="0 0 1440 120"
-        preserveAspectRatio="none"
-        aria-hidden
-      >
-        <path
-          d="M0,64 C240,110 480,10 720,40 C960,70 1200,110 1440,48 L1440,120 L0,120 Z"
-          fill="currentColor"
-        />
-      </svg>
     </section>
   );
 }

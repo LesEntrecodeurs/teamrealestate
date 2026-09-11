@@ -4,7 +4,6 @@ import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Counter } from '@/components/ui/counter';
 import { Reveal } from '@/components/ui/reveal';
-import { Link } from '@/i18n/navigation';
 
 export function AgencySection() {
   const t = useTranslations('HomePage.agency');
@@ -44,10 +43,10 @@ export function AgencySection() {
           <p className="mt-4 text-base text-white/80 sm:text-lg">{t('body2')}</p>
 
           <Button asChild variant="outline-invert" size="lg" className="mt-8">
-            <Link href="/agence">
+            <a href="#equipe">
               {t('learnMore')}
               <ArrowRight className="size-4" />
-            </Link>
+            </a>
           </Button>
         </div>
 

@@ -34,7 +34,7 @@ export function FeaturedListings() {
       <div className="flex flex-col divide-y divide-border">
         {listings.map((listing, i) => (
           <Reveal key={listing.id} delay={i * 80}>
-            <FeaturedListingRow listing={listing} locale={locale} index={i} />
+            <FeaturedListingRow listing={listing} locale={locale} />
           </Reveal>
         ))}
       </div>

@@ -59,7 +59,7 @@
       "stat2Label": "biens vendus et loués",
       "stat3Value": "Une équipe",
       "stat3Label": "à votre service, du premier contact à la signature",
-      "learnMore": "En savoir plus sur l'agence"
+      "learnMore": "Rencontrer l'équipe"
     },
     "team": {
       "eyebrow": "L'équipe",
@@ -82,17 +82,6 @@
       "item4Title": "Technologie au service du client",
       "item4Body": "Recherche assistée par IA, estimation instantanée, alertes ciblées : nos outils accélèrent ce qui compte pour vous."
     },
-    "reviews": {
-      "eyebrow": "Avis Google",
-      "title": "Ce que nos clients en disent",
-      "reviewsCount": "avis Google",
-      "review1Author": "Sophie M.",
-      "review1Body": "Une équipe réactive du premier appel à la signature. On sentait qu'on n'était jamais dépendant d'une seule personne.",
-      "review2Author": "David K.",
-      "review2Body": "Estimation précise et honnête, sans survente. Le suivi juridique a rassuré toute la famille.",
-      "review3Author": "Amélie R.",
-      "review3Body": "Recherche efficace : ils ont compris nos critères en un échange et nous ont trouvé le bien en trois semaines."
-    },
     "estimator": {
       "eyebrow": "Votre projet de vente",
       "title": "Une estimation fiable, en quelques minutes",
@@ -108,6 +97,7 @@
     "rentSubtitle": "Nos biens disponibles à la location, du studio à la maison familiale.",
     "resultsCount": "{count} biens",
     "empty": "Aucun bien ne correspond pour le moment.",
+    "emptyHint": "Essayez d'élargir votre recherche, de modifier vos filtres ou de dézoomer la carte.",
     "searchLabel": "Rechercher",
     "searchPlaceholder": "Rechercher un bien, un quartier...",
     "filterType": "Type de bien",

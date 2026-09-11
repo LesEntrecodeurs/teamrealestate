@@ -32,9 +32,9 @@ export function SiteHeader() {
   useEffect(() => {
     const heroEl = document.getElementById('top');
     if (!heroEl) {
-      // No light hero to blend with (secondary pages open on a dark
-      // PageHeader banner instead) — stay in the dark header style.
-      setScrolled(true);
+      // No dark photo hero to blend with on this page (PageHeader is
+      // light-themed) — keep the light header style throughout.
+      setScrolled(false);
       return;
     }
 
