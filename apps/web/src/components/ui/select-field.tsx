@@ -18,7 +18,8 @@ export function SelectField({
   searchable = false,
   searchPlaceholder,
   ariaLabel,
-  icon: Icon
+  icon: Icon,
+  variant = 'field'
 }: {
   value: string;
   onChange: (value: string) => void;
@@ -28,6 +29,8 @@ export function SelectField({
   searchPlaceholder?: string;
   ariaLabel?: string;
   icon?: LucideIcon;
+  /** 'field' = full-width bar segment (dark text on transparent/white). 'chip' = compact rounded pill for a tag-style filter row. */
+  variant?: 'field' | 'chip';
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
@@ -90,14 +93,41 @@ export function SelectField({
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="flex h-13 w-full items-center gap-2 rounded-xl bg-transparent px-3 text-left text-base text-navy-900 transition-colors focus:outline-none"
+        className={cn(
+          'flex items-center transition-colors focus:outline-none',
+          variant === 'chip'
+            ? 'gap-1.5 whitespace-nowrap rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-xs font-medium text-white/85 hover:border-white/45 hover:bg-white/20 sm:px-3.5 sm:py-2 sm:text-sm'
+            : 'h-13 w-full gap-2 rounded-xl bg-transparent px-3 text-left text-base text-navy-900'
+        )}
       >
-        {Icon ? <Icon className="size-4 shrink-0 text-navy-400" /> : null}
-        <span className={cn('flex-1 truncate', selected ? 'text-navy-900' : 'text-navy-400')}>
+        {Icon ? (
+          <Icon
+            className={cn(
+              'size-4 shrink-0',
+              variant === 'chip' ? 'text-white/70' : 'text-navy-400'
+            )}
+          />
+        ) : null}
+        <span
+          className={cn(
+            variant === 'chip' ? '' : 'flex-1 truncate',
+            variant === 'chip'
+              ? selected
+                ? 'text-white'
+                : 'text-white/85'
+              : selected
+                ? 'text-navy-900'
+                : 'text-navy-400'
+          )}
+        >
           {selected ? selected.label : placeholder}
         </span>
         <ChevronDown
-          className={cn('size-4 text-navy-400 transition-transform', open && 'rotate-180')}
+          className={cn(
+            'size-3.5 transition-transform',
+            variant === 'chip' ? 'text-white/60' : 'size-4 text-navy-400',
+            open && 'rotate-180'
+          )}
         />
       </button>
 
