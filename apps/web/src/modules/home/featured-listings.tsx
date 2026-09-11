@@ -24,10 +24,12 @@ export function FeaturedListings() {
         </div>
         <Link
           href="/acheter"
-          className="flex shrink-0 items-center gap-1.5 rounded-full border border-border px-4 py-2 text-xs font-semibold uppercase tracking-widest text-foreground transition-colors hover:border-accent hover:text-accent"
+          className="group flex shrink-0 items-center gap-1.5 text-sm font-semibold text-accent"
         >
-          {t('viewAll')}
-          <ArrowRight className="size-4" />
+          <span className="underline decoration-transparent underline-offset-4 transition-colors group-hover:decoration-accent">
+            {t('viewAll')}
+          </span>
+          <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
         </Link>
       </div>
 

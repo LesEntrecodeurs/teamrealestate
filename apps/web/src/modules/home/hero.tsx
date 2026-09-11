@@ -194,7 +194,7 @@ export function Hero() {
                         type="text"
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
-                        placeholder={t('aiPlaceholder')}
+                        placeholder={mode === 'ai' ? t('aiPlaceholder') : t('searchPlaceholder')}
                         className="h-12 w-full rounded-xl border border-navy-100 bg-white pl-11 pr-10 text-sm text-navy-900 shadow-lg shadow-navy-950/15 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none sm:h-16 sm:pl-13 sm:pr-11 sm:text-base"
                       />
                       {query ? (
@@ -208,83 +208,97 @@ export function Hero() {
                         </button>
                       ) : null}
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => setFiltersOpen((v) => !v)}
-                      aria-expanded={filtersOpen}
-                      aria-label={t('filterType')}
-                      title={t('filterType')}
-                      className={cn(
-                        'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border bg-white shadow-lg shadow-navy-950/15 transition-colors sm:h-16 sm:w-16',
-                        filtersOpen
-                          ? 'border-cyan-500 text-cyan-600'
-                          : 'border-navy-100 text-navy-300 hover:border-navy-300 hover:text-navy-400'
-                      )}
-                    >
-                      <Sliders className="size-4 sm:size-5" />
-                    </button>
-                  </div>
-
-                  <div
-                    className={cn(
-                      'grid transition-all duration-300 ease-out',
-                      filtersOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
-                    )}
-                  >
-                    <div className={filtersOpen ? 'overflow-visible' : 'overflow-hidden'}>
-                      <div className="flex flex-col gap-3 pt-1 sm:flex-row">
-                        <div className="flex-1 rounded-xl border border-navy-100 bg-white px-2 shadow-md shadow-navy-950/10">
-                          <SelectField
-                            value={type}
-                            onChange={setType}
-                            placeholder={t('filterTypeAny')}
-                            ariaLabel={t('filterType')}
-                            options={[
-                              { value: '', label: t('filterTypeAny') },
-                              { value: 'apartment', label: t('filterTypeApartment') },
-                              { value: 'house', label: t('filterTypeHouse') }
-                            ]}
-                          />
-                        </div>
-                        <div className="flex-1 rounded-xl border border-navy-100 bg-white px-2 shadow-md shadow-navy-950/10">
-                          <SelectField
-                            value={location}
-                            onChange={setLocation}
-                            placeholder={t('filterLocationPlaceholder')}
-                            ariaLabel={t('filterLocation')}
-                            searchable
-                            searchPlaceholder={t('filterLocationSearchPlaceholder')}
-                            options={luxembourgLocations.map((commune) => ({
-                              value: commune,
-                              label: commune
-                            }))}
-                          />
-                        </div>
-                        <input
-                          type="text"
-                          inputMode="numeric"
-                          value={budget}
-                          onChange={(e) => setBudget(e.target.value)}
-                          placeholder={t('filterBudget')}
-                          className="h-11 flex-1 rounded-xl border border-navy-100 bg-white px-4 text-sm text-navy-900 shadow-md shadow-navy-950/10 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none sm:h-13 sm:px-5 sm:text-base"
-                        />
-                      </div>
+                    <div className="flex gap-2 sm:gap-3">
+                      <button
+                        type="submit"
+                        aria-label={t('aiSubmit')}
+                        title={t('aiSubmit')}
+                        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-navy-100 bg-white text-navy-300 shadow-lg shadow-navy-950/15 transition-colors hover:border-navy-300 hover:text-navy-400 sm:h-16 sm:w-16"
+                      >
+                        <Search className="size-4 sm:size-5" />
+                      </button>
+                      {mode !== 'ai' ? (
+                        <button
+                          type="button"
+                          onClick={() => setFiltersOpen((v) => !v)}
+                          aria-expanded={filtersOpen}
+                          aria-label={t('filterType')}
+                          title={t('filterType')}
+                          className={cn(
+                            'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border bg-white shadow-lg shadow-navy-950/15 transition-colors sm:h-16 sm:w-16',
+                            filtersOpen
+                              ? 'border-cyan-500 text-cyan-600'
+                              : 'border-navy-100 text-navy-300 hover:border-navy-300 hover:text-navy-400'
+                          )}
+                        >
+                          <Sliders className="size-4 sm:size-5" />
+                        </button>
+                      ) : null}
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-white/70 sm:text-sm">
-                    <span className="font-medium">{t('tryLabel')}</span>
-                    {suggestions.map((s) => (
-                      <button
-                        key={s}
-                        type="button"
-                        onClick={() => setQuery(s)}
-                        className="rounded-xl border border-white/25 bg-white/10 px-2.5 py-1 font-medium text-white/85 transition-colors hover:border-white/45 hover:bg-white/20 sm:px-3 sm:py-1.5"
-                      >
-                        {s}
-                      </button>
-                    ))}
-                  </div>
+                  {mode !== 'ai' ? (
+                    <div
+                      className={cn(
+                        'grid transition-all duration-300 ease-out',
+                        filtersOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                      )}
+                    >
+                      <div className={filtersOpen ? 'overflow-visible' : 'overflow-hidden'}>
+                        <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+                          <div className="flex-1 rounded-xl border border-navy-100 bg-white px-2 shadow-md shadow-navy-950/10">
+                            <SelectField
+                              value={type}
+                              onChange={setType}
+                              placeholder={t('filterTypeAny')}
+                              ariaLabel={t('filterType')}
+                              options={[
+                                { value: '', label: t('filterTypeAny') },
+                                { value: 'apartment', label: t('filterTypeApartment') },
+                                { value: 'house', label: t('filterTypeHouse') }
+                              ]}
+                            />
+                          </div>
+                          <div className="flex-1 rounded-xl border border-navy-100 bg-white px-2 shadow-md shadow-navy-950/10">
+                            <SelectField
+                              value={location}
+                              onChange={setLocation}
+                              placeholder={t('filterLocationPlaceholder')}
+                              ariaLabel={t('filterLocation')}
+                              searchable
+                              searchPlaceholder={t('filterLocationSearchPlaceholder')}
+                              options={luxembourgLocations.map((commune) => ({
+                                value: commune,
+                                label: commune
+                              }))}
+                            />
+                          </div>
+                          <input
+                            type="text"
+                            inputMode="numeric"
+                            value={budget}
+                            onChange={(e) => setBudget(e.target.value)}
+                            placeholder={t('filterBudget')}
+                            className="h-11 flex-1 rounded-xl border border-navy-100 bg-white px-4 text-sm text-navy-900 shadow-md shadow-navy-950/10 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none sm:h-13 sm:px-5 sm:text-base"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-white/70 sm:text-sm">
+                      <span className="font-medium">{t('tryLabel')}</span>
+                      {suggestions.map((s) => (
+                        <button
+                          key={s}
+                          type="button"
+                          onClick={() => setQuery(s)}
+                          className="rounded-xl border border-white/25 bg-white/10 px-2.5 py-1 font-medium text-white/85 transition-colors hover:border-white/45 hover:bg-white/20 sm:px-3 sm:py-1.5"
+                        >
+                          {s}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </form>
               )}
             </div>
