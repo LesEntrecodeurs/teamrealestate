@@ -108,6 +108,8 @@
     "rentSubtitle": "Our available rentals, from studios to family houses.",
     "resultsCount": "{count} listings",
     "empty": "No listings match right now.",
+    "searchLabel": "Search",
+    "searchPlaceholder": "Search a property, an area...",
     "filterType": "Property type",
     "filterTypeAny": "Any type",
     "filterTypeApartment": "Apartment",

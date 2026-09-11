@@ -24,6 +24,20 @@ export function Hero() {
   const suggestions = [t('try1'), t('try2'), t('try3')];
   const imageRef = useRef<HTMLDivElement>(null);
   const heroSectionRef = useRef<HTMLElement>(null);
+  const searchFormRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    if (!filtersOpen) return;
+
+    function onClickOutside(e: MouseEvent) {
+      if (searchFormRef.current && !searchFormRef.current.contains(e.target as Node)) {
+        setFiltersOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', onClickOutside);
+    return () => document.removeEventListener('mousedown', onClickOutside);
+  }, [filtersOpen]);
 
   useEffect(() => {
     const image = imageRef.current;
@@ -102,6 +116,7 @@ export function Hero() {
           </div>
 
           <form
+            ref={searchFormRef}
             className="relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-3 px-6 sm:px-8"
             onSubmit={handleSearch}
           >

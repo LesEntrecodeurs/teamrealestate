@@ -108,6 +108,8 @@
     "rentSubtitle": "Unsere verfügbaren Mietobjekte, vom Studio bis zum Familienhaus.",
     "resultsCount": "{count} Immobilien",
     "empty": "Derzeit passt keine Immobilie zu Ihrer Suche.",
+    "searchLabel": "Suche",
+    "searchPlaceholder": "Nach einer Immobilie oder Gegend suchen...",
     "filterType": "Immobilientyp",
     "filterTypeAny": "Alle Typen",
     "filterTypeApartment": "Wohnung",
