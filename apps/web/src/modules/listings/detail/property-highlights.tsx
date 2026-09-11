@@ -1,11 +1,14 @@
 import { Check, MapPin } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import type { PointOfInterest } from '@/modules/listings/types';
+import { PropertyMap } from './property-map';
 
 export function PropertyHighlights({
+  location,
   features,
   pointsOfInterest
 }: {
+  location: string;
   features: string[];
   pointsOfInterest: PointOfInterest[];
 }) {
@@ -43,6 +46,7 @@ export function PropertyHighlights({
             </li>
           ))}
         </ul>
+        <PropertyMap location={location} />
       </div>
     </div>
   );

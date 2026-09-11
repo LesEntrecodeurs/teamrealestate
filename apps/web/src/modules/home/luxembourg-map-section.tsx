@@ -42,12 +42,6 @@ export function LuxembourgMapSection() {
     }
   }, []);
 
-  const stats = [
-    { value: t('stat1Value'), label: t('stat1Label') },
-    { value: t('stat2Value'), label: t('stat2Label') },
-    { value: t('stat3Value'), label: t('stat3Label') }
-  ];
-
   const totalListings = mockListings.length;
 
   return (
@@ -65,17 +59,6 @@ export function LuxembourgMapSection() {
           </h2>
           <p className="mt-6 text-base text-muted-foreground">{t('body1')}</p>
           <p className="mt-4 text-base text-muted-foreground">{t('body2')}</p>
-
-          <dl className="mt-10 grid grid-cols-1 gap-8 border-t border-navy-100 pt-8 sm:grid-cols-3 sm:gap-6 sm:divide-x sm:divide-navy-100">
-            {stats.map((stat) => (
-              <div key={stat.label} className="sm:pl-6 sm:first:pl-0">
-                <dt className="font-display text-4xl font-bold text-secondary">
-                  <Counter value={stat.value} />
-                </dt>
-                <dd className="mt-1.5 text-sm text-muted-foreground">{stat.label}</dd>
-              </div>
-            ))}
-          </dl>
         </Reveal>
 
         <Reveal delay={150}>
@@ -240,6 +223,34 @@ export function LuxembourgMapSection() {
                 </button>
               );
             })}
+
+            <div
+              className="absolute -top-5 left-2 z-20 rounded-2xl bg-card px-4 py-3 shadow-xl shadow-navy-900/10 ring-1 ring-navy-100 transition-all duration-700 sm:-left-6"
+              style={{
+                opacity: inView ? 1 : 0,
+                transform: inView ? 'translateY(0)' : 'translateY(8px)',
+                transitionDelay: '1300ms'
+              }}
+            >
+              <p className="font-display text-2xl font-bold text-secondary">
+                <Counter value="4" />
+              </p>
+              <p className="text-[11px] text-muted-foreground">quartiers couverts</p>
+            </div>
+
+            <div
+              className="absolute -bottom-5 right-2 z-20 rounded-2xl bg-card px-4 py-3 shadow-xl shadow-navy-900/10 ring-1 ring-navy-100 transition-all duration-700 sm:-right-6"
+              style={{
+                opacity: inView ? 1 : 0,
+                transform: inView ? 'translateY(0)' : 'translateY(-8px)',
+                transitionDelay: '1450ms'
+              }}
+            >
+              <p className="font-display text-2xl font-bold text-secondary">
+                <Counter value={String(totalListings)} />
+              </p>
+              <p className="text-[11px] text-muted-foreground">biens actifs sur la carte</p>
+            </div>
           </div>
         </Reveal>
       </div>

@@ -160,7 +160,7 @@ export function Hero() {
                 filtersOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
               )}
             >
-              <div className="overflow-hidden">
+              <div className={filtersOpen ? 'overflow-visible' : 'overflow-hidden'}>
                 <div className="flex flex-col gap-3 pt-1 sm:flex-row">
                   <div className="flex-1 rounded-xl border border-navy-100 bg-white px-2 shadow-md shadow-navy-950/10">
                     <SelectField

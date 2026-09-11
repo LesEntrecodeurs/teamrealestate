@@ -91,6 +91,7 @@ export async function ListingDetailView({ listing, locale }: { listing: Listing;
 
       <div className="mt-14">
         <PropertyHighlights
+          location={listing.location}
           features={listing.features}
           pointsOfInterest={listing.pointsOfInterest}
         />
