@@ -30,14 +30,14 @@
       "filterTypeApartment": "Apartment",
       "filterTypeHouse": "House",
       "filterLocation": "Area",
-      "filterLocationPlaceholder": "All areas",
+      "filterLocationPlaceholder": "Areas",
       "filterLocationSearchPlaceholder": "Search an area...",
-      "filterBudget": "Max budget",
+      "filterBudget": "Budget",
       "filterSubmit": "See listings",
       "estimateLabel": "Address of the property to value",
       "estimateHelper": "Get a free, no-obligation valuation within 24h.",
-      "estimatePlaceholder": "12 rue de la Gare, Luxembourg",
-      "estimateSubmit": "Estimate"
+      "estimatePlaceholder": "E.g. 12 Rue de la Gare",
+      "estimateSubmit": "Get my valuation"
     },
     "quickLinks": {
       "title": "Our most popular services,",

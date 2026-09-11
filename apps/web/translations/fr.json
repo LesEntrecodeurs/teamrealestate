@@ -30,14 +30,14 @@
       "filterTypeApartment": "Appartement",
       "filterTypeHouse": "Maison",
       "filterLocation": "Commune",
-      "filterLocationPlaceholder": "Toutes les communes",
+      "filterLocationPlaceholder": "Communes",
       "filterLocationSearchPlaceholder": "Rechercher une commune...",
-      "filterBudget": "Budget max",
+      "filterBudget": "Budget",
       "filterSubmit": "Voir les biens",
       "estimateLabel": "Adresse du bien à estimer",
       "estimateHelper": "Recevez une estimation gratuite et sans engagement sous 24h.",
-      "estimatePlaceholder": "12 rue de la Gare, Luxembourg",
-      "estimateSubmit": "Estimer"
+      "estimatePlaceholder": "Ex : 12 rue de la Gare",
+      "estimateSubmit": "Faire mon estimation"
     },
     "quickLinks": {
       "title": "Nos services les plus demandés,",

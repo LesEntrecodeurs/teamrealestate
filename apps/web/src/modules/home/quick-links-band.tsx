@@ -1,6 +1,12 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import { BuyIcon, ContactIcon, EstimateIcon, RentIcon } from './quick-link-icons';
+import {
+  BuyIcon,
+  ContactIcon,
+  EstimateIcon,
+  HandDrawnFilterDefs,
+  RentIcon
+} from './quick-link-icons';
 
 const links = [
   { key: 'estimate', href: '/vendre', icon: EstimateIcon },
@@ -13,7 +19,8 @@ export function QuickLinksBand() {
   const t = useTranslations('HomePage.quickLinks');
 
   return (
-    <div className="relative z-10 mx-auto -mt-16 w-full max-w-5xl px-6 sm:-mt-20 sm:px-8">
+    <div className="relative z-10 mx-auto -mt-16 w-full max-w-5xl px-6 sm:-mt-20 sm:px-8 xl:hidden">
+      <HandDrawnFilterDefs />
       <div className="rounded-2xl bg-background px-6 py-6 sm:rounded-3xl sm:px-10 sm:py-8">
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
           {links.map((link) => (

@@ -19,7 +19,8 @@ export function SelectField({
   searchPlaceholder,
   ariaLabel,
   icon: Icon,
-  variant = 'field'
+  variant = 'field',
+  tone = 'dark'
 }: {
   value: string;
   onChange: (value: string) => void;
@@ -29,8 +30,10 @@ export function SelectField({
   searchPlaceholder?: string;
   ariaLabel?: string;
   icon?: LucideIcon;
-  /** 'field' = full-width bar segment (dark text on transparent/white). 'chip' = compact rounded pill for a tag-style filter row. */
+  /** 'field' = full-width bar segment (dark text on transparent/white). 'chip' = compact rounded pill. */
   variant?: 'field' | 'chip';
+  /** Chip only: 'dark' = glass pill for a photo/navy backdrop, 'light' = muted pill for a white bar. */
+  tone?: 'dark' | 'light';
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
@@ -94,17 +97,26 @@ export function SelectField({
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
         className={cn(
-          'flex items-center transition-colors focus:outline-none',
+          'flex items-center whitespace-nowrap transition-colors focus:outline-none',
           variant === 'chip'
-            ? 'gap-1.5 whitespace-nowrap rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-xs font-medium text-white/85 hover:border-white/45 hover:bg-white/20 sm:px-3.5 sm:py-2 sm:text-sm'
+            ? cn(
+                'gap-1.5 rounded-full border px-2.5 py-1.5 text-xs font-medium sm:text-sm',
+                tone === 'dark'
+                  ? 'border-white/25 bg-white/10 text-white/85 hover:border-white/45 hover:bg-white/20'
+                  : 'border-navy-100 bg-navy-50 text-navy-600 hover:border-navy-200 hover:bg-navy-100/70'
+              )
             : 'h-13 w-full gap-2 rounded-xl bg-transparent px-3 text-left text-base text-navy-900'
         )}
       >
         {Icon ? (
           <Icon
             className={cn(
-              'size-4 shrink-0',
-              variant === 'chip' ? 'text-white/70' : 'text-navy-400'
+              'size-3.5 shrink-0',
+              variant === 'chip'
+                ? tone === 'dark'
+                  ? 'text-white/70'
+                  : 'text-navy-400'
+                : 'size-4 text-navy-400'
             )}
           />
         ) : null}
@@ -112,9 +124,13 @@ export function SelectField({
           className={cn(
             variant === 'chip' ? '' : 'flex-1 truncate',
             variant === 'chip'
-              ? selected
-                ? 'text-white'
-                : 'text-white/85'
+              ? tone === 'dark'
+                ? selected
+                  ? 'text-white'
+                  : 'text-white/85'
+                : selected
+                  ? 'text-navy-900'
+                  : 'text-navy-600'
               : selected
                 ? 'text-navy-900'
                 : 'text-navy-400'
@@ -124,8 +140,12 @@ export function SelectField({
         </span>
         <ChevronDown
           className={cn(
-            'size-3.5 transition-transform',
-            variant === 'chip' ? 'text-white/60' : 'size-4 text-navy-400',
+            'size-3 transition-transform',
+            variant === 'chip'
+              ? tone === 'dark'
+                ? 'text-white/60'
+                : 'text-navy-400'
+              : 'size-4 text-navy-400',
             open && 'rotate-180'
           )}
         />

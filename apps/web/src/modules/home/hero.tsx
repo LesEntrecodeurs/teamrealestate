@@ -10,14 +10,29 @@ import { SelectField } from '@/components/ui/select-field';
 import { TypewriterText } from '@/components/ui/typewriter-text';
 import { luxembourgLocations } from '@/config/communes';
 import { useRotatingPlaceholder } from '@/hooks/use-rotating-placeholder';
-import { useRouter } from '@/i18n/navigation';
+import { Link, useRouter } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
+import {
+  BuyIcon,
+  ContactIcon,
+  EstimateIcon,
+  HandDrawnFilterDefs,
+  RentIcon
+} from './quick-link-icons';
+
+const QUICK_LINKS = [
+  { key: 'estimate', href: '/vendre', icon: EstimateIcon },
+  { key: 'buy', href: '/acheter', icon: BuyIcon },
+  { key: 'rent', href: '/louer', icon: RentIcon },
+  { key: 'contact', href: '/contact', icon: ContactIcon }
+] as const;
 
 const MODES = ['buy', 'rent', 'estimate', 'ai'] as const;
 type Mode = (typeof MODES)[number];
 
 export function Hero() {
   const t = useTranslations('HomePage.hero');
+  const tQuick = useTranslations('HomePage.quickLinks');
   const router = useRouter();
   const [mode, setMode] = useState<Mode>('buy');
   const [query, setQuery] = useState('');
@@ -26,7 +41,6 @@ export function Hero() {
   const [budget, setBudget] = useState('');
   const [address, setAddress] = useState('');
 
-  const suggestions = [t('try1'), t('try2'), t('try3')];
   const aiPlaceholder = useRotatingPlaceholder(
     [t('aiPlaceholder'), t('try1'), t('try2'), t('try3')],
     mode === 'ai'
@@ -103,7 +117,7 @@ export function Hero() {
 
         <HeroSquares />
 
-        <div className="relative flex min-h-[540px] flex-col pb-20 sm:min-h-[640px] sm:pb-24 lg:min-h-[68vh]">
+        <div className="relative flex min-h-[460px] flex-col py-10 sm:min-h-[520px] sm:py-14 lg:min-h-[54vh]">
           <div className="flex flex-1 flex-col justify-center gap-10 sm:gap-12">
             <div className="mx-auto mt-6 w-full max-w-7xl px-6 text-white sm:mt-0 sm:px-8">
               <p className="mb-5 text-sm font-medium uppercase tracking-[0.15em] text-cyan-300">
@@ -179,27 +193,40 @@ export function Hero() {
                         : 'pointer-events-none translate-y-1 opacity-0'
                     )}
                   >
-                    <p className="text-xs text-white/70 sm:text-sm">{t('estimateHelper')}</p>
-                    <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
-                      <label className="flex-1 text-left">
-                        <span className="sr-only">{t('estimateLabel')}</span>
-                        <input
-                          type="text"
-                          value={address}
-                          onChange={(e) => setAddress(e.target.value)}
-                          placeholder={t('estimatePlaceholder')}
-                          className="h-12 w-full rounded-xl border border-navy-100 bg-white px-4 text-sm text-navy-900 shadow-lg shadow-navy-950/15 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none sm:h-16 sm:text-base"
-                        />
-                      </label>
+                    <div className="flex items-center gap-2 rounded-xl border border-navy-100 bg-white p-2 shadow-lg shadow-navy-950/15 sm:h-16">
+                      <div className="relative flex min-w-[120px] flex-1 items-center">
+                        <MapPin className="pointer-events-none absolute left-3 size-4 text-navy-300" />
+                        <label className="w-full">
+                          <span className="sr-only">{t('estimateLabel')}</span>
+                          <input
+                            type="text"
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
+                            placeholder={t('estimatePlaceholder')}
+                            className="h-10 w-full bg-transparent pl-9 pr-8 text-sm text-navy-900 placeholder:text-navy-400 focus:outline-none sm:h-full sm:text-base"
+                          />
+                        </label>
+                        {address ? (
+                          <button
+                            type="button"
+                            onClick={() => setAddress('')}
+                            aria-label={t('estimateSubmit')}
+                            className="absolute right-2 text-navy-400 hover:text-navy-700"
+                          >
+                            <X className="size-4" />
+                          </button>
+                        ) : null}
+                      </div>
                       <Button
                         type="submit"
-                        variant="accent"
+                        variant="primary"
                         size="lg"
-                        className="h-12 rounded-xl shadow-lg shadow-navy-950/15 sm:h-16"
+                        className="ml-auto h-10 shrink-0 rounded-lg text-sm sm:h-12"
                       >
                         {t('estimateSubmit')}
                       </Button>
                     </div>
+                    <p className="text-xs text-white/70 sm:text-sm">{t('estimateHelper')}</p>
                   </form>
 
                   <form
@@ -212,68 +239,71 @@ export function Hero() {
                         : 'pointer-events-none translate-y-1 opacity-0'
                     )}
                   >
-                    <div className="flex flex-col divide-y divide-navy-200 overflow-hidden rounded-xl border border-navy-100 bg-white shadow-lg shadow-navy-950/15 lg:h-16 lg:flex-row lg:divide-x lg:divide-y-0">
-                      <div className="relative flex items-center lg:min-w-0 lg:flex-1">
-                        <Search className="pointer-events-none absolute left-4 size-4 text-navy-300 sm:left-5 sm:size-5" />
+                    <div
+                      key={mode}
+                      className="flex flex-wrap items-center gap-2 rounded-xl border border-navy-100 bg-white p-2 shadow-lg shadow-navy-950/15 animate-in fade-in slide-in-from-top-1 duration-300 sm:h-16 sm:flex-nowrap sm:gap-2.5"
+                    >
+                      <div className="relative flex min-w-[120px] flex-1 items-center">
+                        <Search className="pointer-events-none absolute left-3 size-4 text-navy-300" />
                         <input
                           type="text"
                           value={query}
                           onChange={(e) => setQuery(e.target.value)}
                           placeholder={mode === 'ai' ? aiPlaceholder : t('searchPlaceholder')}
-                          className="h-12 w-full bg-transparent pl-11 pr-10 text-sm text-navy-900 placeholder:text-navy-400 focus:outline-none sm:pl-13 sm:pr-4 sm:text-base lg:h-full"
+                          className="h-10 w-full bg-transparent pl-9 pr-8 text-sm text-navy-900 placeholder:text-navy-400 focus:outline-none sm:h-full"
                         />
                         {query ? (
                           <button
                             type="button"
                             onClick={() => setQuery('')}
                             aria-label={t('aiSubmit')}
-                            className="absolute right-3 text-navy-400 hover:text-navy-700 sm:right-4"
+                            className="absolute right-2 text-navy-400 hover:text-navy-700"
                           >
-                            <X className="size-4 sm:size-5" />
+                            <X className="size-4" />
                           </button>
                         ) : null}
                       </div>
 
                       {mode !== 'ai' ? (
-                        <div className="flex flex-col divide-y divide-navy-200 bg-navy-50/60 lg:flex-row lg:divide-x lg:divide-y-0">
-                          <div className="flex items-center lg:w-36">
-                            <SelectField
-                              value={type}
-                              onChange={setType}
-                              placeholder={t('filterTypeAny')}
-                              ariaLabel={t('filterType')}
-                              icon={Home}
-                              options={[
-                                { value: '', label: t('filterTypeAny') },
-                                { value: 'apartment', label: t('filterTypeApartment') },
-                                { value: 'house', label: t('filterTypeHouse') }
-                              ]}
-                            />
-                          </div>
-                          <div className="flex items-center lg:w-60">
-                            <SelectField
-                              value={location}
-                              onChange={setLocation}
-                              placeholder={t('filterLocationPlaceholder')}
-                              ariaLabel={t('filterLocation')}
-                              icon={MapPin}
-                              searchable
-                              searchPlaceholder={t('filterLocationSearchPlaceholder')}
-                              options={luxembourgLocations.map((commune) => ({
-                                value: commune,
-                                label: commune
-                              }))}
-                            />
-                          </div>
-                          <div className="relative flex items-center lg:w-36">
-                            <Euro className="pointer-events-none absolute left-4 size-4 text-navy-400 sm:left-5" />
+                        <div className="flex flex-wrap items-center gap-1.5">
+                          <SelectField
+                            variant="chip"
+                            tone="light"
+                            value={type}
+                            onChange={setType}
+                            placeholder={t('filterTypeAny')}
+                            ariaLabel={t('filterType')}
+                            icon={Home}
+                            options={[
+                              { value: '', label: t('filterTypeAny') },
+                              { value: 'apartment', label: t('filterTypeApartment') },
+                              { value: 'house', label: t('filterTypeHouse') }
+                            ]}
+                          />
+                          <SelectField
+                            variant="chip"
+                            tone="light"
+                            value={location}
+                            onChange={setLocation}
+                            placeholder={t('filterLocationPlaceholder')}
+                            ariaLabel={t('filterLocation')}
+                            icon={MapPin}
+                            searchable
+                            searchPlaceholder={t('filterLocationSearchPlaceholder')}
+                            options={luxembourgLocations.map((commune) => ({
+                              value: commune,
+                              label: commune
+                            }))}
+                          />
+                          <div className="relative flex items-center rounded-full border border-navy-100 bg-navy-50 pl-2.5 pr-1.5 transition-colors focus-within:border-navy-200 hover:border-navy-200 hover:bg-navy-100/70">
+                            <Euro className="size-3.5 shrink-0 text-navy-400" />
                             <input
                               type="text"
                               inputMode="numeric"
                               value={budget}
                               onChange={(e) => setBudget(e.target.value)}
                               placeholder={t('filterBudget')}
-                              className="h-12 w-full bg-transparent pl-10 pr-4 text-sm text-navy-900 placeholder:text-navy-400 focus:outline-none sm:pl-12 sm:pr-5 sm:text-base lg:h-full"
+                              className="w-16 bg-transparent py-1.5 pl-1 text-xs font-medium text-navy-700 placeholder:text-navy-500 focus:outline-none sm:text-sm"
                             />
                           </div>
                         </div>
@@ -283,29 +313,33 @@ export function Hero() {
                         type="submit"
                         aria-label={t('aiSubmit')}
                         title={t('aiSubmit')}
-                        className="flex h-12 shrink-0 items-center justify-center bg-cyan-500 text-white transition-colors hover:bg-cyan-600 lg:h-full lg:w-16"
+                        className="ml-auto flex size-10 shrink-0 items-center justify-center rounded-lg bg-navy-900 text-white transition-colors hover:bg-navy-800 sm:size-12"
                       >
                         <Search className="size-4 sm:size-5" />
                       </button>
                     </div>
-
-                    {mode === 'ai' ? (
-                      <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-white/70 sm:text-sm">
-                        <span className="font-medium">{t('tryLabel')}</span>
-                        {suggestions.map((s) => (
-                          <button
-                            key={s}
-                            type="button"
-                            onClick={() => setQuery(s)}
-                            className="rounded-xl border border-white/25 bg-white/10 px-2.5 py-1 font-medium text-white/85 transition-colors hover:border-white/45 hover:bg-white/20 sm:px-3 sm:py-1.5"
-                          >
-                            {s}
-                          </button>
-                        ))}
-                      </div>
-                    ) : null}
                   </form>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="pointer-events-none absolute inset-0 hidden xl:block">
+            <div className="relative mx-auto h-full max-w-7xl px-6 sm:px-8">
+              <div className="pointer-events-auto absolute right-6 top-1/2 flex w-64 -translate-y-1/2 flex-col gap-3 sm:right-8">
+                <HandDrawnFilterDefs />
+                {QUICK_LINKS.map((link) => (
+                  <Link
+                    key={link.key}
+                    href={link.href}
+                    className="group flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition-all hover:border-white/25 hover:bg-white/15"
+                  >
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-white/10 text-cyan-300 transition-transform duration-300 group-hover:scale-105">
+                      <link.icon className="size-5" />
+                    </span>
+                    {tQuick(`${link.key}Label`)}
+                  </Link>
+                ))}
               </div>
             </div>
           </div>

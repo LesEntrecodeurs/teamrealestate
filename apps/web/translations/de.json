@@ -30,14 +30,14 @@
       "filterTypeApartment": "Wohnung",
       "filterTypeHouse": "Haus",
       "filterLocation": "Gemeinde",
-      "filterLocationPlaceholder": "Alle Gemeinden",
+      "filterLocationPlaceholder": "Gemeinden",
       "filterLocationSearchPlaceholder": "Gemeinde suchen...",
-      "filterBudget": "Budget max.",
+      "filterBudget": "Budget",
       "filterSubmit": "Immobilien ansehen",
       "estimateLabel": "Adresse der zu bewertenden Immobilie",
       "estimateHelper": "Erhalten Sie innerhalb von 24 Stunden eine kostenlose, unverbindliche Bewertung.",
-      "estimatePlaceholder": "12 rue de la Gare, Luxembourg",
-      "estimateSubmit": "Bewerten"
+      "estimatePlaceholder": "z. B. 12 Rue de la Gare",
+      "estimateSubmit": "Meine Bewertung anfordern"
     },
     "quickLinks": {
       "title": "Unsere gefragtesten Leistungen,",

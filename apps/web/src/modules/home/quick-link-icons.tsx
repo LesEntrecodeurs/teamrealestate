@@ -1,16 +1,48 @@
 import type { SVGProps } from 'react';
 
-/** Hand-drawn icon set for the homepage quick-links band — a house-based glyph per action, kept in the same stroke language as lucide (round caps/joins, 1.75 weight) so they sit naturally next to the rest of the UI. */
+/**
+ * Icon set for the homepage quick-links band — a house-based glyph per
+ * action, in the same stroke language as lucide (round caps/joins). Each
+ * icon is run through the `hand-drawn-sketch` SVG filter (feTurbulence +
+ * feDisplacementMap) to read as pencil-sketched rather than machine-drawn;
+ * mount <HandDrawnFilterDefs /> once per page section that uses these icons.
+ */
 
-function IconBase({ children, ...props }: SVGProps<SVGSVGElement>) {
+export function HandDrawnFilterDefs() {
+  return (
+    <svg width="0" height="0" className="absolute" aria-hidden="true">
+      <defs>
+        <filter id="hand-drawn-sketch" x="-20%" y="-20%" width="140%" height="140%">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.045 0.09"
+            numOctaves={2}
+            seed={4}
+            result="noise"
+          />
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="noise"
+            scale={1.6}
+            xChannelSelector="R"
+            yChannelSelector="G"
+          />
+        </filter>
+      </defs>
+    </svg>
+  );
+}
+
+function IconBase({ children, style, ...props }: SVGProps<SVGSVGElement>) {
   return (
     <svg
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth={1.75}
+      strokeWidth={1.6}
       strokeLinecap="round"
       strokeLinejoin="round"
+      style={{ filter: 'url(#hand-drawn-sketch)', ...style }}
       {...props}
     >
       {children}
