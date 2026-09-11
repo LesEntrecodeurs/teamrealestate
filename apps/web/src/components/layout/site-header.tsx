@@ -17,6 +17,16 @@ type ViewTransitionDocument = Document & {
   startViewTransition?: (callback: () => void | Promise<void>) => void;
 };
 
+// Longest FR/EN/DE translation per nav item, so the link's own width never
+// changes when the locale switches (only its content re-centers inside it).
+const navItemWidth: Record<string, string> = {
+  buy: 'min-w-[7ch]',
+  rent: 'min-w-[6ch]',
+  sell: 'min-w-[9ch]',
+  agency: 'min-w-[11ch]',
+  contact: 'min-w-[7ch]'
+};
+
 export function SiteHeader() {
   const t = useTranslations('Nav');
   const locale = useLocale();
@@ -111,7 +121,8 @@ export function SiteHeader() {
                 key={item.key}
                 href={item.href}
                 className={cn(
-                  'group relative py-1 text-lg font-medium transition-colors',
+                  'group relative py-1 text-center text-lg font-medium transition-colors',
+                  navItemWidth[item.key],
                   scrolled ? 'text-white/80 hover:text-white' : 'text-navy-600 hover:text-navy-900'
                 )}
               >
@@ -133,7 +144,7 @@ export function SiteHeader() {
             />
             <div
               className={cn(
-                'flex items-center gap-1 rounded-lg p-1 text-base font-semibold',
+                'flex items-center gap-0.5 rounded-lg p-0.5 text-xs font-semibold',
                 scrolled ? 'bg-white/5' : 'bg-navy-50'
               )}
             >
@@ -144,7 +155,7 @@ export function SiteHeader() {
                   locale={loc}
                   onClick={(event) => handleLocaleClick(event, loc)}
                   className={cn(
-                    'rounded-md px-3 py-2 uppercase transition-colors',
+                    'rounded-md px-2 py-1 uppercase transition-colors',
                     loc === locale
                       ? scrolled
                         ? 'bg-white/15 text-white'

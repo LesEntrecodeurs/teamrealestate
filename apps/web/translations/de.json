@@ -35,6 +35,7 @@
       "filterBudget": "Budget max.",
       "filterSubmit": "Immobilien ansehen",
       "estimateLabel": "Adresse der zu bewertenden Immobilie",
+      "estimateHelper": "Erhalten Sie innerhalb von 24 Stunden eine kostenlose, unverbindliche Bewertung.",
       "estimatePlaceholder": "12 rue de la Gare, Luxembourg",
       "estimateSubmit": "Bewerten"
     },

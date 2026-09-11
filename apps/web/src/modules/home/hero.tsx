@@ -167,30 +167,33 @@ export function Hero() {
                 <form
                   onSubmit={handleEstimate}
                   className={cn(
-                    '[grid-area:1/1] flex flex-col gap-3 pt-3 transition-all duration-300 sm:flex-row sm:items-end sm:pt-3',
+                    '[grid-area:1/1] flex flex-col gap-3 pt-3 transition-all duration-300 sm:pt-3',
                     mode === 'estimate'
                       ? 'opacity-100'
                       : 'pointer-events-none translate-y-1 opacity-0'
                   )}
                 >
-                  <label className="flex-1 text-left">
-                    <span className="sr-only">{t('estimateLabel')}</span>
-                    <input
-                      type="text"
-                      value={address}
-                      onChange={(e) => setAddress(e.target.value)}
-                      placeholder={t('estimatePlaceholder')}
-                      className="h-12 w-full rounded-xl border border-navy-100 bg-white px-4 text-sm text-navy-900 shadow-lg shadow-navy-950/15 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none sm:h-16 sm:text-base"
-                    />
-                  </label>
-                  <Button
-                    type="submit"
-                    variant="accent"
-                    size="lg"
-                    className="h-12 rounded-xl shadow-lg shadow-navy-950/15 sm:h-16"
-                  >
-                    {t('estimateSubmit')}
-                  </Button>
+                  <p className="text-xs text-white/70 sm:text-sm">{t('estimateHelper')}</p>
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
+                    <label className="flex-1 text-left">
+                      <span className="sr-only">{t('estimateLabel')}</span>
+                      <input
+                        type="text"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                        placeholder={t('estimatePlaceholder')}
+                        className="h-12 w-full rounded-xl border border-navy-100 bg-white px-4 text-sm text-navy-900 shadow-lg shadow-navy-950/15 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none sm:h-16 sm:text-base"
+                      />
+                    </label>
+                    <Button
+                      type="submit"
+                      variant="accent"
+                      size="lg"
+                      className="h-12 rounded-xl shadow-lg shadow-navy-950/15 sm:h-16"
+                    >
+                      {t('estimateSubmit')}
+                    </Button>
+                  </div>
                 </form>
 
                 <form

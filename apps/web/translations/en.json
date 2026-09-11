@@ -35,6 +35,7 @@
       "filterBudget": "Max budget",
       "filterSubmit": "See listings",
       "estimateLabel": "Address of the property to value",
+      "estimateHelper": "Get a free, no-obligation valuation within 24h.",
       "estimatePlaceholder": "12 rue de la Gare, Luxembourg",
       "estimateSubmit": "Estimate"
     },

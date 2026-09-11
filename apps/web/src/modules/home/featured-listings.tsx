@@ -14,10 +14,6 @@ export function FeaturedListings() {
     <section className="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:py-28">
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4 border-b border-border pb-8">
         <div>
-          <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-            <span className="h-1.5 w-6 rounded-full bg-accent" />
-            {t('eyebrow')}
-          </p>
           <h2 className="max-w-xl font-display text-3xl font-bold text-foreground sm:text-4xl">
             {t('title')}
           </h2>

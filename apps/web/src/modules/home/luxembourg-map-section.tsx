@@ -49,10 +49,6 @@ export function LuxembourgMapSection() {
     <section className="overflow-hidden bg-navy-50">
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-6 py-20 sm:px-8 lg:grid-cols-2 lg:gap-16 lg:py-28">
         <Reveal>
-          <p className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-            <span className="h-1.5 w-6 rounded-full bg-accent" />
-            {t('eyebrow')}
-          </p>
           <h2 className="font-display text-3xl font-bold leading-tight text-foreground sm:text-4xl">
             {t('title1')}
             <br />

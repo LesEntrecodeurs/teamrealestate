@@ -35,6 +35,7 @@
       "filterBudget": "Budget max",
       "filterSubmit": "Voir les biens",
       "estimateLabel": "Adresse du bien à estimer",
+      "estimateHelper": "Recevez une estimation gratuite et sans engagement sous 24h.",
       "estimatePlaceholder": "12 rue de la Gare, Luxembourg",
       "estimateSubmit": "Estimer"
     },

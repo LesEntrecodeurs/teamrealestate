@@ -52,12 +52,8 @@ export function WhyTeam() {
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:py-28">
-      <div className="mb-14 grid grid-cols-1 gap-6 lg:grid-cols-12">
-        <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent lg:col-span-3">
-          <span className="h-1.5 w-6 rounded-full bg-accent" />
-          {t('eyebrow')}
-        </p>
-        <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl lg:col-span-9">
+      <div className="mb-14">
+        <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl">
           {t('title')}
         </h2>
       </div>
