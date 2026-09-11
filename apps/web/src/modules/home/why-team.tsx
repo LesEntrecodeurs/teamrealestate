@@ -1,23 +1,78 @@
+'use client';
+
 import { Layers, PhoneCall, RefreshCw, Sparkles } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { useEffect, useRef, useState } from 'react';
 import { Reveal } from '@/components/ui/reveal';
+import { cn } from '@/lib/utils';
 
-const nodePositions = [
-  { left: '18%', top: '16%' },
-  { left: '82%', top: '16%' },
-  { left: '18%', top: '84%' },
-  { left: '82%', top: '84%' }
-];
+const RING_COLORS = ['#00a0be', '#d1622c', '#3a5677', '#7fcfe0'];
+const RING_RADIUS = 90;
+const RING_STROKE = 26;
+const CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
+const QUARTER = CIRCUMFERENCE / 4;
+const SEGMENT_GAP = 10;
+const SEGMENT_LENGTH = QUARTER - SEGMENT_GAP;
+
+function useInView<T extends HTMLElement>() {
+  const ref = useRef<T>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, inView };
+}
 
 export function WhyTeam() {
   const t = useTranslations('HomePage.why');
+  const { ref, inView } = useInView<HTMLDivElement>();
 
   const items = [
-    { n: '01', title: t('item1Title'), body: t('item1Body'), Icon: PhoneCall },
-    { n: '02', title: t('item2Title'), body: t('item2Body'), Icon: Layers },
-    { n: '03', title: t('item3Title'), body: t('item3Body'), Icon: RefreshCw },
-    { n: '04', title: t('item4Title'), body: t('item4Body'), Icon: Sparkles }
+    {
+      title: t('item1Title'),
+      body: t('item1Body'),
+      Icon: PhoneCall,
+      value: 95,
+      color: RING_COLORS[0]
+    },
+    {
+      title: t('item2Title'),
+      body: t('item2Body'),
+      Icon: Layers,
+      value: 90,
+      color: RING_COLORS[1]
+    },
+    {
+      title: t('item3Title'),
+      body: t('item3Body'),
+      Icon: RefreshCw,
+      value: 85,
+      color: RING_COLORS[2]
+    },
+    {
+      title: t('item4Title'),
+      body: t('item4Body'),
+      Icon: Sparkles,
+      value: 90,
+      color: RING_COLORS[3]
+    }
   ];
 
   return (
@@ -32,70 +87,71 @@ export function WhyTeam() {
         </h2>
       </div>
 
-      {/* Desktop: hub-and-spoke diagram — the team at the center, each strength radiating out */}
-      <div className="relative hidden h-[640px] lg:block">
-        <svg className="absolute inset-0 size-full" aria-hidden="true">
-          {items.map((item, i) => (
-            <line
-              key={item.n}
-              x1="50%"
-              y1="50%"
-              x2={nodePositions[i]?.left}
-              y2={nodePositions[i]?.top}
-              stroke="#cfd8e0"
-              strokeWidth={1.5}
-              strokeDasharray="5 6"
+      <div ref={ref} className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
+        <div className="relative mx-auto size-72 shrink-0 sm:size-80 lg:size-96">
+          <svg viewBox="0 0 220 220" className="size-full -rotate-90" aria-hidden="true">
+            <circle
+              cx="110"
+              cy="110"
+              r={RING_RADIUS}
+              fill="none"
+              stroke="#f2f4f6"
+              strokeWidth={RING_STROKE}
             />
-          ))}
-        </svg>
-
-        <div className="absolute left-1/2 top-1/2 flex size-40 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-2 rounded-full bg-navy-900 shadow-xl shadow-navy-900/25 ring-8 ring-navy-50">
-          <Image
-            src="/logo/team-symbole-negatif.png"
-            alt=""
-            width={80}
-            height={80}
-            className="h-9 w-auto"
-          />
-          <p className="max-w-[7rem] text-center text-[11px] font-semibold uppercase leading-tight tracking-wide text-white/80">
-            {t('hubLabel')}
-          </p>
+            {items.map((item, i) => (
+              <circle
+                key={item.title}
+                cx="110"
+                cy="110"
+                r={RING_RADIUS}
+                fill="none"
+                stroke={item.color}
+                strokeWidth={RING_STROKE}
+                strokeLinecap="round"
+                strokeDasharray={`${SEGMENT_LENGTH} ${CIRCUMFERENCE - SEGMENT_LENGTH}`}
+                strokeDashoffset={-(i * QUARTER)}
+                style={{
+                  transformOrigin: '110px 110px',
+                  opacity: inView ? 1 : 0,
+                  transform: inView ? 'scale(1)' : 'scale(0.8)',
+                  transition: `opacity 700ms ease ${i * 130}ms, transform 700ms cubic-bezier(0.22, 1, 0.36, 1) ${i * 130}ms`
+                }}
+              />
+            ))}
+          </svg>
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-center">
+            <Image
+              src="/logo/team-symbole.png"
+              alt=""
+              width={80}
+              height={80}
+              className="h-8 w-auto sm:h-9"
+            />
+            <p className="max-w-[7rem] text-[11px] font-semibold uppercase leading-tight tracking-wide text-muted-foreground">
+              {t('hubLabel')}
+            </p>
+          </div>
         </div>
 
-        {items.map((item, i) => (
-          <div
-            key={item.n}
-            className="absolute w-72 -translate-x-1/2 -translate-y-1/2"
-            style={{ left: nodePositions[i]?.left, top: nodePositions[i]?.top }}
-          >
-            <Reveal delay={i * 100}>
-              <div className="rounded-2xl border border-navy-100 bg-card p-5 shadow-sm transition-shadow hover:shadow-lg hover:shadow-navy-900/10">
-                <div className="flex items-center gap-3">
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-cyan-100 text-secondary">
-                    <item.Icon className="size-4" />
-                  </span>
-                  <span className="font-display text-sm text-navy-300">{item.n}</span>
-                </div>
-                <p className="mt-3 font-semibold text-foreground">{item.title}</p>
-                <p className="mt-1.5 text-sm text-muted-foreground">{item.body}</p>
-              </div>
-            </Reveal>
-          </div>
-        ))}
-      </div>
-
-      {/* Mobile/tablet: vertical connected graph */}
-      <div className="relative lg:hidden">
-        <div className="absolute bottom-5 left-[19px] top-5 w-px bg-navy-100" />
         <div className="flex flex-col gap-8">
           {items.map((item, i) => (
-            <Reveal key={item.n} delay={i * 80}>
-              <div className="relative flex gap-4">
-                <span className="relative z-10 flex size-10 shrink-0 items-center justify-center rounded-full bg-secondary text-secondary-foreground">
+            <Reveal key={item.title} delay={i * 90}>
+              <div className="flex items-start gap-4">
+                <span
+                  className={cn(
+                    'mt-1 flex size-9 shrink-0 items-center justify-center rounded-full'
+                  )}
+                  style={{ backgroundColor: `${item.color}1a`, color: item.color }}
+                >
                   <item.Icon className="size-4" />
                 </span>
                 <div>
-                  <p className="font-semibold text-foreground">{item.title}</p>
+                  <div className="flex items-baseline gap-2">
+                    <p className="font-semibold text-foreground">{item.title}</p>
+                    <span className="font-display text-sm font-bold" style={{ color: item.color }}>
+                      {item.value}%
+                    </span>
+                  </div>
                   <p className="mt-1 text-sm text-muted-foreground">{item.body}</p>
                 </div>
               </div>

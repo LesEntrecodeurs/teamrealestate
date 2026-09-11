@@ -12,7 +12,6 @@
       "eyebrow": "Immobilienagentur in Luxemburg-Stadt",
       "title1": "Immobilien,",
       "titleRotating": ["im Team gespielt.", "bewegt sich im Team.", "ist immer erreichbar."],
-      "subtitle": "Team Real Estate vereint Suche, Verhandlung, Recht und Bewertung in einem Team — damit Ihr Projekt vorankommt, ohne je von einer einzigen Person abzuhängen.",
       "tabAi": "KI-Assistent",
       "tabFilters": "Filtersuche",
       "aiHelper": "Beschreiben Sie Ihr Vorhaben in einem Satz — der Assistent durchsucht unser gesamtes Angebot.",
@@ -81,7 +80,7 @@
       "roleValuation": "Bewertung & Analyse"
     },
     "why": {
-      "eyebrow": "03 — Warum Team",
+      "eyebrow": "Warum Team",
       "title": "Der Vorteil des Kollektivs, ganz konkret",
       "hubLabel": "Das ganze Team",
       "item1Title": "Ständige Erreichbarkeit",

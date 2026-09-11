@@ -11,14 +11,6 @@ import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { routing } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 
-const navItemWidth: Record<(typeof mainNav)[number]['key'], string> = {
-  buy: 'min-w-[8ch]',
-  rent: 'min-w-[7ch]',
-  sell: 'min-w-[10ch]',
-  agency: 'min-w-[12ch]',
-  contact: 'min-w-[8ch]'
-};
-
 type Locale = (typeof routing.locales)[number];
 
 type ViewTransitionDocument = Document & {
@@ -99,20 +91,19 @@ export function SiteHeader() {
               alt="Team Real Estate"
               width={800}
               height={267}
-              className="h-9 w-auto"
+              className="h-11 w-auto"
               priority
             />
           </Link>
 
-          <nav className="hidden items-center gap-8 lg:flex">
+          <nav className="hidden items-center gap-5 lg:flex">
             {mainNav.map((item) => (
               <Link
                 key={item.key}
                 href={item.href}
                 className={cn(
-                  'group relative py-1 text-center text-base font-medium transition-colors',
-                  scrolled ? 'text-white/80 hover:text-white' : 'text-navy-600 hover:text-navy-900',
-                  navItemWidth[item.key]
+                  'group relative py-1 text-lg font-medium transition-colors',
+                  scrolled ? 'text-white/80 hover:text-white' : 'text-navy-600 hover:text-navy-900'
                 )}
               >
                 {t(item.key)}
@@ -158,7 +149,7 @@ export function SiteHeader() {
                 </Link>
               ))}
             </div>
-            <Button asChild variant="accent" size="lg" className="min-w-[20ch] shrink-0">
+            <Button asChild variant="accent" size="lg" className="min-w-[20ch] shrink-0 rounded-xl">
               <Link href="/vendre">{t('estimate')}</Link>
             </Button>
           </div>
@@ -194,7 +185,7 @@ export function SiteHeader() {
                 alt="Team Real Estate"
                 width={800}
                 height={267}
-                className="h-9 w-auto"
+                className="h-11 w-auto"
               />
             </Link>
             <button
@@ -251,7 +242,7 @@ export function SiteHeader() {
                 </Link>
               ))}
             </div>
-            <Button asChild variant="accent" size="lg" className="w-full">
+            <Button asChild variant="accent" size="lg" className="w-full rounded-xl">
               <Link href="/vendre" onClick={() => setOpen(false)}>
                 {t('estimate')}
               </Link>

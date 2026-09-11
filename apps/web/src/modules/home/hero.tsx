@@ -87,20 +87,15 @@ export function Hero() {
 
       <div className="relative flex min-h-[540px] flex-col pb-20 sm:min-h-[640px] sm:pb-24 lg:min-h-[68vh]">
         <div className="flex flex-1 flex-col justify-center gap-10 sm:gap-12">
-          <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-6 text-white sm:px-8 lg:grid-cols-12">
-            <div className="lg:col-span-8">
-              <p className="mb-5 text-sm font-medium uppercase tracking-[0.15em] text-cyan-300">
-                {t('eyebrow')}
-              </p>
-              <h1 className="font-display text-5xl font-bold leading-[1.05] sm:text-7xl sm:leading-[0.98] lg:text-8xl">
-                {t('title1')}
-                <br />
-                <TypewriterText phrases={t.raw('titleRotating')} className="text-cyan-300" />
-              </h1>
-            </div>
-            <div className="flex items-center lg:col-span-4">
-              <p className="max-w-sm text-base text-white/75 sm:text-lg">{t('subtitle')}</p>
-            </div>
+          <div className="mx-auto w-full max-w-7xl px-6 text-white sm:px-8">
+            <p className="mb-5 text-sm font-medium uppercase tracking-[0.15em] text-cyan-300">
+              {t('eyebrow')}
+            </p>
+            <h1 className="font-display text-5xl font-bold leading-[1.05] sm:text-7xl sm:leading-[0.98] lg:text-8xl">
+              {t('title1')}
+              <br />
+              <TypewriterText phrases={t.raw('titleRotating')} className="text-cyan-300" />
+            </h1>
           </div>
 
           <form

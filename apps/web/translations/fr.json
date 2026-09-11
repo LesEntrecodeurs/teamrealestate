@@ -12,7 +12,6 @@
       "eyebrow": "Agence immobilière à Luxembourg-Ville",
       "title1": "L'immobilier",
       "titleRotating": ["joue collectif.", "avance en équipe.", "reste disponible."],
-      "subtitle": "Team Real Estate réunit recherche, négociation, juridique et estimation dans une seule équipe — pour un projet qui avance, sans jamais dépendre d'une seule personne.",
       "tabAi": "Assistant IA",
       "tabFilters": "Recherche par filtres",
       "aiHelper": "Décrivez votre projet en une phrase, l'assistant explore l'ensemble de nos biens.",
@@ -70,7 +69,7 @@
       "roleValuation": "Estimation & analyse"
     },
     "why": {
-      "eyebrow": "03 — Pourquoi Team",
+      "eyebrow": "Pourquoi Team",
       "title": "L'avantage du collectif, concrètement",
       "hubLabel": "Toute l’équipe",
       "item1Title": "Disponibilité permanente",

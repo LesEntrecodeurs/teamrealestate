@@ -12,7 +12,6 @@
       "eyebrow": "Real estate agency in Luxembourg City",
       "title1": "Real estate,",
       "titleRotating": ["played as a team.", "moves as one team.", "never stops for you."],
-      "subtitle": "Team Real Estate brings search, negotiation, legal and valuation together in one team — so your project moves forward without ever depending on a single person.",
       "tabAi": "AI Assistant",
       "tabFilters": "Filter search",
       "aiHelper": "Describe your project in one sentence — the assistant searches our whole portfolio.",
@@ -81,7 +80,7 @@
       "roleValuation": "Valuation & analysis"
     },
     "why": {
-      "eyebrow": "03 — Why Team",
+      "eyebrow": "Why Team",
       "title": "The advantage of a team, in practice",
       "hubLabel": "The whole team",
       "item1Title": "Always available",
