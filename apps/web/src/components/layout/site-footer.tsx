@@ -16,10 +16,10 @@ export function SiteFooter() {
         </p>
         <a
           href="mailto:contact@teamrealestate.eu"
-          className="group flex flex-wrap items-center gap-3 font-display text-3xl font-bold sm:text-5xl"
+          className="group flex flex-wrap items-center gap-2 font-display text-2xl font-bold sm:gap-3 sm:text-3xl lg:text-5xl"
         >
           contact@teamrealestate.eu
-          <ArrowUpRight className="size-8 shrink-0 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 sm:size-10" />
+          <ArrowUpRight className="size-6 shrink-0 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 sm:size-8 lg:size-10" />
         </a>
 
         <div className="mt-16 grid grid-cols-2 gap-8 border-t border-white/10 pt-10 sm:grid-cols-4">
@@ -78,13 +78,10 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-navy-400 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 border-t border-white/10 pt-6 text-xs text-navy-400">
           <p>
             © {new Date().getFullYear()} Team Real Estate S.à r.l. · {t('rightsReserved')}
           </p>
-          <a href="#top" className="transition-colors hover:text-white">
-            {t('backToTop')} ↑
-          </a>
         </div>
       </div>
     </footer>

@@ -106,7 +106,17 @@
     "rentTitle": "Rent in Luxembourg",
     "rentSubtitle": "Our available rentals, from studios to family houses.",
     "resultsCount": "{count} listings",
-    "empty": "No listings match right now."
+    "empty": "No listings match right now.",
+    "filterType": "Property type",
+    "filterTypeAny": "Any type",
+    "filterTypeApartment": "Apartment",
+    "filterTypeHouse": "House",
+    "filterLocation": "Area",
+    "filterLocationPlaceholder": "All areas",
+    "filterBudget": "Max budget",
+    "filterBudgetPlaceholder": "Max budget",
+    "filterSubmit": "Update",
+    "filterReset": "Reset"
   },
   "ListingDetail": {
     "back": "Back to listings",

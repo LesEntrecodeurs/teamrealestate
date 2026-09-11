@@ -3,8 +3,8 @@
 import { Layers, PhoneCall, RefreshCw, Sparkles } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { useEffect, useRef, useState } from 'react';
 import { Reveal } from '@/components/ui/reveal';
+import { useInView } from '@/hooks/use-in-view';
 import { cn } from '@/lib/utils';
 
 const RING_COLORS = ['#00a0be', '#d1622c', '#3a5677', '#7fcfe0'];
@@ -14,31 +14,6 @@ const CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
 const QUARTER = CIRCUMFERENCE / 4;
 const SEGMENT_GAP = 10;
 const SEGMENT_LENGTH = QUARTER - SEGMENT_GAP;
-
-function useInView<T extends HTMLElement>() {
-  const ref = useRef<T>(null);
-  const [inView, setInView] = useState(false);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setInView(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
-  return { ref, inView };
-}
 
 export function WhyTeam() {
   const t = useTranslations('HomePage.why');

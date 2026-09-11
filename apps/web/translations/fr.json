@@ -106,7 +106,17 @@
     "rentTitle": "Louer à Luxembourg",
     "rentSubtitle": "Nos biens disponibles à la location, du studio à la maison familiale.",
     "resultsCount": "{count} biens",
-    "empty": "Aucun bien ne correspond pour le moment."
+    "empty": "Aucun bien ne correspond pour le moment.",
+    "filterType": "Type de bien",
+    "filterTypeAny": "Tous types",
+    "filterTypeApartment": "Appartement",
+    "filterTypeHouse": "Maison",
+    "filterLocation": "Commune",
+    "filterLocationPlaceholder": "Toutes les communes",
+    "filterBudget": "Budget max",
+    "filterBudgetPlaceholder": "Budget max",
+    "filterSubmit": "Actualiser",
+    "filterReset": "Réinitialiser"
   },
   "ListingDetail": {
     "back": "Retour aux biens",

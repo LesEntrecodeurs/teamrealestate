@@ -1,7 +1,7 @@
-import { AgencySection } from '@/modules/home/agency-section';
 import { EstimatorTeaser } from '@/modules/home/estimator-teaser';
 import { FeaturedListings } from '@/modules/home/featured-listings';
 import { Hero } from '@/modules/home/hero';
+import { LuxembourgMapSection } from '@/modules/home/luxembourg-map-section';
 import { ReviewsSection } from '@/modules/home/reviews-section';
 import { StatsBand } from '@/modules/home/stats-band';
 import { TeamSection } from '@/modules/home/team-section';
@@ -13,7 +13,7 @@ export default function HomePage() {
       <Hero />
       <StatsBand />
       <FeaturedListings />
-      <AgencySection />
+      <LuxembourgMapSection />
       <TeamSection />
       <WhyTeam />
       <ReviewsSection />

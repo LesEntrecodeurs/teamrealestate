@@ -106,7 +106,17 @@
     "rentTitle": "Mieten in Luxemburg",
     "rentSubtitle": "Unsere verfügbaren Mietobjekte, vom Studio bis zum Familienhaus.",
     "resultsCount": "{count} Immobilien",
-    "empty": "Derzeit passt keine Immobilie zu Ihrer Suche."
+    "empty": "Derzeit passt keine Immobilie zu Ihrer Suche.",
+    "filterType": "Immobilientyp",
+    "filterTypeAny": "Alle Typen",
+    "filterTypeApartment": "Wohnung",
+    "filterTypeHouse": "Haus",
+    "filterLocation": "Gemeinde",
+    "filterLocationPlaceholder": "Alle Gemeinden",
+    "filterBudget": "Budget max.",
+    "filterBudgetPlaceholder": "Budget max.",
+    "filterSubmit": "Aktualisieren",
+    "filterReset": "Zurücksetzen"
   },
   "ListingDetail": {
     "back": "Zurück zu den Immobilien",

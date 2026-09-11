@@ -87,14 +87,16 @@ export function Hero() {
 
       <div className="relative flex min-h-[540px] flex-col pb-20 sm:min-h-[640px] sm:pb-24 lg:min-h-[68vh]">
         <div className="flex flex-1 flex-col justify-center gap-10 sm:gap-12">
-          <div className="mx-auto w-full max-w-7xl px-6 text-white sm:px-8">
+          <div className="mx-auto mt-6 w-full max-w-7xl px-6 text-white sm:mt-0 sm:px-8">
             <p className="mb-5 text-sm font-medium uppercase tracking-[0.15em] text-cyan-300">
               {t('eyebrow')}
             </p>
             <h1 className="font-display text-5xl font-bold leading-[1.05] sm:text-7xl sm:leading-[0.98] lg:text-8xl">
               {t('title1')}
               <br />
-              <TypewriterText phrases={t.raw('titleRotating')} className="text-cyan-300" />
+              <span className="inline-block min-h-[2.1em] align-top sm:min-h-0">
+                <TypewriterText phrases={t.raw('titleRotating')} className="text-cyan-300" />
+              </span>
             </h1>
           </div>
 
@@ -104,26 +106,26 @@ export function Hero() {
           >
             <div className="flex flex-col gap-3 sm:flex-row">
               <div className="relative flex-1">
-                <Search className="pointer-events-none absolute left-5 top-1/2 size-5 -translate-y-1/2 text-navy-400" />
+                <Search className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-navy-400 sm:left-5 sm:size-5" />
                 <input
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder={t('aiPlaceholder')}
-                  className="h-16 w-full rounded-xl border border-navy-100 bg-white pl-13 pr-11 text-base text-navy-900 shadow-lg shadow-navy-950/15 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none"
+                  className="h-12 w-full rounded-xl border border-navy-100 bg-white pl-11 pr-10 text-sm text-navy-900 shadow-lg shadow-navy-950/15 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none sm:h-16 sm:pl-13 sm:pr-11 sm:text-base"
                 />
                 {query ? (
                   <button
                     type="button"
                     onClick={() => setQuery('')}
                     aria-label={t('aiSubmit')}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-navy-400 hover:text-navy-700"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-navy-400 hover:text-navy-700 sm:right-4"
                   >
-                    <X className="size-5" />
+                    <X className="size-4 sm:size-5" />
                   </button>
                 ) : null}
               </div>
-              <div className="flex gap-3">
+              <div className="flex gap-2 sm:gap-3">
                 <button
                   type="button"
                   onClick={() => setFiltersOpen((v) => !v)}
@@ -131,19 +133,19 @@ export function Hero() {
                   aria-label={t('filterType')}
                   title={t('filterType')}
                   className={cn(
-                    'flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border bg-white shadow-lg shadow-navy-950/15 transition-colors',
+                    'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border bg-white shadow-lg shadow-navy-950/15 transition-colors sm:h-16 sm:w-16',
                     filtersOpen
                       ? 'border-cyan-500 text-cyan-600'
                       : 'border-navy-100 text-navy-700 hover:border-navy-300'
                   )}
                 >
-                  <Sliders className="size-5" />
+                  <Sliders className="size-4 sm:size-5" />
                 </button>
                 <Button
                   type="submit"
                   variant="accent"
                   size="lg"
-                  className="h-16 flex-1 rounded-xl text-base shadow-lg shadow-navy-950/15 sm:flex-none"
+                  className="h-12 flex-1 rounded-xl text-sm shadow-lg shadow-navy-950/15 sm:h-16 sm:flex-none sm:text-base"
                 >
                   {t('aiSubmit')}
                   <ArrowRight className="size-4" />
@@ -177,7 +179,7 @@ export function Hero() {
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     placeholder={t('filterLocationPlaceholder')}
-                    className="h-13 flex-1 rounded-xl border border-navy-100 bg-white px-5 text-base text-navy-900 shadow-md shadow-navy-950/10 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none"
+                    className="h-11 flex-1 rounded-xl border border-navy-100 bg-white px-4 text-sm text-navy-900 shadow-md shadow-navy-950/10 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none sm:h-13 sm:px-5 sm:text-base"
                   />
                   <input
                     type="text"
@@ -185,20 +187,20 @@ export function Hero() {
                     value={budget}
                     onChange={(e) => setBudget(e.target.value)}
                     placeholder={t('filterBudget')}
-                    className="h-13 flex-1 rounded-xl border border-navy-100 bg-white px-5 text-base text-navy-900 shadow-md shadow-navy-950/10 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none"
+                    className="h-11 flex-1 rounded-xl border border-navy-100 bg-white px-4 text-sm text-navy-900 shadow-md shadow-navy-950/10 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none sm:h-13 sm:px-5 sm:text-base"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2 pt-1 text-sm text-white/70">
+            <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-white/70 sm:text-sm">
               <span className="font-medium">{t('tryLabel')}</span>
               {suggestions.map((s) => (
                 <button
                   key={s}
                   type="button"
                   onClick={() => setQuery(s)}
-                  className="rounded-xl border border-white/25 bg-white/10 px-3 py-1.5 font-medium text-white/85 transition-colors hover:border-white/45 hover:bg-white/20"
+                  className="rounded-xl border border-white/25 bg-white/10 px-2.5 py-1 font-medium text-white/85 transition-colors hover:border-white/45 hover:bg-white/20 sm:px-3 sm:py-1.5"
                 >
                   {s}
                 </button>
