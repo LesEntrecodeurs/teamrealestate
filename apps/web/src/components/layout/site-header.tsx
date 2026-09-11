@@ -90,7 +90,7 @@ export function SiteHeader() {
               src={scrolled ? '/logo/team-wordmark-negatif.png' : '/logo/team-wordmark.png'}
               alt="Team Real Estate"
               width={800}
-              height={267}
+              height={300}
               className="h-11 w-auto"
               priority
             />
@@ -184,7 +184,7 @@ export function SiteHeader() {
                 src={scrolled ? '/logo/team-wordmark-negatif.png' : '/logo/team-wordmark.png'}
                 alt="Team Real Estate"
                 width={800}
-                height={267}
+                height={300}
                 className="h-11 w-auto"
               />
             </Link>

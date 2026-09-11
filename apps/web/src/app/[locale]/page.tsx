@@ -9,10 +9,10 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <StatsBand />
       <FeaturedListings />
       <LuxembourgMapSection />
       <WhyTeam />
+      <StatsBand />
       <EstimatorTeaser />
     </>
   );
