@@ -28,6 +28,7 @@
       "filterTypeHouse": "Haus",
       "filterLocation": "Gemeinde",
       "filterLocationPlaceholder": "Alle Gemeinden",
+      "filterLocationSearchPlaceholder": "Gemeinde suchen...",
       "filterBudget": "Budget max.",
       "filterSubmit": "Immobilien ansehen"
     },
@@ -113,6 +114,7 @@
     "filterTypeHouse": "Haus",
     "filterLocation": "Gemeinde",
     "filterLocationPlaceholder": "Alle Gemeinden",
+    "filterLocationSearchPlaceholder": "Gemeinde suchen...",
     "filterBudget": "Budget max.",
     "filterBudgetPlaceholder": "Budget max.",
     "filterSubmit": "Aktualisieren",

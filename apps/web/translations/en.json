@@ -28,6 +28,7 @@
       "filterTypeHouse": "House",
       "filterLocation": "Area",
       "filterLocationPlaceholder": "All areas",
+      "filterLocationSearchPlaceholder": "Search an area...",
       "filterBudget": "Max budget",
       "filterSubmit": "See listings"
     },
@@ -113,6 +114,7 @@
     "filterTypeHouse": "House",
     "filterLocation": "Area",
     "filterLocationPlaceholder": "All areas",
+    "filterLocationSearchPlaceholder": "Search an area...",
     "filterBudget": "Max budget",
     "filterBudgetPlaceholder": "Max budget",
     "filterSubmit": "Update",

@@ -1,11 +1,13 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import Image from 'next/image';
+import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 import { Counter } from '@/components/ui/counter';
 import { Reveal } from '@/components/ui/reveal';
 import { useInView } from '@/hooks/use-in-view';
 import { cn } from '@/lib/utils';
+import { formatPrice } from '@/modules/listings/listing-card';
 import { mockListings } from '@/modules/listings/mock-data';
 import { LUXEMBOURG_PATH } from './luxembourg-path';
 
@@ -29,6 +31,7 @@ function toPercent(value: number) {
 
 export function LuxembourgMapSection() {
   const t = useTranslations('HomePage.agency');
+  const locale = useLocale();
   const { ref, inView } = useInView<HTMLDivElement>(0.25);
   const pathRef = useRef<SVGPathElement>(null);
   const [pathLength, setPathLength] = useState(0);
@@ -95,16 +98,15 @@ export function LuxembourgMapSection() {
                 <path
                   ref={pathRef}
                   d={LUXEMBOURG_PATH}
-                  fill="#15273f"
+                  fill="none"
                   stroke="#00a0be"
-                  strokeWidth={pathLength ? 16 : 0}
+                  strokeWidth={pathLength ? 18 : 0}
                   strokeLinejoin="round"
+                  strokeLinecap="round"
                   style={{
-                    fillOpacity: inView ? 1 : 0,
                     strokeDasharray: pathLength,
                     strokeDashoffset: inView ? 0 : pathLength,
-                    transition:
-                      'stroke-dashoffset 2000ms ease-out, fill-opacity 900ms ease-out 1000ms'
+                    transition: 'stroke-dashoffset 900ms ease-out'
                   }}
                 />
               </g>
@@ -120,7 +122,7 @@ export function LuxembourgMapSection() {
                 style={{
                   transformBox: 'fill-box',
                   opacity: inView ? undefined : 0,
-                  transition: 'opacity 500ms ease 1600ms'
+                  transition: 'opacity 500ms ease 850ms'
                 }}
               />
               <circle
@@ -134,7 +136,7 @@ export function LuxembourgMapSection() {
                 style={{
                   transformBox: 'fill-box',
                   opacity: inView ? undefined : 0,
-                  transition: 'opacity 500ms ease 1600ms'
+                  transition: 'opacity 500ms ease 850ms'
                 }}
               />
             </svg>
@@ -147,26 +149,43 @@ export function LuxembourgMapSection() {
                 left: toPercent(CITY_MARKER.x),
                 top: toPercent(CITY_MARKER.y),
                 opacity: inView ? 1 : 0,
-                transitionDelay: '1600ms'
+                transitionDelay: '850ms'
               }}
             >
               <span className="block size-4 rounded-full border-2 border-white bg-terracotta-500 shadow-lg transition-transform duration-300 group-hover/pin:scale-125" />
               <span className="pointer-events-none absolute bottom-[calc(100%+10px)] whitespace-nowrap rounded-full bg-navy-900 px-3 py-1.5 text-xs font-semibold text-white shadow-lg transition-all duration-300 group-hover/pin:-translate-y-1 group-focus-visible/pin:-translate-y-1">
                 Luxembourg-Ville
               </span>
-              <span className="pointer-events-none absolute bottom-[calc(100%+38px)] w-max max-w-[11rem] scale-95 rounded-xl bg-white px-3 py-2 text-left opacity-0 shadow-xl shadow-navy-900/20 ring-1 ring-navy-100 transition-all duration-200 group-hover/pin:scale-100 group-hover/pin:opacity-100 group-focus-visible/pin:scale-100 group-focus-visible/pin:opacity-100">
-                <span className="block font-display text-lg font-bold text-secondary">
-                  {totalListings}
+              <span className="pointer-events-none absolute bottom-[calc(100%+38px)] w-48 scale-95 rounded-xl bg-white p-3 text-left opacity-0 shadow-xl shadow-navy-900/20 ring-1 ring-navy-100 transition-all duration-200 group-hover/pin:scale-100 group-hover/pin:opacity-100 group-focus-visible/pin:scale-100 group-focus-visible/pin:opacity-100">
+                <span className="flex items-baseline gap-1.5">
+                  <span className="font-display text-xl font-bold text-secondary">
+                    {totalListings}
+                  </span>
+                  <span className="text-xs text-muted-foreground">biens dans nos secteurs</span>
                 </span>
-                <span className="block text-[11px] leading-tight text-muted-foreground">
-                  biens dans nos secteurs
+                <span className="mt-2 flex flex-col gap-1 border-t border-navy-100 pt-2">
+                  {NEIGHBORHOODS.map((n) => (
+                    <span
+                      key={n.name}
+                      className="flex items-center justify-between text-[11px] text-muted-foreground"
+                    >
+                      {n.name}
+                      <span className="font-semibold text-foreground">
+                        {mockListings.filter((l) => l.location === n.name).length}
+                      </span>
+                    </span>
+                  ))}
                 </span>
               </span>
             </button>
 
             {/* Neighbourhood markers */}
             {NEIGHBORHOODS.map((n, i) => {
-              const count = mockListings.filter((l) => l.location === n.name).length;
+              const areaListings = mockListings.filter((l) => l.location === n.name);
+              const featured = areaListings[0];
+              const extraCount = areaListings.length - 1;
+              if (!featured) return null;
+
               return (
                 <button
                   key={n.name}
@@ -176,27 +195,46 @@ export function LuxembourgMapSection() {
                     left: toPercent(n.x),
                     top: toPercent(n.y),
                     opacity: inView ? 1 : 0,
-                    transitionDelay: `${1750 + i * 130}ms`
+                    transitionDelay: `${950 + i * 130}ms`
                   }}
-                  aria-label={`${n.name} — ${count} biens`}
+                  aria-label={`${n.name} — ${areaListings.length} biens`}
                 >
-                  <span
-                    className="absolute size-4 animate-[radar-pulse_2.8s_ease-out_infinite] rounded-full bg-cyan-400/70"
-                    style={{ animationDelay: `${i * 450}ms` }}
-                  />
+                  <span className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                    <span
+                      className="size-4 animate-[radar-pulse_2.8s_ease-out_infinite] rounded-full bg-cyan-400/70"
+                      style={{ animationDelay: `${i * 450}ms` }}
+                    />
+                  </span>
                   <span className="relative block size-2.5 rounded-full border-2 border-white bg-secondary shadow transition-transform duration-300 group-hover/pin:scale-150" />
 
                   <span
                     className={cn(
-                      'pointer-events-none absolute w-max max-w-[10rem] scale-95 rounded-xl bg-white px-3 py-2 text-left opacity-0 shadow-xl shadow-navy-900/20 ring-1 ring-navy-100 transition-all duration-200 group-hover/pin:scale-100 group-hover/pin:opacity-100 group-focus-visible/pin:scale-100 group-focus-visible/pin:opacity-100',
+                      'pointer-events-none absolute w-44 scale-95 rounded-xl bg-white p-2 text-left opacity-0 shadow-xl shadow-navy-900/20 ring-1 ring-navy-100 transition-all duration-200 group-hover/pin:scale-100 group-hover/pin:opacity-100 group-focus-visible/pin:scale-100 group-focus-visible/pin:opacity-100',
                       n.tooltip === 'top'
                         ? 'bottom-[calc(100%+8px)] group-hover/pin:-translate-y-1'
                         : 'top-[calc(100%+8px)] group-hover/pin:translate-y-1'
                     )}
                   >
-                    <span className="block text-sm font-semibold text-foreground">{n.name}</span>
-                    <span className="block text-[11px] leading-tight text-muted-foreground">
-                      {count} bien{count > 1 ? 's' : ''} disponible{count > 1 ? 's' : ''}
+                    <span className="relative block aspect-[16/10] w-full overflow-hidden rounded-lg bg-muted">
+                      <Image
+                        src={featured.image}
+                        alt=""
+                        fill
+                        sizes="176px"
+                        className="object-cover"
+                      />
+                    </span>
+                    <span className="mt-2 block line-clamp-1 text-xs font-semibold text-foreground">
+                      {featured.title}
+                    </span>
+                    <span className="block text-xs font-bold text-secondary">
+                      {formatPrice(featured, locale)}
+                    </span>
+                    <span className="mt-1 block text-[11px] text-muted-foreground">
+                      {n.name}
+                      {extraCount > 0
+                        ? ` · +${extraCount} autre${extraCount > 1 ? 's' : ''} bien${extraCount > 1 ? 's' : ''}`
+                        : ''}
                     </span>
                   </span>
                 </button>

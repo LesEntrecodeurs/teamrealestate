@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { SelectField } from '@/components/ui/select-field';
+import { luxembourgCommunes } from '@/config/communes';
 import { useRouter } from '@/i18n/navigation';
 
 export function ListingsFilterBar({
@@ -57,14 +58,17 @@ export function ListingsFilterBar({
           ]}
         />
       </div>
-      <input
-        type="text"
-        value={location}
-        onChange={(e) => setLocation(e.target.value)}
-        placeholder={t('filterLocationPlaceholder')}
-        aria-label={t('filterLocation')}
-        className="h-13 flex-1 rounded-xl border border-navy-100 bg-white px-4 text-sm text-navy-900 shadow-md shadow-navy-950/10 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none sm:text-base"
-      />
+      <div className="flex-1 rounded-xl border border-navy-100 bg-white px-2 shadow-md shadow-navy-950/10">
+        <SelectField
+          value={location}
+          onChange={setLocation}
+          placeholder={t('filterLocationPlaceholder')}
+          ariaLabel={t('filterLocation')}
+          searchable
+          searchPlaceholder={t('filterLocationSearchPlaceholder')}
+          options={luxembourgCommunes.map((commune) => ({ value: commune, label: commune }))}
+        />
+      </div>
       <input
         type="text"
         inputMode="numeric"

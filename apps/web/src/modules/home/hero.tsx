@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { HeroSquares } from '@/components/ui/hero-squares';
 import { SelectField } from '@/components/ui/select-field';
 import { TypewriterText } from '@/components/ui/typewriter-text';
+import { luxembourgCommunes } from '@/config/communes';
 import { useRouter } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 
@@ -174,13 +175,20 @@ export function Hero() {
                       ]}
                     />
                   </div>
-                  <input
-                    type="text"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                    placeholder={t('filterLocationPlaceholder')}
-                    className="h-11 flex-1 rounded-xl border border-navy-100 bg-white px-4 text-sm text-navy-900 shadow-md shadow-navy-950/10 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none sm:h-13 sm:px-5 sm:text-base"
-                  />
+                  <div className="flex-1 rounded-xl border border-navy-100 bg-white px-2 shadow-md shadow-navy-950/10">
+                    <SelectField
+                      value={location}
+                      onChange={setLocation}
+                      placeholder={t('filterLocationPlaceholder')}
+                      ariaLabel={t('filterLocation')}
+                      searchable
+                      searchPlaceholder={t('filterLocationSearchPlaceholder')}
+                      options={luxembourgCommunes.map((commune) => ({
+                        value: commune,
+                        label: commune
+                      }))}
+                    />
+                  </div>
                   <input
                     type="text"
                     inputMode="numeric"
