@@ -12,8 +12,11 @@
       "eyebrow": "Immobilienagentur in Luxemburg-Stadt",
       "title1": "Immobilien,",
       "titleRotating": ["im Team gespielt.", "bewegt sich im Team.", "ist immer erreichbar."],
-      "tabAi": "KI-Assistent",
-      "tabFilters": "Filtersuche",
+      "tabBuy": "Kaufen",
+      "tabRent": "Mieten",
+      "tabAi": "KI-Suche",
+      "tabEstimate": "Bewerten",
+      "searchPlaceholder": "Stadt, Viertel, Objektreferenz...",
       "aiHelper": "Beschreiben Sie Ihr Vorhaben in einem Satz — der Assistent durchsucht unser gesamtes Angebot.",
       "aiPlaceholder": "Eine helle 2-Zimmer-Wohnung nahe dem Bahnhof, mit Balkon, max. 750.000 €",
       "aiSubmit": "Suche starten",
@@ -30,7 +33,18 @@
       "filterLocationPlaceholder": "Alle Gemeinden",
       "filterLocationSearchPlaceholder": "Gemeinde suchen...",
       "filterBudget": "Budget max.",
-      "filterSubmit": "Immobilien ansehen"
+      "filterSubmit": "Immobilien ansehen",
+      "estimateLabel": "Adresse der zu bewertenden Immobilie",
+      "estimatePlaceholder": "12 rue de la Gare, Luxembourg",
+      "estimateSubmit": "Bewerten"
+    },
+    "quickLinks": {
+      "title": "Unsere gefragtesten Leistungen,",
+      "subtitle": "nur einen Klick entfernt!",
+      "estimateLabel": "Immobilie bewerten",
+      "buyLabel": "Immobilie kaufen",
+      "rentLabel": "Immobilie mieten",
+      "contactLabel": "Team kontaktieren"
     },
     "statsBand": {
       "stat1Value": "16 Jahre",

@@ -12,8 +12,11 @@
       "eyebrow": "Agence immobilière à Luxembourg-Ville",
       "title1": "L'immobilier",
       "titleRotating": ["joue collectif.", "avance en équipe.", "reste disponible."],
-      "tabAi": "Assistant IA",
-      "tabFilters": "Recherche par filtres",
+      "tabBuy": "Acheter",
+      "tabRent": "Louer",
+      "tabAi": "Recherche IA",
+      "tabEstimate": "Estimer",
+      "searchPlaceholder": "Ville, quartier, référence du bien...",
       "aiHelper": "Décrivez votre projet en une phrase, l'assistant explore l'ensemble de nos biens.",
       "aiPlaceholder": "Un 2 chambres lumineux près de la gare, avec balcon, max 750 000 €",
       "aiSubmit": "Lancer la recherche",
@@ -30,7 +33,18 @@
       "filterLocationPlaceholder": "Toutes les communes",
       "filterLocationSearchPlaceholder": "Rechercher une commune...",
       "filterBudget": "Budget max",
-      "filterSubmit": "Voir les biens"
+      "filterSubmit": "Voir les biens",
+      "estimateLabel": "Adresse du bien à estimer",
+      "estimatePlaceholder": "12 rue de la Gare, Luxembourg",
+      "estimateSubmit": "Estimer"
+    },
+    "quickLinks": {
+      "title": "Nos services les plus demandés,",
+      "subtitle": "accessibles en un clic !",
+      "estimateLabel": "Estimer mon bien",
+      "buyLabel": "Acheter un bien",
+      "rentLabel": "Louer un bien",
+      "contactLabel": "Contacter l'équipe"
     },
     "statsBand": {
       "stat1Value": "16 ans",

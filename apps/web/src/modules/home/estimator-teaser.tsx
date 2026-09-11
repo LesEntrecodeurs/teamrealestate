@@ -14,12 +14,12 @@ export function EstimatorTeaser() {
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:py-28">
-      <Reveal className="relative overflow-hidden rounded-xl bg-navy-900 px-8 py-14 text-white sm:px-14 sm:py-16">
+      <Reveal className="relative overflow-hidden rounded-2xl bg-navy-900 px-8 py-14 text-white sm:rounded-3xl sm:px-14 sm:py-16">
         <div className="absolute -right-16 -top-16 size-64 rounded-full bg-cyan-500/20 blur-3xl" />
         <div className="absolute -bottom-20 left-1/3 size-72 rounded-full bg-cyan-300/10 blur-3xl" />
 
         <div className="relative flex flex-col items-start gap-6 lg:max-w-xl">
-          <span className="flex size-12 items-center justify-center rounded-2xl bg-white/10">
+          <span className="flex size-12 items-center justify-center rounded-xl bg-white/10">
             <Calculator className="size-6 text-cyan-300" />
           </span>
           <div>

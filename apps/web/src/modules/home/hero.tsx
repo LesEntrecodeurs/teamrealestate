@@ -1,9 +1,10 @@
 'use client';
 
-import { Search, Sliders, X } from 'lucide-react';
+import { Search, Sliders, Sparkles, X } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
+import { Button } from '@/components/ui/button';
 import { HeroSquares } from '@/components/ui/hero-squares';
 import { SelectField } from '@/components/ui/select-field';
 import { TypewriterText } from '@/components/ui/typewriter-text';
@@ -11,14 +12,19 @@ import { luxembourgLocations } from '@/config/communes';
 import { useRouter } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 
+const MODES = ['buy', 'rent', 'ai', 'estimate'] as const;
+type Mode = (typeof MODES)[number];
+
 export function Hero() {
   const t = useTranslations('HomePage.hero');
   const router = useRouter();
+  const [mode, setMode] = useState<Mode>('buy');
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [type, setType] = useState('');
   const [location, setLocation] = useState('');
   const [budget, setBudget] = useState('');
+  const [address, setAddress] = useState('');
 
   const suggestions = [t('try1'), t('try2'), t('try3')];
   const imageRef = useRef<HTMLDivElement>(null);
@@ -74,7 +80,13 @@ export function Hero() {
     if (type) params.set('type', type);
     if (location.trim()) params.set('location', location.trim());
     if (budget.trim()) params.set('budget', budget.trim());
-    router.push(`/acheter${params.toString() ? `?${params.toString()}` : ''}`);
+    const base = mode === 'rent' ? '/louer' : '/acheter';
+    router.push(`${base}${params.toString() ? `?${params.toString()}` : ''}`);
+  }
+
+  function handleEstimate(e: React.FormEvent) {
+    e.preventDefault();
+    router.push('/vendre');
   }
 
   return (
@@ -115,116 +127,167 @@ export function Hero() {
               </h1>
             </div>
 
-            <form
-              ref={searchFormRef}
-              className="relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-3 px-6 sm:px-8"
-              onSubmit={handleSearch}
-            >
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <div className="relative flex-1">
+            <div className="relative z-10 mx-auto w-full max-w-7xl px-6 sm:px-8">
+              <div className="flex w-fit gap-1 rounded-t-2xl bg-white/10 p-1.5 backdrop-blur-sm">
+                {MODES.map((m) => (
                   <button
-                    type="submit"
-                    aria-label={t('aiSubmit')}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-navy-400 transition-colors hover:text-cyan-600 sm:left-5"
-                  >
-                    <Search className="size-4 sm:size-5" />
-                  </button>
-                  <input
-                    type="text"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    placeholder={t('aiPlaceholder')}
-                    className="h-12 w-full rounded-xl border border-navy-100 bg-white pl-11 pr-10 text-sm text-navy-900 shadow-lg shadow-navy-950/15 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none sm:h-16 sm:pl-13 sm:pr-11 sm:text-base"
-                  />
-                  {query ? (
-                    <button
-                      type="button"
-                      onClick={() => setQuery('')}
-                      aria-label={t('aiSubmit')}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-navy-400 hover:text-navy-700 sm:right-4"
-                    >
-                      <X className="size-4 sm:size-5" />
-                    </button>
-                  ) : null}
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setFiltersOpen((v) => !v)}
-                  aria-expanded={filtersOpen}
-                  aria-label={t('filterType')}
-                  title={t('filterType')}
-                  className={cn(
-                    'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border bg-white shadow-lg shadow-navy-950/15 transition-colors sm:h-16 sm:w-16',
-                    filtersOpen
-                      ? 'border-cyan-500 text-cyan-600'
-                      : 'border-navy-100 text-navy-300 hover:border-navy-300 hover:text-navy-400'
-                  )}
-                >
-                  <Sliders className="size-4 sm:size-5" />
-                </button>
-              </div>
-
-              <div
-                className={cn(
-                  'grid transition-all duration-300 ease-out',
-                  filtersOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
-                )}
-              >
-                <div className={filtersOpen ? 'overflow-visible' : 'overflow-hidden'}>
-                  <div className="flex flex-col gap-3 pt-1 sm:flex-row">
-                    <div className="flex-1 rounded-xl border border-navy-100 bg-white px-2 shadow-md shadow-navy-950/10">
-                      <SelectField
-                        value={type}
-                        onChange={setType}
-                        placeholder={t('filterTypeAny')}
-                        ariaLabel={t('filterType')}
-                        options={[
-                          { value: '', label: t('filterTypeAny') },
-                          { value: 'apartment', label: t('filterTypeApartment') },
-                          { value: 'house', label: t('filterTypeHouse') }
-                        ]}
-                      />
-                    </div>
-                    <div className="flex-1 rounded-xl border border-navy-100 bg-white px-2 shadow-md shadow-navy-950/10">
-                      <SelectField
-                        value={location}
-                        onChange={setLocation}
-                        placeholder={t('filterLocationPlaceholder')}
-                        ariaLabel={t('filterLocation')}
-                        searchable
-                        searchPlaceholder={t('filterLocationSearchPlaceholder')}
-                        options={luxembourgLocations.map((commune) => ({
-                          value: commune,
-                          label: commune
-                        }))}
-                      />
-                    </div>
-                    <input
-                      type="text"
-                      inputMode="numeric"
-                      value={budget}
-                      onChange={(e) => setBudget(e.target.value)}
-                      placeholder={t('filterBudget')}
-                      className="h-11 flex-1 rounded-xl border border-navy-100 bg-white px-4 text-sm text-navy-900 shadow-md shadow-navy-950/10 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none sm:h-13 sm:px-5 sm:text-base"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-white/70 sm:text-sm">
-                <span className="font-medium">{t('tryLabel')}</span>
-                {suggestions.map((s) => (
-                  <button
-                    key={s}
+                    key={m}
                     type="button"
-                    onClick={() => setQuery(s)}
-                    className="rounded-xl border border-white/25 bg-white/10 px-2.5 py-1 font-medium text-white/85 transition-colors hover:border-white/45 hover:bg-white/20 sm:px-3 sm:py-1.5"
+                    onClick={() => setMode(m)}
+                    className={cn(
+                      'flex items-center gap-1.5 rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors sm:px-5',
+                      mode === m
+                        ? m === 'ai'
+                          ? 'bg-white text-secondary'
+                          : 'bg-white text-navy-900'
+                        : 'text-white/70 hover:text-white'
+                    )}
                   >
-                    {s}
+                    {m === 'ai' ? <Sparkles className="size-4" /> : null}
+                    {m === 'buy'
+                      ? t('tabBuy')
+                      : m === 'rent'
+                        ? t('tabRent')
+                        : m === 'ai'
+                          ? t('tabAi')
+                          : t('tabEstimate')}
                   </button>
                 ))}
               </div>
-            </form>
+
+              {mode === 'estimate' ? (
+                <form
+                  onSubmit={handleEstimate}
+                  className="flex flex-col gap-3 rounded-b-2xl rounded-tr-2xl bg-white p-4 shadow-lg shadow-navy-950/15 sm:flex-row sm:items-end sm:p-5"
+                >
+                  <label className="flex-1 text-left">
+                    <span className="mb-1.5 block text-sm font-semibold text-navy-900">
+                      {t('estimateLabel')}
+                    </span>
+                    <input
+                      type="text"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                      placeholder={t('estimatePlaceholder')}
+                      className="h-12 w-full rounded-xl border border-navy-100 bg-white px-4 text-sm text-navy-900 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none sm:h-14 sm:text-base"
+                    />
+                  </label>
+                  <Button
+                    type="submit"
+                    variant="accent"
+                    size="lg"
+                    className="h-12 rounded-xl sm:h-14"
+                  >
+                    {t('estimateSubmit')}
+                  </Button>
+                </form>
+              ) : (
+                <form
+                  ref={searchFormRef}
+                  className="flex flex-col gap-3 rounded-b-2xl rounded-tr-2xl sm:pt-0"
+                  onSubmit={handleSearch}
+                >
+                  <div className="flex flex-col gap-3 pt-3 sm:flex-row sm:pt-3">
+                    <div className="relative flex-1">
+                      <Search className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-navy-300 sm:left-5 sm:size-5" />
+                      <input
+                        type="text"
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                        placeholder={t('aiPlaceholder')}
+                        className="h-12 w-full rounded-xl border border-navy-100 bg-white pl-11 pr-10 text-sm text-navy-900 shadow-lg shadow-navy-950/15 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none sm:h-16 sm:pl-13 sm:pr-11 sm:text-base"
+                      />
+                      {query ? (
+                        <button
+                          type="button"
+                          onClick={() => setQuery('')}
+                          aria-label={t('aiSubmit')}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-navy-400 hover:text-navy-700 sm:right-4"
+                        >
+                          <X className="size-4 sm:size-5" />
+                        </button>
+                      ) : null}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setFiltersOpen((v) => !v)}
+                      aria-expanded={filtersOpen}
+                      aria-label={t('filterType')}
+                      title={t('filterType')}
+                      className={cn(
+                        'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border bg-white shadow-lg shadow-navy-950/15 transition-colors sm:h-16 sm:w-16',
+                        filtersOpen
+                          ? 'border-cyan-500 text-cyan-600'
+                          : 'border-navy-100 text-navy-300 hover:border-navy-300 hover:text-navy-400'
+                      )}
+                    >
+                      <Sliders className="size-4 sm:size-5" />
+                    </button>
+                  </div>
+
+                  <div
+                    className={cn(
+                      'grid transition-all duration-300 ease-out',
+                      filtersOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                    )}
+                  >
+                    <div className={filtersOpen ? 'overflow-visible' : 'overflow-hidden'}>
+                      <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+                        <div className="flex-1 rounded-xl border border-navy-100 bg-white px-2 shadow-md shadow-navy-950/10">
+                          <SelectField
+                            value={type}
+                            onChange={setType}
+                            placeholder={t('filterTypeAny')}
+                            ariaLabel={t('filterType')}
+                            options={[
+                              { value: '', label: t('filterTypeAny') },
+                              { value: 'apartment', label: t('filterTypeApartment') },
+                              { value: 'house', label: t('filterTypeHouse') }
+                            ]}
+                          />
+                        </div>
+                        <div className="flex-1 rounded-xl border border-navy-100 bg-white px-2 shadow-md shadow-navy-950/10">
+                          <SelectField
+                            value={location}
+                            onChange={setLocation}
+                            placeholder={t('filterLocationPlaceholder')}
+                            ariaLabel={t('filterLocation')}
+                            searchable
+                            searchPlaceholder={t('filterLocationSearchPlaceholder')}
+                            options={luxembourgLocations.map((commune) => ({
+                              value: commune,
+                              label: commune
+                            }))}
+                          />
+                        </div>
+                        <input
+                          type="text"
+                          inputMode="numeric"
+                          value={budget}
+                          onChange={(e) => setBudget(e.target.value)}
+                          placeholder={t('filterBudget')}
+                          className="h-11 flex-1 rounded-xl border border-navy-100 bg-white px-4 text-sm text-navy-900 shadow-md shadow-navy-950/10 placeholder:text-navy-400 focus:border-cyan-500 focus:outline-none sm:h-13 sm:px-5 sm:text-base"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-white/70 sm:text-sm">
+                    <span className="font-medium">{t('tryLabel')}</span>
+                    {suggestions.map((s) => (
+                      <button
+                        key={s}
+                        type="button"
+                        onClick={() => setQuery(s)}
+                        className="rounded-xl border border-white/25 bg-white/10 px-2.5 py-1 font-medium text-white/85 transition-colors hover:border-white/45 hover:bg-white/20 sm:px-3 sm:py-1.5"
+                      >
+                        {s}
+                      </button>
+                    ))}
+                  </div>
+                </form>
+              )}
+            </div>
           </div>
         </div>
       </section>

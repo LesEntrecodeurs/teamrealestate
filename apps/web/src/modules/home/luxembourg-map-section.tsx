@@ -208,7 +208,7 @@ export function LuxembourgMapSection() {
                         : 'top-[calc(100%+8px)] group-hover/pin:translate-y-1'
                     )}
                   >
-                    <span className="relative block aspect-[16/10] w-full overflow-hidden rounded-lg bg-muted">
+                    <span className="relative block aspect-[16/10] w-full overflow-hidden rounded-xl bg-muted">
                       <Image
                         src={featured.image}
                         alt=""
