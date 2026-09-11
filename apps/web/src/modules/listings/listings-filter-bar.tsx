@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { SelectField } from '@/components/ui/select-field';
-import { luxembourgCommunes } from '@/config/communes';
+import { luxembourgLocations } from '@/config/communes';
 import { useRouter } from '@/i18n/navigation';
 
 export function ListingsFilterBar({
@@ -81,7 +81,7 @@ export function ListingsFilterBar({
             ariaLabel={t('filterLocation')}
             searchable
             searchPlaceholder={t('filterLocationSearchPlaceholder')}
-            options={luxembourgCommunes.map((commune) => ({ value: commune, label: commune }))}
+            options={luxembourgLocations.map((commune) => ({ value: commune, label: commune }))}
           />
         </div>
         <input

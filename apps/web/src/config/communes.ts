@@ -106,3 +106,41 @@ export const luxembourgCommunes = [
   'Winseler',
   'Wormeldange'
 ] as const;
+
+/**
+ * Luxembourg City's 24 official districts (source: vdl.lu). People search
+ * by neighborhood ("Gare", "Belair", "Kirchberg"...) far more than by the
+ * commune name "Luxembourg" itself — communes alone missed every one of
+ * these.
+ */
+export const luxembourgCityDistricts = [
+  'Beggen',
+  'Belair',
+  'Bonnevoie-Nord/Verlorenkost',
+  'Bonnevoie-Sud',
+  'Cents',
+  'Cessange',
+  'Clausen',
+  'Dommeldange',
+  'Eich',
+  'Gare',
+  'Gasperich',
+  'Grund',
+  'Hamm',
+  'Hollerich',
+  'Kirchberg/Kiem',
+  'Limpertsberg',
+  'Merl',
+  'Mühlenbach',
+  'Neudorf/Weimershof',
+  'Pfaffenthal',
+  'Pulvermühl',
+  'Rollingergrund/Belair-Nord',
+  'Ville Haute',
+  'Weimerskirch'
+] as const;
+
+/** Combined, deduplicated, alphabetical — what search/filter UIs should use. */
+export const luxembourgLocations = Array.from(
+  new Set<string>([...luxembourgCommunes, ...luxembourgCityDistricts])
+).sort((a, b) => a.localeCompare(b, 'fr'));

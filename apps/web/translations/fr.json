@@ -120,7 +120,10 @@
     "filterBudget": "Budget max",
     "filterBudgetPlaceholder": "Budget max",
     "filterSubmit": "Actualiser",
-    "filterReset": "Réinitialiser"
+    "filterReset": "Réinitialiser",
+    "viewSplit": "Liste + carte",
+    "viewList": "Liste",
+    "viewMap": "Carte"
   },
   "ListingDetail": {
     "back": "Retour aux biens",

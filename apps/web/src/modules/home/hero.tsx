@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { HeroSquares } from '@/components/ui/hero-squares';
 import { SelectField } from '@/components/ui/select-field';
 import { TypewriterText } from '@/components/ui/typewriter-text';
-import { luxembourgCommunes } from '@/config/communes';
+import { luxembourgLocations } from '@/config/communes';
 import { useRouter } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 
@@ -198,7 +198,7 @@ export function Hero() {
                       ariaLabel={t('filterLocation')}
                       searchable
                       searchPlaceholder={t('filterLocationSearchPlaceholder')}
-                      options={luxembourgCommunes.map((commune) => ({
+                      options={luxembourgLocations.map((commune) => ({
                         value: commune,
                         label: commune
                       }))}
